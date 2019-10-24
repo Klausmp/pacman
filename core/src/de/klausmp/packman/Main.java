@@ -2,6 +2,7 @@ package de.klausmp.packman;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import de.klausmp.packman.screens.GameScreen;
 
@@ -22,6 +23,10 @@ public class Main extends Game {
 	public void render () {
 //	    rendern des aktiven screens
 		getScreen().render(Gdx.graphics.getDeltaTime());
+//		schließung der anwendung beim drücken von ESC
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+			Gdx.app.exit();
+		}
 	}
 
 	@Override
