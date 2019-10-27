@@ -19,4 +19,10 @@ public class LayerRendererQueQueElement {
         this.layerToRenderOn = Layers.DEFAULT;
         this.priority = priority;
     }
+
+    public LayerRendererQueQueElement(Sprite sprite) {
+        this.sprite = sprite;
+        this.layerToRenderOn = Layers.DEFAULT;
+        this.priority = 10.0f;
+    }
 }
