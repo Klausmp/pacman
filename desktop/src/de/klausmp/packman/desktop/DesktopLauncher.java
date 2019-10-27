@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import de.klausmp.packman.Main;
 
+/**
+ * @author Klausmp
+ */
+
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		packer();
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 //		einschaltung von vertikaler synkronisation
 		config.useVsync(true);

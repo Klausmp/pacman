@@ -1,5 +1,9 @@
 package de.klausmp.packman.visuals.renderer;
 
+/**
+ * @author Klausmp
+ */
+
 public enum Layers {
 
 
@@ -16,5 +20,5 @@ public enum Layers {
     //  layer für texte die im spiel erscheinen
     TEXT,
     //  layer für alle gui elemente
-    GUI;
+    GUI
 }

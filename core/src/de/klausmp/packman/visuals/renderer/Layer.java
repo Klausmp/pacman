@@ -3,10 +3,14 @@ package de.klausmp.packman.visuals.renderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * @author Klausmp
+ */
+
 public class Layer {
 
-    public Array<LayerRendererQueQueElement> elementsToRender;
-    public Layers layerToRenderOn;
+    private Array<LayerRendererQueQueElement> elementsToRender;
+    private Layers layerToRenderOn;
 
     public Layer() {
         this.layerToRenderOn = Layers.DEFAULT;
@@ -21,7 +25,7 @@ public class Layer {
     public void render(SpriteBatch batch) {
         sortElementsToRdender();
         for (LayerRendererQueQueElement element : elementsToRender) {
-            element.sprite.draw(batch);
+            element.getSprite().draw(batch);
         }
         clear();
     }
@@ -29,7 +33,7 @@ public class Layer {
     private void sortElementsToRdender() {
         for (int s = elementsToRender.size; s > -1; s--) {
             for (int x = 0; x < s - 1; x++) {
-                if (elementsToRender.get(x).priority > elementsToRender.get(x + 1).priority) {
+                if (elementsToRender.get(x).getPriority() > elementsToRender.get(x + 1).getPriority()) {
                     swap(x, x + 1);
                 }
             }
@@ -50,5 +54,9 @@ public class Layer {
 
     private void clear() {
         elementsToRender.clear();
+    }
+
+    public Layers getLayerToRenderOn() {
+        return layerToRenderOn;
     }
 }

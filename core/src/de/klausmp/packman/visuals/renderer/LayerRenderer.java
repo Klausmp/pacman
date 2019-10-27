@@ -3,6 +3,10 @@ package de.klausmp.packman.visuals.renderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * @author Klausmp
+ */
+
 public class LayerRenderer {
 
     private static SpriteBatch batch;
@@ -10,9 +14,9 @@ public class LayerRenderer {
     private static Array<Layers> layerOrder;
 
     public LayerRenderer(Layers[] layers) {
-        this.layerArry = new Array<Layer>();
+        layerArry = new Array<Layer>();
         layerOrder = convertLayersArray(layers);
-        this.batch = new SpriteBatch();
+        batch = new SpriteBatch();
         addLAyersFromOrder();
     }
 
@@ -20,7 +24,7 @@ public class LayerRenderer {
         batch.begin();
         for (Layers layers : layerOrder) {
             for (Layer layer : layerArry) {
-                if (layers.equals(layer.layerToRenderOn)) {
+                if (layers.equals(layer.getLayerToRenderOn())) {
                     layer.render(batch);
                 }
             }
@@ -42,15 +46,15 @@ public class LayerRenderer {
 
     private Array<Layers> convertLayersArray(Layers[] layers) {
         Array<Layers> result = new Array<Layers>();
-        for (int i = 0; i < layers.length; i++) {
-            result.add(layers[i]);
+        for (Layers layer : layers) {
+            result.add(layer);
         }
         return result;
     }
 
     public void addToQueque(LayerRendererQueQueElement queQueElement) {
         for (Layer layer : layerArry) {
-            if (layer.layerToRenderOn.equals(queQueElement.layerToRenderOn)) {
+            if (layer.getLayerToRenderOn().equals(queQueElement.getLayerToRenderOn())) {
                 layer.add(queQueElement);
             }
         }

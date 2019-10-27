@@ -6,9 +6,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import de.klausmp.packman.visuals.screens.GameScreen;
 
+/**
+ * @author Klausmp
+ */
+
 public class Main extends Game {
 
 	private static Main INSTANCE;
+
 	@Override
 	public void create () {
 //		erstellung einer neuen instance von main wenn keine vorhanden ist
@@ -34,7 +39,7 @@ public class Main extends Game {
 
 	}
 
-//	methode um den anktiven screen von überall zu ändern
+	//	methode um den anktiven screen von überall zu ändern
 	public static void setActiveScreen(Screen screen){
 		INSTANCE.setScreen(screen);
 	}

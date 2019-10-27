@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * @author Klausmp
+ */
+
 public class LayerRendererQueQueElement {
 
     private static final float DEFAULTPROIRITY = 10.0f;
-    public Sprite sprite;
-    public Layers layerToRenderOn;
-    public float priority;
+    private Sprite sprite;
+    private Layers layerToRenderOn;
+    private float priority;
 
     public LayerRendererQueQueElement(Sprite sprite, Layers layerToRenderOn, float priority) {
         this.sprite = sprite;
@@ -65,5 +69,17 @@ public class LayerRendererQueQueElement {
         sprite.setY(position.y);
         this.layerToRenderOn = layerToRenderOn;
         this.priority = DEFAULTPROIRITY;
+    }
+
+    public Layers getLayerToRenderOn() {
+        return layerToRenderOn;
+    }
+
+    public float getPriority() {
+        return priority;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }
