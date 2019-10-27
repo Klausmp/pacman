@@ -13,7 +13,7 @@ public class LayerRenderer {
         this.layerArry = new Array<Layer>();
         layerOrder = convertLayersArray(layers);
         this.batch = new SpriteBatch();
-        addLAyers();
+        addLAyersFromOrder();
     }
 
     public void render() {
@@ -28,10 +28,16 @@ public class LayerRenderer {
         batch.end();
     }
 
-    private void addLAyers() {
+    private void addLAyersFromOrder() {
+        layerArry.clear();
         for (Layers layers: layerOrder) {
             layerArry.add(new Layer(layers));
         }
+    }
+
+    private void addLayer(Layers layer, int index) {
+        layerOrder.insert(index, layer);
+        layerArry.add(new Layer(layer));
     }
 
     private Array<Layers> convertLayersArray(Layers[] layers) {
