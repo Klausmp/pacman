@@ -29,7 +29,7 @@ public class Layer {
     private void sortElementsToRdender() {
         for (int s = elementsToRender.size; s > -1; s--) {
             for (int x = 0; x < s - 1; x++) {
-                if (elementsToRender.get(x).priority < elementsToRender.get(x + 1).priority) {
+                if (elementsToRender.get(x).priority > elementsToRender.get(x + 1).priority) {
                     swap(x, x + 1);
                 }
             }
