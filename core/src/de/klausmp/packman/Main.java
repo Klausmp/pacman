@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import de.klausmp.packman.screens.GameScreen;
+import de.klausmp.packman.visuals.screens.GameScreen;
 
 public class Main extends Game {
 
