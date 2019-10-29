@@ -4,8 +4,11 @@ package de.klausmp.packman.visuals.renderer;
  * @author Klausmp
  */
 
+/*
+ * dieses enum ist eine liste aller verfügbaren layer im renderer
+ * zudem bietet sie eine DEFAULT
+ * */
 public enum Layers {
-
 
     //  layer für den hintergrund
     BACKGROUND,
@@ -20,5 +23,13 @@ public enum Layers {
     //  layer für texte die im spiel erscheinen
     TEXT,
     //  layer für alle gui elemente
-    GUI
+    GUI;
+
+    //  default reihenfolger der layer in der sie gerendert werden
+//  hierbei ist der erste layer der der zu erst gezeichnet wird
+//  alles ander wird darüber gezeichnet
+    public static Layers[] DEFAULTLAYERORDER() {
+        Layers[] DEFAULTLAYERORDER = {Layers.BACKGROUND, Layers.BACK, Layers.DEFAULT, Layers.FRONT, Layers.INFRONT, Layers.TEXT, Layers.GUI};
+        return DEFAULTLAYERORDER;
+    }
 }
