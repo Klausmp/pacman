@@ -69,11 +69,13 @@ public class LayerRenderer {
         }
     }
 
+    //  fügt einen meuen layer an gewünschtem index in die LayerOrder hinzu
     private void addLayer(Layers layer, int index) {
         layerOrder.insert(index, layer);
         layerArry.add(new Layer(layer));
     }
 
+    //  konvertiert ein ARRAY zu einem GDX ARRAY
     private Array<Layers> convertLayersArray(Layers[] layers) {
         Array<Layers> result = new Array<Layers>();
         for (Layers layer : layers) {
@@ -82,6 +84,8 @@ public class LayerRenderer {
         return result;
     }
 
+    //  fügt eine neues eslement in die render liste hinzu
+//  jedes element wird am ende jedes frames gerendert
     public void addToQueque(LayerRendererQueQueElement queQueElement) {
         for (Layer layer : layerArry) {
             if (layer.getLayerToRenderOn().equals(queQueElement.getLayerToRenderOn())) {
