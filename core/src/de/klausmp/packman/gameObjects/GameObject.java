@@ -19,20 +19,21 @@ public abstract class GameObject extends Sprite {
 
     public GameObject(TextureRegion region, Vector2 position, Layers layerToRenderOn, float renderPriority) {
         super(region);
-        this.setX(position.x);
-        this.setY(position.y);
-        this.layerToRenderOn = layerToRenderOn;
-        this.renderPriority = renderPriority;
-        renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
+        creat(position, layerToRenderOn, renderPriority);
     }
 
     public GameObject(Texture texture, Vector2 position, Layers layerToRenderOn, float renderPriority) {
         super(texture);
+        creat(position, layerToRenderOn, renderPriority);
+    }
+
+    private void creat(Vector2 position, Layers layerToRenderOn, float renderPriority){
         this.setX(position.x);
         this.setY(position.y);
         this.layerToRenderOn = layerToRenderOn;
         this.renderPriority = renderPriority;
         renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
+
     }
 
     public abstract void update();

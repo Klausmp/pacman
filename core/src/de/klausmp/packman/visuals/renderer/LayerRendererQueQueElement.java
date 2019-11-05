@@ -2,6 +2,7 @@ package de.klausmp.packman.visuals.renderer;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -71,6 +72,38 @@ public class LayerRendererQueQueElement {
         this.priority = DEFAULTPROIRITY;
     }
 
+    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, Layers layerToRenderOn, float priority) {
+        sprite = new Sprite(region);
+        sprite.setX(position.x);
+        sprite.setY(position.y);
+        this.layerToRenderOn = layerToRenderOn;
+        this.priority = priority;
+    }
+
+    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, float priority) {
+        sprite = new Sprite(region);
+        sprite.setX(position.x);
+        sprite.setY(position.y);
+        this.layerToRenderOn = Layers.DEFAULT;
+        this.priority = priority;
+    }
+
+    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, Layers layerToRenderOn) {
+        sprite = new Sprite(region);
+        sprite.setX(position.x);
+        sprite.setY(position.y);
+        this.layerToRenderOn = layerToRenderOn;
+        this.priority = DEFAULTPROIRITY;
+    }
+
+    public LayerRendererQueQueElement(TextureRegion region, Vector2 position) {
+        sprite = new Sprite(region);
+        sprite.setX(position.x);
+        sprite.setY(position.y);
+        this.layerToRenderOn = Layers.DEFAULT;
+        this.priority = DEFAULTPROIRITY;
+    }
+
     public Layers getLayerToRenderOn() {
         return layerToRenderOn;
     }
@@ -81,5 +114,9 @@ public class LayerRendererQueQueElement {
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public static float getDEFAULTPROIRITY() {
+        return DEFAULTPROIRITY;
     }
 }

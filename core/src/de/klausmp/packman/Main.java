@@ -16,19 +16,19 @@ public class Main extends Game {
 
 	@Override
 	public void create () {
-//		erstellung einer neuen instance von main wenn keine vorhanden ist
+	//erstellung einer neuen instance von main wenn keine vorhanden ist
 		if (INSTANCE == null){
 			INSTANCE = this;
 		}
-//		setzen des Start Screens
+		//setzen des Start Screens
 		setScreen(new GameScreen());
 	}
 
 	@Override
 	public void render () {
-//	    rendern des aktiven screens
+		//rendern des aktiven screens
 		getScreen().render(Gdx.graphics.getDeltaTime());
-//		schließung der anwendung beim drücken von ESC
+		//schließung der anwendung beim drücken von ESC
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 		}
@@ -39,7 +39,7 @@ public class Main extends Game {
 
 	}
 
-	//	methode um den anktiven screen von überall zu ändern
+	//methode um den anktiven screen von überall zu ändern
 	public static void setActiveScreen(Screen screen){
 		INSTANCE.setScreen(screen);
 	}
