@@ -15,4 +15,8 @@ public class GridTile {
         size = new Vector2(32, 32);
 
     }
+
+    public void update(){
+
+    }
 }
