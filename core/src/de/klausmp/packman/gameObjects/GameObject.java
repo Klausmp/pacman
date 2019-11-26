@@ -13,23 +13,25 @@ import de.klausmp.packman.visuals.renderer.Layers;
  */
 public abstract class GameObject extends Sprite {
 
+    private ObjectType objectType;
     private LayerRendererQueQueElement renderElement;
     private Layers layerToRenderOn;
     private float renderPriority;
 
-    public GameObject(TextureRegion region, Vector2 position, Layers layerToRenderOn, float renderPriority) {
+    public GameObject(TextureRegion region, Vector2 position, ObjectType objectType, Layers layerToRenderOn, float renderPriority) {
         super(region);
-        creat(position, layerToRenderOn, renderPriority);
+        creat(position, objectType,layerToRenderOn, renderPriority);
     }
 
-    public GameObject(Texture texture, Vector2 position, Layers layerToRenderOn, float renderPriority) {
+    public GameObject(Texture texture, Vector2 position, ObjectType objectType, Layers layerToRenderOn, float renderPriority) {
         super(texture);
-        creat(position, layerToRenderOn, renderPriority);
+        creat(position, objectType, layerToRenderOn, renderPriority);
     }
 
-    private void creat(Vector2 position, Layers layerToRenderOn, float renderPriority){
+    private void creat(Vector2 position, ObjectType objectType,Layers layerToRenderOn, float renderPriority){
         this.setX(position.x);
         this.setY(position.y);
+        this.objectType = objectType;
         this.layerToRenderOn = layerToRenderOn;
         this.renderPriority = renderPriority;
         renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
@@ -52,5 +54,9 @@ public abstract class GameObject extends Sprite {
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {
         this.renderElement = renderElement;
+    }
+
+    public ObjectType getObjectType() {
+        return objectType;
     }
 }

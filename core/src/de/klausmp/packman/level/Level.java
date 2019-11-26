@@ -9,5 +9,9 @@ public abstract class Level {
     private PacMan pacMan;
 
     public Level() {
+
     }
+
+    public abstract void update();
+
 }
