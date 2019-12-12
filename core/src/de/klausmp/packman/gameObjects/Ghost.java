@@ -13,10 +13,6 @@ public class Ghost extends GameObject {
         super(region, position, ObjectType.GHOST, Layers.DEFAULT, 5.0f);
     }
 
-    public Ghost(Texture texture, Vector2 position) {
-        super(texture, position, ObjectType.GHOST, Layers.DEFAULT, 5.0f);
-    }
-
     @Override
     public void update() {
 

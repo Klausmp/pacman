@@ -18,6 +18,8 @@ public class LayerRendererQueQueElement {
 
     public LayerRendererQueQueElement(Sprite sprite, Layers layerToRenderOn, float priority) {
         this.sprite = sprite;
+        //System.out.println(sprite.getX());
+        //System.out.println(sprite.getY());
         this.layerToRenderOn = layerToRenderOn;
         this.priority = priority;
     }

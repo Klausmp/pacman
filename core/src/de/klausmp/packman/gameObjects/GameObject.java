@@ -23,11 +23,6 @@ public abstract class GameObject extends Sprite {
         creat(position, objectType, layerToRenderOn, renderPriority);
     }
 
-    public GameObject(Texture texture, Vector2 position, ObjectType objectType, Layers layerToRenderOn, float renderPriority) {
-        super(texture);
-        creat(position, objectType, layerToRenderOn, renderPriority);
-    }
-
     private void creat(Vector2 position, ObjectType objectType, Layers layerToRenderOn, float renderPriority) {
         this.setX(position.x);
         this.setY(position.y);
@@ -37,7 +32,9 @@ public abstract class GameObject extends Sprite {
         renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
     }
 
-    public abstract void update();
+    public void update(){
+        renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
+    }
 
     public void render(LayerRenderer renderer) {
         renderer.addToQueque(renderElement);

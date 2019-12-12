@@ -14,10 +14,6 @@ public class Dot extends GameObject {
         super(region, position, ObjectType.DOT, layerToRenderOn, renderPriority);
     }
 
-    public Dot(Texture texture, Vector2 position, Layers layerToRenderOn, float renderPriority) {
-        super(texture, position, ObjectType.DOT, layerToRenderOn, renderPriority);
-    }
-
     @Override
     public void update() {
 

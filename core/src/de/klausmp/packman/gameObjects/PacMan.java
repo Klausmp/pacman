@@ -13,10 +13,6 @@ public class PacMan extends GameObject {
         super(region, position, ObjectType.PACMAN, layerToRenderOn, renderPriority);
     }
 
-    public PacMan(Texture texture, Vector2 position, Layers layerToRenderOn, float renderPriority) {
-        super(texture, position, ObjectType.PACMAN, layerToRenderOn, renderPriority);
-    }
-
     @Override
     public void update() {
 

@@ -29,6 +29,7 @@ public enum Layers {
 //  hierbei ist der erste layer der der zu erst gezeichnet wird
 //  alles ander wird darüber gezeichnet
     public static Layers[] DEFAULTLAYERORDER() {
+        //TODO vereinfachung in einzeiler mit allem in return
         Layers[] DEFAULTLAYERORDER = {Layers.BACKGROUND, Layers.BACK, Layers.DEFAULT, Layers.FRONT, Layers.INFRONT, Layers.TEXT, Layers.GUI};
         return DEFAULTLAYERORDER;
     }

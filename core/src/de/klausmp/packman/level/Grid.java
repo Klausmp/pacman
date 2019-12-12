@@ -3,6 +3,7 @@ package de.klausmp.packman.level;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
+import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
  * @author Klausmp
@@ -46,13 +47,19 @@ public class Grid {
         }
     }
 
+    public void render(LayerRenderer renderer) {
+        for (GridTile gridTile : gridTiles) {
+            gridTile.render(renderer);
+        }
+    }
+
     public GridTile getGridTile(int posX, int posY) {
         for (GridTile gridTile : gridTiles) {
             if (gridTile.getPosition().x == posX && gridTile.getPosition().y == posY) {
                 return gridTile;
             }
         }
-        System.out.println("No GridTile at Position: " + posX + " and " + posY);
+        //System.out.println("No GridTile at Position: " + posX + " and " + posY);
         return null;
     }
 
@@ -60,11 +67,16 @@ public class Grid {
         return getGridTile((int) position.x, (int) position.y);
     }
 
-    public void addToGridTile(GameObject gameObject, Vector2 position){
-        getGridTile((int) position.x, (int) position.y).addGameObject(gameObject);
+    public void addToGridTile(GameObject gameObject, Vector2 position) {
+        if (getGridTile((int) position.x, (int) position.y) != null) {
+            getGridTile((int) position.x, (int) position.y).addGameObject(gameObject);
+        } else {
+            gridTiles.add(new GridTile(position, this));
+            addToGridTile(gameObject, position);
+        }
     }
 
-    public void addToGridTile(GameObject gameObject, int posX, int posY){
+    public void addToGridTile(GameObject gameObject, int posX, int posY) {
         addToGridTile(gameObject, new Vector2(posX, posY));
     }
 

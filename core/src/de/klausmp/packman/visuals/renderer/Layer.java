@@ -1,5 +1,6 @@
 package de.klausmp.packman.visuals.renderer;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
@@ -38,14 +39,15 @@ public class Layer {
         sortElementsToRdender();
 //      rendert alle elemente aus "elementsToRender" nach priorität
 //      kleinste zu erst, dadurch sind elemente mit hoher priorität
-//      vor elementen mit niediriger priorität
+//      vor elementen mit niediriger priorität gezeichnet
+        //System.out.println("anzahl der elemente" + elementsToRender.size + "    " + this.layerToRenderOn);
         for (LayerRendererQueQueElement element : elementsToRender) {
-//          rendert elemente auf den screen
+            //rendert elemente auf den screen
             element.getSprite().draw(batch);
         }
 //      löscht "elementsToRender" um im nächsten frame nicht alte
 //      elemente erneut zu rendern
-        clear();
+        //clear();
     }
 
     //  sortiert "elementsToRender" nach ihrer priorität (kleinste zu erst)

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.gameObjects.ObjectType;
+import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
  * @author Klausmp
@@ -12,7 +13,7 @@ public class GridTile {
 
     private Vector2 position;
     private Grid grid;
-    private Array<GameObject> gameObjects;
+    private Array<GameObject> gameObjects = new Array<GameObject>();
 
     public GridTile(Vector2 position, Grid grid) {
         this.position = position;
@@ -24,6 +25,12 @@ public class GridTile {
             for (GameObject object: gameObjects) {
                 object.update();
             }
+        }
+    }
+
+    public void render(LayerRenderer renderer){
+        for (GameObject object: gameObjects) {
+            object.render(renderer);
         }
     }
 
