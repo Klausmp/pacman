@@ -33,6 +33,10 @@ public class GameScreen extends ScreenAdapter {
         return layerRenderer;
     }
 
+    public static TextureAtlas getAtlas() {
+        return atlas;
+    }
+
     @Override
     public void dispose() {
         super.dispose();

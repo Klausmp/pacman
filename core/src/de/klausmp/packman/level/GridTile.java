@@ -43,4 +43,8 @@ public class GridTile {
         }
         return null;
     }
+
+    public Vector2 getPosition() {
+        return position;
+    }
 }

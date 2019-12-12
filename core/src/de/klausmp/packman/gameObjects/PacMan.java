@@ -10,11 +10,11 @@ import de.klausmp.packman.visuals.renderer.Layers;
  */
 public class PacMan extends GameObject {
     public PacMan(TextureRegion region, Vector2 position, Layers layerToRenderOn, float renderPriority) {
-        super(region, position, layerToRenderOn, renderPriority);
+        super(region, position, ObjectType.PACMAN, layerToRenderOn, renderPriority);
     }
 
     public PacMan(Texture texture, Vector2 position, Layers layerToRenderOn, float renderPriority) {
-        super(texture, position, layerToRenderOn, renderPriority);
+        super(texture, position, ObjectType.PACMAN, layerToRenderOn, renderPriority);
     }
 
     @Override

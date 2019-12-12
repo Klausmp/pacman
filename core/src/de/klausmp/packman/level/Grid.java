@@ -2,16 +2,21 @@ package de.klausmp.packman.level;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.klausmp.packman.gameObjects.GameObject;
 
 /**
  * @author Klausmp
  */
 public class Grid {
-    private final int GRINDSIZE = 32;
     private final int DEFAULTGRIDSIZE = 32;
     private Array<GridTile> gridTiles = new Array<GridTile>();
     private Vector2 position;
     private Vector2 size;
+    private Map map;
+
+    public Grid() {
+        create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
+    }
 
     public Grid(Vector2 position, Vector2 size) {
         create(position, size);
@@ -25,13 +30,12 @@ public class Grid {
         create(new Vector2(posX, posY), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
     }
 
-
     public void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
-                gridTiles.add(new GridTile(new Vector2((x * GRINDSIZE) + position.x, (y * GRINDSIZE) + position.y), this));
+                gridTiles.add(new GridTile(new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
             }
         }
     }
@@ -42,11 +46,41 @@ public class Grid {
         }
     }
 
+    public GridTile getGridTile(int posX, int posY) {
+        for (GridTile gridTile : gridTiles) {
+            if (gridTile.getPosition().x == posX && gridTile.getPosition().y == posY) {
+                return gridTile;
+            }
+        }
+        System.out.println("No GridTile at Position: " + posX + " and " + posY);
+        return null;
+    }
+
+    public GridTile getGridTile(Vector2 position) {
+        return getGridTile((int) position.x, (int) position.y);
+    }
+
+    public void addToGridTile(GameObject gameObject, Vector2 position){
+        getGridTile((int) position.x, (int) position.y).addGameObject(gameObject);
+    }
+
+    public void addToGridTile(GameObject gameObject, int posX, int posY){
+        addToGridTile(gameObject, new Vector2(posX, posY));
+    }
+
     public Vector2 getPosition() {
         return position;
     }
 
     public void addTile(GridTile gridTile) {
         gridTiles.add(gridTile);
+    }
+
+    public Vector2 getSize() {
+        return size;
+    }
+
+    public int getDEFAULTGRIDSIZE() {
+        return DEFAULTGRIDSIZE;
     }
 }
