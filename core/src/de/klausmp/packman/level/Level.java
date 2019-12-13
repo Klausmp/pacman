@@ -43,6 +43,8 @@ public abstract class Level {
         grid.render(renderer);
     }
 
-    public abstract void update();
+    public void update(){
+        grid.update();
+    }
 
 }

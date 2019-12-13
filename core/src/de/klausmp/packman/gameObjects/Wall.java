@@ -8,12 +8,17 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * @author Klausmp
  */
 public class Wall extends GameObject {
+    private int timer = 0;
     public Wall(Vector2 position) {
         super(GameScreen.getAtlas().findRegion("wall"), position, ObjectType.WALL, Layers.BACKGROUND, 5.0f);
     }
 
     @Override
     public void update() {
-
+        super.update();
+        timer++;
+        if (timer >= 500){
+            alive = false;
+        }
     }
 }

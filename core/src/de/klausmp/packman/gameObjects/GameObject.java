@@ -1,6 +1,5 @@
 package de.klausmp.packman.gameObjects;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +16,7 @@ public abstract class GameObject extends Sprite {
     protected LayerRendererQueQueElement renderElement;
     protected Layers layerToRenderOn;
     protected float renderPriority;
+    protected boolean alive = true;
 
     public GameObject(TextureRegion region, Vector2 position, ObjectType objectType, Layers layerToRenderOn, float renderPriority) {
         super(region);
@@ -32,8 +32,10 @@ public abstract class GameObject extends Sprite {
         renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
     }
 
-    public void update(){
-        renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
+    public void update() {
+        if (alive == false){
+            dispose();
+        }
     }
 
     public void render(LayerRenderer renderer) {
@@ -54,5 +56,17 @@ public abstract class GameObject extends Sprite {
 
     public ObjectType getObjectType() {
         return objectType;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public void dispose(){
+        this.dispose();
     }
 }

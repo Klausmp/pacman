@@ -21,20 +21,31 @@ public class GridTile {
     }
 
     public void update() {
-        if (gameObjects.isEmpty() == false) {
-            for (GameObject object: gameObjects) {
-                object.update();
-            }
+        for (GameObject object : gameObjects) {
+            object.update();
         }
+        removeDeadGameObjects();
+        if (gameObjects.size >= 1)
+        System.out.println(gameObjects.size);
     }
 
-    public void render(LayerRenderer renderer){
-        for (GameObject object: gameObjects) {
+    public void render(LayerRenderer renderer) {
+        for (GameObject object : gameObjects) {
             object.render(renderer);
         }
     }
 
-    public void removeGameObject() {
+    private void removeDeadGameObjects() {
+        Array<GameObject> gameObjectsToRemove = new Array<GameObject>();
+        for (GameObject object : gameObjects) {
+            if (object.isAlive() == false){
+                gameObjectsToRemove.add(object);
+            }
+        }
+        gameObjects.removeAll(gameObjectsToRemove, true);
+    }
+
+    public void removeAllGameObject() {
         gameObjects.clear();
     }
 
@@ -42,9 +53,9 @@ public class GridTile {
         gameObjects.add(gameObject);
     }
 
-    public GameObject getGameObjectByType(ObjectType objectType){
-        for (GameObject object: gameObjects) {
-            if (object.getObjectType().equals(objectType)){
+    public GameObject getGameObjectByType(ObjectType objectType) {
+        for (GameObject object : gameObjects) {
+            if (object.getObjectType().equals(objectType)) {
                 return object;
             }
         }
