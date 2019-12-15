@@ -14,7 +14,6 @@ public class Grid {
     private Array<GridTile> gridTiles = new Array<GridTile>();
     private Vector2 position;
     private Vector2 size;
-    private Map map;
 
     public Grid() {
         create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
