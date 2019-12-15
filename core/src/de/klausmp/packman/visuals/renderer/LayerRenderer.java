@@ -6,16 +6,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 /**
+ * diese klasse rendert sprites auf den screen
+ * dies geschieht nach layern sortiert
+ * innerhalb eins layers kann auch noch mit
+ * prioritäten die renderring reihenfolge
+ * beinflusst werden
+ *
  * @author Klausmp
+ * @version 0.0.2
  */
-
-/*   diese klasse rendert sprites auf den screen
- *   dies geschieht nach layern sortiert
- *   innerhalb eins layers kann auch noch mit
- *   prioritäten die renderring reihenfolge
- *   beinflusst werden
- * */
-
+//TODO JAVA DOC
 public class LayerRenderer {
     //mit dem sprite batch werden die sprites auf den screen gezeichnet
     private static SpriteBatch batch;
@@ -27,17 +27,21 @@ public class LayerRenderer {
     private static Array<Layers> layerOrder;
 
     //konstruktor mit individueller layerOrder
-    public LayerRenderer(Layers[] layers) {
-        layerArry = new Array<Layer>();
-        layerOrder = convertLayersArray(layers);
-        batch = new SpriteBatch();
-        addLayersFromOrder();
+    public LayerRenderer(Layers[] layerOrder) {
+       create(layerOrder);
     }
 
     //konstruktor mit defaultLayerOrder
     public LayerRenderer() {
+        create(Layers.DEFAULTLAYERORDER());
+    }
+
+    /**
+     * @since 0.0.2
+     */
+    public void create(Layers[] layerOrder) {
         layerArry = new Array<Layer>();
-        layerOrder = convertLayersArray(Layers.DEFAULTLAYERORDER());
+        this.layerOrder = convertLayersArray(layerOrder);
         batch = new SpriteBatch();
         addLayersFromOrder();
     }
@@ -69,7 +73,7 @@ public class LayerRenderer {
         //damit kein layer doppelt vorkommen kann wird zuerst
         //die alte layerListe gelöscht
         layerArry.clear();
-        for (Layers layers: layerOrder) {
+        for (Layers layers : layerOrder) {
             layerArry.add(new Layer(layers));
         }
     }
