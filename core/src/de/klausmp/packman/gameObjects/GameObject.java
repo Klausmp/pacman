@@ -33,9 +33,7 @@ public abstract class GameObject extends Sprite {
     }
 
     public void update() {
-        if (alive == false){
-            dispose();
-        }
+
     }
 
     public void render(LayerRenderer renderer) {
@@ -64,9 +62,5 @@ public abstract class GameObject extends Sprite {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
-    }
-
-    public void dispose(){
-        this.dispose();
     }
 }
