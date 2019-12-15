@@ -13,6 +13,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
  * screen in dem das spiel statfindt.
  * hier werden alle objekte für das gameplay {@link #render(float) gerendert}
  * und {@link #update() geupdated}.
+ *
  * @author Klausmp
  * @version 0.0.1
  * @see com.badlogic.gdx.ScreenAdapter
@@ -33,12 +34,13 @@ public class GameScreen extends ScreenAdapter {
     /**
      * initalisierung des {@link LayerRenderer LayerRenderes} mit der zu verwendenen
      * layerorder einem array aus {@link Layers layers}. <br>
-     *
+     * <p>
      * initalisierung des {@link TextureAtlas TextureAtlases} mit dem pfad
      * des spriteSheets in "core.assets". <br>
-     *
+     * <p>
      * initalisierung des {@link Level level}. hierbei kann das jedes von {@link Level level}
      * erbende objekt verwendet werden
+     *
      * @since 0.0.1
      */
     public void create() {
@@ -49,6 +51,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * {@link Level#update() updated} das {@link Level level}.
+     *
      * @since 0.0.1
      */
     public void update() {
@@ -57,10 +60,11 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * rendert und updated alle objecte auf dem screen.
-     * @see Main#render()
+     *
      * @param delta {@link Graphics#getDeltaTime() deltatime} des spieles dient zur berechnung von geschwindigkeiten und timern
-     * @since
      * @Override
+     * @see Main#render()
+     * @since
      */
     public void render(float delta) {
         super.render(delta);
@@ -78,8 +82,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * @since 0.0.1
      * @Override
+     * @since 0.0.1
      */
     public void dispose() {
         super.dispose();
