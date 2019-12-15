@@ -5,42 +5,61 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import de.klausmp.packman.visuals.screens.GameScreen;
-
+//todo menues etc for den rest der level etc machen
 /**
  * @author Klausmp
+ * @version 0.0.1
+ * startmethode des haubtspieles platformunabhänig (Core)
  */
-//todo menues etc for den rest der level etc machen
 public class Main extends Game {
 
 	private static Main INSTANCE;
 
-	@Override
-	public void create () {
-	//erstellung einer neuen instance von main wenn keine vorhanden ist
-		if (INSTANCE == null){
-			INSTANCE = this;
-		}
-		//setzen des Start Screens
-		setScreen(new GameScreen());
-	}
+    /**
+     * erstellung des spieles mit der erschaffung einer main-instance
+     * und setzung des startscreens.
+     */
+    @Override
+    public void create() {
+        /**
+         * erstellung einer neuen instance von main wenn keine vorhanden ist
+         */
+        if (INSTANCE == null) {
+            INSTANCE = this;
+        }
+        /**
+         * setzen des Start Screens
+         */
+        setScreen(new GameScreen());
+    }
 
-	@Override
-	public void render () {
-		//rendern des aktiven screens
-		getScreen().render(Gdx.graphics.getDeltaTime());
-		//schließung der anwendung beim drücken von ESC
-		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-			Gdx.app.exit();
-		}
-	}
+    /**
+	 * rendert und updated alle objecte im spiel.
+	 * einstellungsmöglichkeiten für PC im DesktopLauncher.
+	 */
+    @Override
+    public void render() {
+        /**
+		 * rendern des aktiven screens
+		 */
+        getScreen().render(Gdx.graphics.getDeltaTime());
+        /**
+		 * schließung der anwendung beim drücken von ESC
+		 */
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+        }
+    }
 
-	@Override
-	public void dispose () {
+    @Override
+    public void dispose() {
+		screen.dispose();
+    }
 
-	}
-
-	//methode um den anktiven screen von überall zu ändern
-	public static void setActiveScreen(Screen screen){
-		INSTANCE.setScreen(screen);
-	}
+	/**
+	 * 	methode um den anktiven screen von überall zu ändern
+	 */
+    public static void setActiveScreen(Screen screen) {
+        INSTANCE.setScreen(screen);
+    }
 }
