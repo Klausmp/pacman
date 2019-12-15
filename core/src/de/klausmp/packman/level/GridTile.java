@@ -25,8 +25,6 @@ public class GridTile {
             object.update();
         }
         removeDeadGameObjects();
-        if (gameObjects.size >= 1)
-        System.out.println(gameObjects.size);
     }
 
     public void render(LayerRenderer renderer) {

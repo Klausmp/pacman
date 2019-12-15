@@ -9,7 +9,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
 /**
  * @author Klausmp
  */
-
+//todo menues etc for den rest der level etc machen
 public class Main extends Game {
 
 	private static Main INSTANCE;
