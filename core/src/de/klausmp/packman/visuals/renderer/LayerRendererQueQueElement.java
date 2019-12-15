@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * @author Klausmp
  */
-
+//TODO JAVA DOC
 public class LayerRendererQueQueElement {
 
     private static final float DEFAULTPROIRITY = 10.0f;
