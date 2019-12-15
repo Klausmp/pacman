@@ -53,7 +53,7 @@ public enum Layers {
      * {@link Layer layer} mit kleinem index werden unter {@link Layer layern} mit großem index gezeichnet. <br>
      * dadurch sind {@link Layer layer} mit hohem index im vordergrund
      *
-     * @return default zeichenreihenfolge der layer.
+     * @return default zeichenreihenfolge der {@link Layer layer}.
      */
     public static Layers[] DEFAULTLAYERORDER() {
         return new Layers[]{Layers.BACKGROUND, Layers.BACK, Layers.DEFAULT, Layers.FRONT, Layers.INFRONT, Layers.TEXT, Layers.GUI};
