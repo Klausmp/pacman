@@ -39,7 +39,7 @@ public class Main extends Game {
      * rendert und updated alle objecte im spiel.
      * einstellungsmöglichkeiten für PC im DesktopLauncher.
      * @since 0.0.1
-     * @@Override
+     * @Override
 	 */
     public void render() {
         /**
