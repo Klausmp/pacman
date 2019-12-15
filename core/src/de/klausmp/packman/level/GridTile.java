@@ -9,6 +9,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
 /**
  * @author Klausmp
  */
+//TODO JAVA DOC MACHEN
 public class GridTile {
 
     private Vector2 position;

@@ -10,6 +10,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
 /**
  * @author Klausmp
  */
+//TODO JAVA DOC MACHEN
 public abstract class GameObject extends Sprite {
 
     protected ObjectType objectType;

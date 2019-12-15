@@ -2,17 +2,14 @@ package de.klausmp.packman.visuals.renderer;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+//TODO JAVA DOC MACHEN
 
 /**
- * @author Klausmp
+ * @author Klausmp.
+ * ein Layer der im layerRenderer verwendet wird.
+ * die klasse layer sortiert ihre elemente nach prioritat.
+ * und zeichnet sie in der richtigen reihenfloge auf den screen.
  */
-
-/*
- *   ein Layer der im layerRenderer verwendet wird
- *   die klasse layer sortiert ihre elemente nach prioritat
- *   und zeichnet sie in der richtigen reihenfloge auf den screen
- * */
-
 public class Layer {
     //liste aller elemente die in diesem layer gerendert werden
     private Array<LayerRendererQueQueElement> elementsToRender;
@@ -84,3 +81,7 @@ public class Layer {
         return layerToRenderOn;
     }
 }
+
+/**
+ *
+ */

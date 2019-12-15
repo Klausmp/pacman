@@ -7,9 +7,10 @@ import com.badlogic.gdx.Screen;
 import de.klausmp.packman.visuals.screens.GameScreen;
 //todo menues etc for den rest der level etc machen
 /**
+ * startmethode des haubtspieles platformunabhänig (Core)
  * @author Klausmp
  * @version 0.0.1
- * startmethode des haubtspieles platformunabhänig (Core)
+ * @see Game
  */
 public class Main extends Game {
 
@@ -18,8 +19,9 @@ public class Main extends Game {
     /**
      * erstellung des spieles mit der erschaffung einer main-instance
      * und setzung des startscreens.
+     * @since 0.0.1
+     * @Override
      */
-    @Override
     public void create() {
         /**
          * erstellung einer neuen instance von main wenn keine vorhanden ist
@@ -34,10 +36,11 @@ public class Main extends Game {
     }
 
     /**
-	 * rendert und updated alle objecte im spiel.
-	 * einstellungsmöglichkeiten für PC im DesktopLauncher.
+     * rendert und updated alle objecte im spiel.
+     * einstellungsmöglichkeiten für PC im DesktopLauncher.
+     * @since 0.0.1
+     * @@Override
 	 */
-    @Override
     public void render() {
         /**
 		 * rendern des aktiven screens
@@ -51,13 +54,17 @@ public class Main extends Game {
         }
     }
 
-    @Override
+    /**
+     * @since 0.0.1
+     * @Override
+     */
     public void dispose() {
 		screen.dispose();
     }
 
 	/**
-	 * 	methode um den anktiven screen von überall zu ändern
+     * methode um den anktiven screen von überall zu ändern
+     * @since 0.0.1
 	 */
     public static void setActiveScreen(Screen screen) {
         INSTANCE.setScreen(screen);
