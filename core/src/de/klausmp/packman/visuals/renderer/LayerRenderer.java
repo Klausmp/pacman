@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
  * beinflusst werden
  *
  * @author Klausmp
- * @version 0.0.2
+ * @version 0.0.1
  */
 //TODO JAVA DOC
 public class LayerRenderer {
@@ -37,7 +37,7 @@ public class LayerRenderer {
     }
 
     /**
-     * @since 0.0.2
+     * @since 0.0.1
      */
     public void create(Layers[] layerOrder) {
         layerArry = new Array<Layer>();
