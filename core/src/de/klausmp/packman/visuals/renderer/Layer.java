@@ -112,8 +112,6 @@ public class Layer {
         elementsToRender.add(queQueElement);
     }
 
-    //
-
     /**
      * löscht die liste {@link #elementsToRender elementsToRender}
      *

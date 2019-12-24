@@ -9,7 +9,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
 //todo menues etc for den rest der level etc machen
 
 /**
- * startmethode des haubtspieles platformunabhänig (Core)
+ * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
  * @version 0.0.1
@@ -17,6 +17,12 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  */
 public class Main extends Game {
 
+    /**
+     * instance des spieles. alle dinge aus der mainInstance sind damit zu erreichen. <br>
+     * kann und darf nur einmal existieren.
+     *
+     * @since 0.0.1
+     */
     private static Main INSTANCE;
 
     /**
@@ -70,6 +76,7 @@ public class Main extends Game {
     /**
      * methode um den anktiven screen von überall zu ändern
      *
+     * @param screen neuer {@link Screen screen} der von nun an dargestellt wird
      * @since 0.0.1
      */
     public static void setActiveScreen(Screen screen) {

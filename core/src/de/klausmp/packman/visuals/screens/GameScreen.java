@@ -19,8 +19,25 @@ import de.klausmp.packman.visuals.renderer.Layers;
  * @see com.badlogic.gdx.ScreenAdapter
  */
 public class GameScreen extends ScreenAdapter {
+    /**
+     * @see LayerRenderer
+     * @since 0.0.1
+     */
     private static LayerRenderer layerRenderer;
+
+    /**
+     * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im spiel verwendet werden.
+     *
+     * @see TextureAtlas
+     * @since 0.0.1
+     */
     private static TextureAtlas atlas;
+
+    /**
+     * level welches gerade gespielt wird.
+     *
+     * @since 0.0.1
+     */
     private static Level level;
 
     /**
@@ -64,7 +81,7 @@ public class GameScreen extends ScreenAdapter {
      * @param delta {@link Graphics#getDeltaTime() deltatime} des spieles dient zur berechnung von geschwindigkeiten und timern
      * @Override
      * @see Main#render()
-     * @since
+     * @since 0.0.1
      */
     public void render(float delta) {
         super.render(delta);
@@ -81,10 +98,6 @@ public class GameScreen extends ScreenAdapter {
         return atlas;
     }
 
-    /**
-     * @Override
-     * @since 0.0.1
-     */
     public void dispose() {
         super.dispose();
     }
