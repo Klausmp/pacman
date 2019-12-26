@@ -1,20 +1,52 @@
 package de.klausmp.packman.visuals.renderer;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 
 /**
+ * objekt welches alle informationen enthällt die der {@link LayerRenderer layerRenderer} zum
+ * rendern benötigt <br>
+ *
  * @author Klausmp
+ * @version 0.0.1
  */
 //TODO JAVA DOC (in arbeit)
 public class LayerRendererQueQueElement {
-
+    /**
+     * ein standart werd der {@link #priority priorität}
+     *
+     * @since 0.0.1
+     */
     private static final float DEFAULTPROIRITY = 10.0f;
+
+    /**
+     * in {@link Sprite sprite} werden alle informationen über die textur
+     * sowie ihre position gespeichert.
+     *
+     * @since 0.0.1
+     */
     private Sprite sprite;
+
+    /**
+     * angabe auf welchem {@link Layer} gerdernt werden soll <br>
+     * diese ist type aus dem {@link Layers layers} enum.
+     *
+     * @since 0.0.1
+     */
     private Layers layerToRenderOn;
+
+    /**
+     * zeigt an in welcher reihenfolge im layer gerendert wird. <br>
+     * bzw welche textur von welcher im layer überzeichnet wird
+     *
+     * @since 0.0.1
+     */
     private float priority;
+
+    /**
+     * zeigt an ob das object gelöscht werden kann
+     *
+     * @since 0.0.1
+     */
     private boolean canBeRemoved = false;
 
     public LayerRendererQueQueElement(Sprite sprite, Layers layerToRenderOn, float priority) {
@@ -38,70 +70,6 @@ public class LayerRendererQueQueElement {
     public LayerRendererQueQueElement(Sprite sprite, Layers layerToRenderOn) {
         this.sprite = sprite;
         this.layerToRenderOn = layerToRenderOn;
-        this.priority = DEFAULTPROIRITY;
-    }
-
-    public LayerRendererQueQueElement(Texture texture, Vector2 position, Layers layerToRenderOn, float priority) {
-        sprite = new Sprite(texture);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = layerToRenderOn;
-        this.priority = priority;
-    }
-
-    public LayerRendererQueQueElement(Texture texture, Vector2 position, float priority) {
-        sprite = new Sprite(texture);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = Layers.DEFAULT;
-        this.priority = priority;
-    }
-
-    public LayerRendererQueQueElement(Texture texture, Vector2 position) {
-        sprite = new Sprite(texture);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = Layers.DEFAULT;
-        this.priority = DEFAULTPROIRITY;
-    }
-
-    public LayerRendererQueQueElement(Texture texture, Vector2 position, Layers layerToRenderOn) {
-        sprite = new Sprite(texture);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = layerToRenderOn;
-        this.priority = DEFAULTPROIRITY;
-    }
-
-    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, Layers layerToRenderOn, float priority) {
-        sprite = new Sprite(region);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = layerToRenderOn;
-        this.priority = priority;
-    }
-
-    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, float priority) {
-        sprite = new Sprite(region);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = Layers.DEFAULT;
-        this.priority = priority;
-    }
-
-    public LayerRendererQueQueElement(TextureRegion region, Vector2 position, Layers layerToRenderOn) {
-        sprite = new Sprite(region);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = layerToRenderOn;
-        this.priority = DEFAULTPROIRITY;
-    }
-
-    public LayerRendererQueQueElement(TextureRegion region, Vector2 position) {
-        sprite = new Sprite(region);
-        sprite.setX(position.x);
-        sprite.setY(position.y);
-        this.layerToRenderOn = Layers.DEFAULT;
         this.priority = DEFAULTPROIRITY;
     }
 
