@@ -11,7 +11,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
 public class Dot extends GameObject {
 
     public Dot(TextureRegion region, Vector2 position, Layers layerToRenderOn, float renderPriority) {
-        super(region, position, ObjectType.DOT, layerToRenderOn, renderPriority);
+        super(region, position, GameObjectType.DOT, layerToRenderOn, renderPriority);
     }
 
     @Override

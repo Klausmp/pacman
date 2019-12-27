@@ -6,7 +6,7 @@ package de.klausmp.packman.gameObjects;
  * @author Klausmp
  * @version  0.0.1
  */
-public enum ObjectType {
+public enum GameObjectType {
     /**
      * @see Wall
      * @since 0.0.1
@@ -26,5 +26,5 @@ public enum ObjectType {
      * @see Dot
      * @since 0.0.1
      */
-    DOT;
+    DOT
 }

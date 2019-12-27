@@ -7,7 +7,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
 /**
  * @author Klausmp
  */
-//TODO JAVA DOC MACHEN
+//TODO JAVA DOC MACHEN (in arbeit)
 public abstract class Level {
     protected PacMan pacMan;
     protected Grid grid;

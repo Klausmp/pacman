@@ -10,7 +10,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
 //TODO JAVA DOC MACHEN
 public class Ghost extends GameObject {
     public Ghost(TextureRegion region, Vector2 position) {
-        super(region, position, ObjectType.GHOST, Layers.DEFAULT, 5.0f);
+        super(region, position, GameObjectType.GHOST, Layers.DEFAULT, 5.0f);
     }
 
     @Override
