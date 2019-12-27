@@ -30,6 +30,7 @@ public abstract class Level {
     }
 
     public Level(int gridPosX, int gridPosY) {
+        //TODO irgendwas mit der position ist falsch
         grid = new Grid(gridPosition.x, gridPosition.y);
         create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY));
     }
