@@ -5,7 +5,9 @@ import de.klausmp.packman.gameObjects.PacMan;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
+ *
  * @author Klausmp
+ * @version 0.0.1
  */
 //TODO JAVA DOC MACHEN (in arbeit)
 public abstract class Level {
@@ -30,22 +32,26 @@ public abstract class Level {
     }
 
     public Level(int gridPosX, int gridPosY) {
-        //TODO irgendwas mit der position ist falsch
-        grid = new Grid(gridPosition.x, gridPosition.y);
+        grid = new Grid(gridPosX, gridPosY);
         create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY));
     }
 
     public void create(Vector2 gridSize, Vector2 gridPosition) {
         this.gridSize = gridSize;
         this.gridPosition = gridPosition;
-
     }
 
-    public void render(LayerRenderer renderer){
+    public void render(LayerRenderer renderer) {
         grid.render(renderer);
     }
 
-    public void update(){
+    /**
+     * updated das {@link #grid grid} des {@link Level levels} und damit
+     * alle {@link de.klausmp.packman.gameObjects.GameObject gameObjekte}.
+     *
+     * @since 0.0.1
+     */
+    public void update() {
         grid.update();
     }
 
