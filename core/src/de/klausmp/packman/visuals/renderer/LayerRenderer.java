@@ -164,7 +164,8 @@ public class LayerRenderer {
 
     /**
      * fügt eine neues eslement in die render liste hinzu. <br>
-     * jedes element wird am ende jedes frames gerendert und dan aus der liste entfernt.
+     * jedes element wird am ende jedes frames gerendert und dan aus der liste entfernt. <br>
+     * daher muss es in jedem tick erneut hinugefügt werden.
      *
      * @param queQueElement neues {@link LayerRendererQueQueElement element} welches in die render warteschlage hinzugefügt wird.
      * @since 0.0.1

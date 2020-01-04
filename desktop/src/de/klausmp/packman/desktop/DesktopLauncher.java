@@ -9,7 +9,7 @@ import de.klausmp.packman.Main;
 /**
  * @author Klausmp
  */
-//TODO JAVA DOC MACHEN
+//TODO JAVA DOC MACHEN (in arbeit)
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		startDesktop();

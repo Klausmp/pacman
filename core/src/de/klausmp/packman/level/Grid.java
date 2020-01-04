@@ -9,6 +9,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * @author Klausmp
  */
 //TODO JAVA DOC MACHEN
+//TODO wert für höhe und breite eines gridTiles
 public class Grid {
     private final int DEFAULTGRIDSIZE = 32;
     private Array<GridTile> gridTiles = new Array<GridTile>();

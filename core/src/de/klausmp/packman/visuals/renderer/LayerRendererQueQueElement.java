@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * objekt welches alle informationen enthällt die der {@link LayerRenderer layerRenderer} zum
- * rendern benötigt <br>
+ * rendern benötigt wird <br>
  *
  * @author Klausmp
  * @version 0.0.1
