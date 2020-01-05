@@ -6,6 +6,8 @@ import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
+ * raster auf dem die {@link GameObject gameObjekte} sich verweilen, bewegen und gespeichert werden.
+ *
  * @author Klausmp
  * @version 0.0.1
  * @since 0.0.1
@@ -123,6 +125,10 @@ public class Grid {
     }
 
     /**
+     * durchsucht die liste der {@link #gridTiles gridtiles} nach einem mit den passenden koordinaten.
+     * wennn keines gefunden wird wird NULL zurrückgegeben.
+     * nur ganze zahlen
+     *
      * @param posX x position des gesuchten {@link GridTile gridTiles}.
      * @param posY y position des gesuchten {@link GridTile gridTiles}.
      * @return das gridTile mit den x und y werten
