@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
-
+//TODO wert für höhe und breite eines gridTiles
 /**
  * raster auf dem die {@link GameObject gameObjekte} sich verweilen, bewegen und gespeichert werden.
  *
@@ -12,7 +12,6 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * @version 0.0.1
  * @since 0.0.1
  */
-//TODO wert für höhe und breite eines gridTiles
 public class Grid {
     /**
      * default größe des grids in x und y richtung
