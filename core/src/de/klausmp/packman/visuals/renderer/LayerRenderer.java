@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Array;
  *
  * @author Klausmp
  * @version 0.0.1
+ * @since 0.0.1
  */
 public class LayerRenderer {
 
@@ -72,7 +73,7 @@ public class LayerRenderer {
      */
     public void create(Layers[] layerOrder) {
         layerArry = new Array<Layer>();
-        this.layerOrder = new Array<Layers>();
+        LayerRenderer.layerOrder = new Array<Layers>();
         setLayerOrder(layerOrder);
         batch = new SpriteBatch();
         addLayersFromOrder();
@@ -85,22 +86,22 @@ public class LayerRenderer {
      * @since 0.0.1
      */
     public void render() {
-        /**
+        /*
          * setzt die farbe mit der der Screen übermahlt wird auf schwarz
          */
         Gdx.gl.glClearColor(0, 0, 0, 1);
 
-        /**
+        /*
          * setzt die farbe mit der der Screen übermahlt wird auf schwarz
          */
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /**
+        /*
          * begin des spritebatches mit dem gezeichnet wird
          */
         batch.begin();
 
-        /**
+        /*
          * alle layer werden in der Reihenfolge der layerOrder
          * durchgegenagen und zum richtigen zeitpunkt gerendert
          */
@@ -113,7 +114,7 @@ public class LayerRenderer {
             }
         }
 
-        /**
+        /*
          * ende des {@link SpriteBatch spritebatches} hier werden alle
          * {@link com.badlogic.gdx.graphics.g2d.Sprite sprites} an die
          * graphikkarte übergeben und gezeichnet

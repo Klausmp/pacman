@@ -14,6 +14,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * @author Klausmp
  * @version 0.0.1
  * @see Game
+ * @since 0.0.1
  */
 public class Main extends Game {
 
@@ -24,6 +25,16 @@ public class Main extends Game {
      * @since 0.0.1
      */
     private static Main INSTANCE;
+
+    /**
+     * methode um den anktiven screen von überall zu ändern
+     *
+     * @param screen neuer {@link Screen screen} der von nun an dargestellt wird
+     * @since 0.0.1
+     */
+    public static void setActiveScreen(Screen screen) {
+        INSTANCE.setScreen(screen);
+    }
 
     /**
      * erstellung des spieles mit der erschaffung einer main-instance
@@ -71,15 +82,5 @@ public class Main extends Game {
      */
     public void dispose() {
         screen.dispose();
-    }
-
-    /**
-     * methode um den anktiven screen von überall zu ändern
-     *
-     * @param screen neuer {@link Screen screen} der von nun an dargestellt wird
-     * @since 0.0.1
-     */
-    public static void setActiveScreen(Screen screen) {
-        INSTANCE.setScreen(screen);
     }
 }

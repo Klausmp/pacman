@@ -16,6 +16,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
  *
  * @author Klausmp
  * @version 0.0.1
+ * @since 0.0.1
  * @see Sprite
  */
 

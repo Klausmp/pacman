@@ -10,6 +10,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  *
  * @author Klausmp
  * @version 0.0.1
+ * @since 0.0.1
  */
 public abstract class Level {
 
@@ -37,7 +38,7 @@ public abstract class Level {
     /**
      * position des {@link Grid grids}
      *
-     * @since  0.0.1
+     * @since 0.0.1
      */
     protected Vector2 gridPosition;
 
@@ -88,7 +89,7 @@ public abstract class Level {
     }
 
     /**
-     * setzt die werte bei der erstellung eines {@link Grid grids}. <br>
+     * setzt die werte bei der erstellung eines {@link Level levels}. <br>
      * wird nur im konstruktor verwendet.
      *
      * @param gridSize     {@link #gridSize siehe gridSize}

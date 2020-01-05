@@ -7,35 +7,55 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import de.klausmp.packman.Main;
 
 /**
+ * starter für die desktopanwendung.
+ *
  * @author Klausmp
+ * @version 0.0.1
+ * @since 0.0.1
  */
-//TODO JAVA DOC MACHEN (in arbeit)
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		startDesktop();
-	}
 
-	public static void startDesktop(){
-		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		//einschaltung von vertikaler synkronisation
-		config.useVsync(true);
-		//setzen des fenster titels
-		config.setTitle("Pac Man");
-		//verhinderung der größenänderung des fensters
-		config.setResizable(false);
-		//setzen der größe des fensters
-		config.setWindowedMode(500, 500);
-		new Lwjgl3Application(new Main(), config);
-	}
+    /**
+     * main methode für die desktop anwendung.
+     *
+     * @param arg start argumente.
+     */
+    public static void main(String[] arg) {
+        startDesktop();
+    }
 
-	public static void packer() {
-		TexturePacker.Settings settings = new TexturePacker.Settings();
-		settings.maxWidth = 4096;
-		settings.maxHeight = 4096;
-		settings.edgePadding = true;
-		settings.duplicatePadding = true;
-		settings.filterMin = Texture.TextureFilter.Linear;
-		settings.filterMag = Texture.TextureFilter.Linear;
-		TexturePacker.process(settings, "pacMan", ".", "spriteSheed");
-	}
+    /**
+     * startet die desktop anwendung mit den in der methode festgelegten einstellungen.
+     *
+     * @since 0.0.1
+     */
+    public static void startDesktop() {
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        //einschaltung von vertikaler synkronisation
+        config.useVsync(true);
+        //setzen des fenster titels
+        config.setTitle("Pac Man");
+        //verhinderung der größenänderung des fensters
+        config.setResizable(false);
+        //setzen der größe des fensters
+        config.setWindowedMode(500, 500);
+        new Lwjgl3Application(new Main(), config);
+    }
+
+    /**
+     * erstellt eine sprite sheet und einen texture atlas mit allen texturen die in "core/assets/pacMan"
+     * vorhanden sind. "core/assets" ist des output ordner.
+     *
+     * @since 0.0.1
+     */
+    public static void packer() {
+        TexturePacker.Settings settings = new TexturePacker.Settings();
+        settings.maxWidth = 4096;
+        settings.maxHeight = 4096;
+        settings.edgePadding = true;
+        settings.duplicatePadding = true;
+        settings.filterMin = Texture.TextureFilter.Linear;
+        settings.filterMag = Texture.TextureFilter.Linear;
+        TexturePacker.process(settings, "pacMan", ".", "spriteSheed");
+    }
 }

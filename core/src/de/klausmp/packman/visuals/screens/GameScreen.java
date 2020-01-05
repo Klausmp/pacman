@@ -17,6 +17,7 @@ import de.klausmp.packman.visuals.renderer.Layers;
  * @author Klausmp
  * @version 0.0.1
  * @see com.badlogic.gdx.ScreenAdapter
+ * @since 0.0.1
  */
 public class GameScreen extends ScreenAdapter {
     /**
@@ -46,6 +47,14 @@ public class GameScreen extends ScreenAdapter {
      */
     public GameScreen() {
         create();
+    }
+
+    public static LayerRenderer getLayerRenderer() {
+        return layerRenderer;
+    }
+
+    public static TextureAtlas getAtlas() {
+        return atlas;
     }
 
     /**
@@ -88,14 +97,6 @@ public class GameScreen extends ScreenAdapter {
         update();
         level.render(layerRenderer);
         layerRenderer.render();
-    }
-
-    public static LayerRenderer getLayerRenderer() {
-        return layerRenderer;
-    }
-
-    public static TextureAtlas getAtlas() {
-        return atlas;
     }
 
     public void dispose() {

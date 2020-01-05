@@ -5,6 +5,7 @@ package de.klausmp.packman.gameObjects;
  *
  * @author Klausmp
  * @version  0.0.1
+ * @since 0.0.1
  */
 public enum GameObjectType {
     /**
