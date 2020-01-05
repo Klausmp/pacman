@@ -135,7 +135,7 @@ public class Grid {
                 return gridTile;
             }
         }
-        System.out.println("No GridTile at Position: " + posX + " and " + posY);
+        //System.out.println("No GridTile at Position: " + posX + " and " + posY);
         return null;
     }
 
@@ -154,7 +154,8 @@ public class Grid {
 
     /**
      * fügt die inctanze des {@link GameObject gameObjekts} zum {@link GridTile gridTile} mit der
-     * angegebenen position.
+     * angegebenen position. <br>
+     * wenn an der geuchten stelle kein {@link GridTile gridTile} vorhanden ist wird ein neues erstellt.
      *
      * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden soll
      * @param position   position des {@link GridTile gridTiles} zu dem das {@link GameObject gameObjekt} hinzugefügt werden soll
