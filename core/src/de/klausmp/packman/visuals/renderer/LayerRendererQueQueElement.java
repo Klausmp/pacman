@@ -1,6 +1,7 @@
 package de.klausmp.packman.visuals.renderer;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import de.klausmp.packman.utils.Layers;
 
 /**
  * objekt welches alle informationen enthällt die der {@link LayerRenderer layerRenderer} zum

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import de.klausmp.packman.utils.Layers;
 
 /**
  * diese klasse rendert sprites mit einem {@link SpriteBatch spriteBatch} auf den screen. <br>

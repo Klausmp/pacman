@@ -3,9 +3,11 @@ package de.klausmp.packman.gameObjects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.packman.utils.GameObjectType;
+import de.klausmp.packman.utils.Rotation;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 import de.klausmp.packman.visuals.renderer.LayerRendererQueQueElement;
-import de.klausmp.packman.visuals.renderer.Layers;
+import de.klausmp.packman.utils.Layers;
 
 /**
  * diese klasse ist der ursprung aller objekte die im spiel vorhanden sind. <br>
@@ -15,9 +17,9 @@ import de.klausmp.packman.visuals.renderer.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.0.1
- * @since 0.0.1
+ * @version 0.1.0
  * @see Sprite
+ * @since 0.0.1
  */
 
 public abstract class GameObject extends Sprite {
@@ -60,31 +62,42 @@ public abstract class GameObject extends Sprite {
     protected boolean alive = true;
 
     /**
+     * zeigt die rotation des {@link GameObject gameObjekts} an.
+     *
+     * @since 0.1.0
+     */
+    protected Rotation rotation;
+
+    /**
      * konstruktor mit allen nötien einstellungen.
      *
      * @param region          {@link TextureRegion textur} mit welcher das {@link GameObject gameObject} am start versehen wird.
      * @param position        position an dem das {@link GameObject gameObjekt} gespawned wird.
+     * @param rotation        start rotation des {@link GameObject gameObjekts}.
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
      * @param layerToRenderOn {@link de.klausmp.packman.visuals.renderer.Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
      * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link LayerRendererQueQueElement#priority hier}.
-     * @since 0.0.1
+     * @since 0.1.0
      */
-    public GameObject(TextureRegion region, Vector2 position, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
+    public GameObject(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
         super(region);
-        creat(position, gameObjectType, layerToRenderOn, renderPriority);
+        creat(position, rotation, gameObjectType, layerToRenderOn, renderPriority);
     }
 
     /**
      * wird nur im konstruktor verwendet. speichert alle variablen aus dem konsruktor in die parameter der klasse.
      *
      * @param position        position an dem das {@link GameObject gameObjekt} gespawned wird.
+     * @param rotation        start rotation des {@link GameObject gameObjekts}.
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
-     * @param layerToRenderOn @link de.klausmp.packman.visuals.renderer.Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
+     * @param layerToRenderOn {@link de.klausmp.packman.visuals.renderer.Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
      * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link LayerRendererQueQueElement#priority hier}.
+     * @since 0.1.0
      */
-    private void creat(Vector2 position, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
+    private void creat(Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
         this.setX(position.x);
         this.setY(position.y);
+        this.rotation = rotation;
         this.gameObjectType = gameObjectType;
         this.layerToRenderOn = layerToRenderOn;
         this.renderPriority = renderPriority;

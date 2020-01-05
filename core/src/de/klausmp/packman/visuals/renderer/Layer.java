@@ -2,6 +2,7 @@ package de.klausmp.packman.visuals.renderer;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import de.klausmp.packman.utils.Layers;
 
 /**
  * ein Layer der im {@link LayerRenderer layerRenderer} gezeichnet wird.

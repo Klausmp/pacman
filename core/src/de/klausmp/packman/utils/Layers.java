@@ -1,4 +1,6 @@
-package de.klausmp.packman.visuals.renderer;
+package de.klausmp.packman.utils;
+
+import de.klausmp.packman.visuals.renderer.Layer;
 
 /**
  * liste aller verfügbaren {@link Layer layer} im renderer.

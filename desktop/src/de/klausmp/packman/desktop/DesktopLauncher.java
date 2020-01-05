@@ -10,7 +10,7 @@ import de.klausmp.packman.Main;
  * starter für die desktopanwendung.
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.1.0
  * @since 0.0.1
  */
 public class DesktopLauncher {
@@ -22,6 +22,7 @@ public class DesktopLauncher {
      */
     public static void main(String[] arg) {
         startDesktop();
+        //packer();
     }
 
     /**
@@ -43,6 +44,7 @@ public class DesktopLauncher {
     }
 
     /**
+     * texturePacker <br>
      * erstellt eine sprite sheet und einen texture atlas mit allen texturen die in "core/assets/pacMan"
      * vorhanden sind. "core/assets" ist des output ordner.
      *

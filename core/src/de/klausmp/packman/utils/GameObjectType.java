@@ -1,4 +1,6 @@
-package de.klausmp.packman.gameObjects;
+package de.klausmp.packman.utils;
+
+import de.klausmp.packman.gameObjects.*;
 
 /**
  * liste aller {@link GameObject GameObject} typen.

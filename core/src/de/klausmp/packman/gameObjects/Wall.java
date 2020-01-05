@@ -1,15 +1,41 @@
 package de.klausmp.packman.gameObjects;
 
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.packman.visuals.renderer.Layers;
+import de.klausmp.packman.utils.GameObjectType;
+import de.klausmp.packman.utils.Layers;
+import de.klausmp.packman.utils.Rotation;
 import de.klausmp.packman.visuals.screens.GameScreen;
 
 /**
+ * wände im spiel.
+ *
  * @author Klausmp
+ * @version 0.01.0
+ * @since 0.01.0
  */
-//TODO JAVA DOC MACHEN
-public class Wall extends GameObject {
+public class Wall extends StaticGameObjekt {
+
+    /**
+     * konstrucktor mit einstellungsmöglichkeiten bei der startposition.
+     *
+     * @param position startposition der {@link Wall wall}.
+     * @since 0.1.0
+     */
     public Wall(Vector2 position) {
-        super(GameScreen.getAtlas().findRegion("wall"), position, GameObjectType.WALL, Layers.BACKGROUND, 5.0f);
+        super(GameScreen.getAtlas().findRegion("wall"), position, Rotation.DEFAULTROTATION, GameObjectType.WALL, Layers.BACKGROUND, 5.0f);
+    }
+
+    /**
+     * 0.1.0
+     */
+    public void updateWallType() {
+
+    }
+
+    /**
+     * @since 0.1.0
+     */
+    private void setWallType() {
+
     }
 }

@@ -3,7 +3,7 @@ package de.klausmp.packman.level;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
-import de.klausmp.packman.gameObjects.GameObjectType;
+import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**

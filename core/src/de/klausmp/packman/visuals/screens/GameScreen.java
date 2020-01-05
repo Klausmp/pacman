@@ -7,7 +7,7 @@ import de.klausmp.packman.Main;
 import de.klausmp.packman.level.Level;
 import de.klausmp.packman.level.TESTLEVEL;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
-import de.klausmp.packman.visuals.renderer.Layers;
+import de.klausmp.packman.utils.Layers;
 
 /**
  * screen in dem das spiel statfindt.
