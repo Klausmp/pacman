@@ -11,8 +11,9 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * wände im spiel.
  *
  * @author Klausmp
- * @version 0.1.1
- * @since 0.01.0
+ * @version 0.1.2
+ * @since 0.1.0
+ * @see StaticGameObjekt
  */
 public class Wall extends StaticGameObjekt {
 

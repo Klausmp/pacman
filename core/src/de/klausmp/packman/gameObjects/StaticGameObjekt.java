@@ -12,7 +12,8 @@ import de.klausmp.packman.visuals.renderer.Layer;
  * da es statisch und somit unbeweglich ist ferfügt es über keine movement methode.
  *
  * @author Klausmp
- * @version 0.1.0
+ * @version 0.1.2
+ * @see GameObject
  * @since 0.1.0
  */
 public abstract class StaticGameObjekt extends GameObject {

@@ -9,14 +9,15 @@ import de.klausmp.packman.visuals.renderer.Layer;
 
 /**
  * kinetisches {@link GameObject gameObjekt}. <br>
- *
+ * <p>
  * wird nicht jeden tick bewegt. <br>
- *
+ * <p>
  * die movement methode muss extern oder nur
  * unter einer bestimmten bedingung aufgerufen werden
  *
  * @author Klausmp
- * @version 0.1.0
+ * @version 0.1.2
+ * @see GameObject
  * @since 0.1.0
  */
 public abstract class KinematicGameObject extends GameObject {
@@ -40,7 +41,7 @@ public abstract class KinematicGameObject extends GameObject {
      *
      * @since 0.1.0
      */
-    public void movement(){
+    public void movement() {
 
     }
 }

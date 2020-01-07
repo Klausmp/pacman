@@ -9,16 +9,17 @@ import de.klausmp.packman.visuals.renderer.Layer;
 
 /**
  * dynamisches {@link GameObject gameObjekt}. <br>
- *
+ * <p>
  * es kann bewegt werden und ferfügt daher upber eine {@link #movement() movement} methode. <br>
- *
+ * <p>
  * dieses movement geschieht nach den updates die in der {@link GameObject#update() update}
  * methode des {@link GameObject gameObjekts} getätigt werden. <br>
- *
+ * <p>
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.1.0
+ * @version 0.1.2
+ * @see GameObject
  * @since 0.1.0
  */
 public abstract class DynamicGameObject extends GameObject {
