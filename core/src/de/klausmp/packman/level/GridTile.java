@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.utils.GameObjectType;
+import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
@@ -11,7 +12,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.1.3
  * @since 0.0.1
  */
 public class GridTile {
@@ -23,6 +24,13 @@ public class GridTile {
      * @since 0.0.1
      */
     private Vector2 position;
+
+    /**
+     * gitb den {@link GridTileType type} des {@link GridTile gridTiles} an.
+     *
+     * @since 0.1.3
+     */
+    private GridTileType gridTileType;
 
     /**
      * instance des {@link Grid grids} von dem dieses {@link GridTile gridTile} ein teil ist.
@@ -39,13 +47,27 @@ public class GridTile {
     private Array<GameObject> gameObjects = new Array<GameObject>();
 
     /**
-     * standart konstructor
+     * konstructor mit einstellung der {@link #position position} und setzung des {@link #grid grids} von dem
+     * dieses {@link GridTile gridTile} ein teil ist.
      *
      * @param position position des {@link GridTile gridTiles} innerhalb des {@link Grid grids}.
      * @param grid     {@link Grid grid} von dem dieses {@link GridTile gridtile} ein bestandteil ist.
      * @since 0.0.1
      */
     public GridTile(Vector2 position, Grid grid) {
+        this.position = position;
+        this.grid = grid;
+    }
+
+    /**
+     * konstructor mit allen verfügbaren einstellungen
+     *
+     * @param position position des {@link GridTile gridTiles} innerhalb des {@link Grid grids}.
+     * @param grid     {@link Grid grid} von dem dieses {@link GridTile gridtile} ein bestandteil ist.
+     * @since 0.1.3
+     */
+    public GridTile(GridTileType gridTileType, Vector2 position, Grid grid) {
+        this.gridTileType = gridTileType;
         this.position = position;
         this.grid = grid;
     }
@@ -126,7 +148,77 @@ public class GridTile {
         return null;
     }
 
+    /**
+     * gibt die {@link GridTileType gridTileTypen} aller umliegenden {@link GridTile gridTiles} zurrück.
+     *
+     * @return {@link GridTileType gridTileTypen} der umliegenden {@link GridTile gridTiles}
+     * @since 0.1.3
+     */
+    public GridTileType[] getSorroundings() {
+        GridTileType[] result = new GridTileType[8];
+        result[0] = grid.getGridTile((int) position.x - 1, (int) position.y + 1).getGridTileType();
+        result[1] = getUpperTile().getGridTileType();
+        result[2] = grid.getGridTile((int) position.x + 1, (int) position.y + 1).getGridTileType();
+        result[3] = getLeftGridTile().getGridTileType();
+        result[4] = getRightGridTile().getGridTileType();
+        result[5] = grid.getGridTile((int) position.x - 1, (int) position.y - 1).getGridTileType();
+        result[6] = getLowerTile().getGridTileType();
+        result[7] = grid.getGridTile((int) position.x + 1, (int) position.y - 1).getGridTileType();
+        return result;
+    }
+
+    /**
+     * gibt das {@link GridTile gridTile} über diesem zurrück.
+     *
+     * @return {@link GridTile gridTile} über diesem.
+     * @since 0.1.3
+     */
+    public GridTile getUpperTile() {
+        return grid.getGridTile((int) position.x, (int) position.y + 1);
+    }
+
+    /**
+     * gibt das {@link GridTile gridTile} unter diesem zurrück.
+     *
+     * @return {@link GridTile gridTile} unter diesem.
+     * @since 0.1.3
+     */
+    public GridTile getLowerTile() {
+
+        return grid.getGridTile((int) position.x, (int) position.y - 1);
+    }
+
+    /**
+     * gibt das {@link GridTile gridTile} links neben diesem zurrück.
+     *
+     * @return {@link GridTile gridTile} links neben diesem.
+     * @since 0.1.3
+     */
+    public GridTile getLeftGridTile() {
+
+        return grid.getGridTile((int) position.x - 1, (int) position.y);
+    }
+
+    /**
+     * gibt das {@link GridTile gridTile} rechts neben diesem zurrück.
+     *
+     * @return {@link GridTile gridTile} links neben diesem.
+     * @since 0.1.3
+     */
+    public GridTile getRightGridTile() {
+
+        return grid.getGridTile((int) position.x + 1, (int) position.y);
+    }
+
     public Vector2 getPosition() {
         return position;
+    }
+
+    public GridTileType getGridTileType() {
+        return gridTileType;
+    }
+
+    public void setGridTileType(GridTileType gridTileType) {
+        this.gridTileType = gridTileType;
     }
 }

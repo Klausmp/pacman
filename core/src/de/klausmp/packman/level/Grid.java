@@ -3,13 +3,15 @@ package de.klausmp.packman.level;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
+import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 //TODO wert für höhe und breite eines gridTiles
+
 /**
  * raster auf dem die {@link GameObject gameObjekte} sich verweilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.1.3
  * @since 0.0.1
  */
 public class Grid {
@@ -131,8 +133,7 @@ public class Grid {
      * @param posX x position des gesuchten {@link GridTile gridTiles}.
      * @param posY y position des gesuchten {@link GridTile gridTiles}.
      * @return das gridTile mit den x und y werten
-     * @throws NullPointerException gibt NULL zurrück wenn kein passendes {@link GridTile gridTile} gefunden wird
-     * @since 0.0.1
+     * @since 0.1.3
      */
     public GridTile getGridTile(int posX, int posY) {
         for (GridTile gridTile : gridTiles) {
@@ -140,8 +141,8 @@ public class Grid {
                 return gridTile;
             }
         }
-        //System.out.println("No GridTile at Position: " + posX + " and " + posY);
-        return null;
+        addEmtyGridTile(new Vector2(posX, posY), this);
+        return getGridTile(posX, posY);
     }
 
     /**
@@ -164,15 +165,56 @@ public class Grid {
      *
      * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden soll
      * @param position   position des {@link GridTile gridTiles} zu dem das {@link GameObject gameObjekt} hinzugefügt werden soll
-     * @since 0.0.1
+     * @since 0.1.3
      */
     public void addToGridTile(GameObject gameObject, Vector2 position) {
-        if (getGridTile((int) position.x, (int) position.y) != null) {
-            getGridTile((int) position.x, (int) position.y).addGameObject(gameObject);
+        GridTile gridTile = getGridTile((int) position.x, (int) position.y);
+        if (gridTile != null) {
+            switch (gameObject.getGameObjectType()) {
+                case DOT:
+                    gridTile.setGridTileType(GridTileType.ROAD);
+                    break;
+                case WALL:
+                    gridTile.setGridTileType(GridTileType.WALL);
+                    break;
+                case GHOST:
+                    gridTile.setGridTileType(GridTileType.ROAD);
+                    break;
+                case PACMAN:
+                    gridTile.setGridTileType(GridTileType.ROAD);
+                    break;
+                default:
+                    System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden");
+                    break;
+            }
+            gridTile.addGameObject(gameObject);
         } else {
-            gridTiles.add(new GridTile(position, this));
+            addEmtyGridTile(position, this);
             addToGridTile(gameObject, position);
         }
+    }
+
+    /**
+     * fügt ein neues {@link GridTile gridTile} zu diesem {@link Grid grid} hinzu.
+     *
+     * @param gridTileType type des neuen {@link GridTile gridTiles}
+     * @param position     position des neuen {@link GridTile gridTiles}
+     * @param grid         {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
+     * @since 0.1.3
+     */
+    public void addEmtyGridTile(GridTileType gridTileType, Vector2 position, Grid grid) {
+        gridTiles.add(new GridTile(gridTileType, position, grid));
+    }
+
+    /**
+     * fügt ein neues {@link GridTile gridTile} zu diesem {@link Grid grid} hinzu.
+     *
+     * @param position position des neuen {@link GridTile gridTiles}
+     * @param grid     {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
+     * @since 0.1.3
+     */
+    public void addEmtyGridTile(Vector2 position, Grid grid) {
+       addTile(new GridTile(GridTileType.EMTY, position, grid));
     }
 
     /**

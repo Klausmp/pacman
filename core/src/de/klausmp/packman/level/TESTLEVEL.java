@@ -16,6 +16,5 @@ public class TESTLEVEL extends Level {
                 grid.addToGridTile(new Wall(new Vector2(x * 16, y * 16)), x, y);
             }
         }
-        grid.addToGridTile(new Wall(new Vector2(10 * 16, 10 * 16)), new Vector2(10 , 10));
     }
 }

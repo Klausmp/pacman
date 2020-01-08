@@ -1,5 +1,6 @@
 package de.klausmp.packman.gameObjects;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Layers;
@@ -37,7 +38,7 @@ public class Wall extends StaticGameObjekt {
     /**
      * @since 0.1.0
      */
-    private void setWallType() {
+    private void setWallType(TextureAtlas atlas) {
 
     }
 }
