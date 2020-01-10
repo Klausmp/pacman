@@ -13,14 +13,14 @@ public enum Rotation {
      *
      * @since 0.1.0
      */
-    LEFT(1),
+    LEFT(3),
 
     /**
      * rechts
      *
      * @since 0.1.0
      */
-    RIGHT(2),
+    RIGHT(1),
 
     /**
      * oben
@@ -34,57 +34,59 @@ public enum Rotation {
      *
      * @since 0.1.0
      */
-    DOWN(3);
+    DOWN(2);
 
     /**
-     * standart richtung
+     * standart rotation
      *
      * @since 0.1.0
      */
     public static Rotation DEFAULTROTATION = UP;
 
     /**
-     * TODO JAVA DOC
+     * integer wert passend zu den werten des enums <br>
+     * (ganze zahlen von 0-3)
      *
      * @since 0.1.4
      */
     private int rotation;
 
     /**
-     * TODO JAVA DOC
+     * konstruktor mit einstellungsmöglichkeit der rotation
      *
-     * @param rotation
+     * @param rotation integerwert der rotation
      * @since 0.1.4
      */
     Rotation(int rotation) {
-        rotation = rotation;
+        this.rotation = rotation;
     }
 
     /**
-     * TODO JAVA DOC
+     * wandelt einen integer wert zu einem enum wert um.
      *
-     * @param rotation
-     * @return
+     * @param rotation integer wert zu einer rotation (ganze zahl von 0-3)
+     * @return enum wert zum eingegebenen integer wert
      * @sine 0.1.4
      */
     public static Rotation getRotationFromInt(int rotation) {
-        switch (rotation){
+        switch (rotation) {
             case 0:
                 return UP;
             case 1:
-                return LEFT;
-            case 2:
                 return RIGHT;
-            case 3:
+            case 2:
                 return DOWN;
+            case 3:
+                return LEFT;
             default:
                 return DEFAULTROTATION;
         }
     }
 
     /**
-     * TODO JAVA DOC
+     * gibt den integer wert passen zum enum wert zurrück.
      *
+     * @return integer wert passend zum enum wert.
      * @since 0.1.4
      */
     public int getRotation() {

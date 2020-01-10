@@ -8,7 +8,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
 
 //TODO v 0.1.0 rendering, grid, und start des programmes (fertig)
 //TODO v 0.02.0 walls mit automatischer wall bildung
-//TODO v 0.03.0 animationen
+//TODO v 0.03.0 animationen klasse
 //TODO v 0.04.0 player
 //TODO V 0.05.0 bounding
 //TODO v 0.06.0 dots + score

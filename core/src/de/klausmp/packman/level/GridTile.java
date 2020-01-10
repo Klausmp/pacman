@@ -1,6 +1,7 @@
 package de.klausmp.packman.level;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.utils.GameObjectType;
@@ -157,27 +158,26 @@ public class GridTile {
      */
     public GridTileType[] getSurroundings() {
         GridTileType[] result = new GridTileType[4];
-        result[0] = getUpperTile().getGridTileType();
-        result[1] = getLeftGridTile().getGridTileType();
-        result[2] = getRightGridTile().getGridTileType();
-        result[3] = getLowerTile().getGridTileType();
+        result[Rotation.UP.getRotation()] = getUpperTile().getGridTileType();
+        result[Rotation.RIGHT.getRotation()] = getRightGridTile().getGridTileType();
+        result[Rotation.DOWN.getRotation()] = getLowerTile().getGridTileType();
+        result[Rotation.LEFT.getRotation()] = getLeftGridTile().getGridTileType();
         return result;
     }
 
     /**
-     * TODO java doc
+     * dreht ein array von {@link GridTileType gridTileTypen} im uhrzeigersinn um 90°.
      *
-     * @param suroundings
-     * @param rotation
-     * @return
+     * @param suroundings array der umliegenden {@link GridTileType gridTileTypen} eines {@link GridTile gridTiles}.
+     * @return {@link GridTile#getSurroundings() surrundings} werden um 90° im uhrzeigersinn gedreht.
      * @since 0.1.4
      */
-    public static GridTileType[] rotateSuroundings(GridTileType[] suroundings, Rotation rotation) {
+    public static GridTileType[] rotateSuroundings(GridTileType[] suroundings) {
         GridTileType[] result = new GridTileType[4];
-        result[3] = suroundings[0];
-        result[0] = suroundings[1];
-        result[1] = suroundings[2];
-        result[2] = suroundings[3];
+        result[Rotation.UP.getRotation()] = suroundings[Rotation.LEFT.getRotation()];
+        result[Rotation.RIGHT.getRotation()] = suroundings[Rotation.UP.getRotation()];
+        result[Rotation.DOWN.getRotation()] = suroundings[Rotation.RIGHT.getRotation()];
+        result[Rotation.LEFT.getRotation()] = suroundings[Rotation.DOWN.getRotation()];
         return result;
     }
 

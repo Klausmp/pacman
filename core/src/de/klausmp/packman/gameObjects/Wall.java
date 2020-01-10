@@ -31,21 +31,21 @@ public class Wall extends StaticGameObjekt {
     }
 
     /**
-     * TODO JAVA DOC
+     * setzt die {@link com.badlogic.gdx.graphics.g2d.Sprite sprite} passend zu
+     * den umliegenen {@link GridTile gridTiles} um eine durchgehende wand zu erschaffen
      *
+     * @param atlas {@link TextureAtlas textureAtlas} mit den gameTexturen;
      * @since 0.1.4
      */
     public void setTexture(TextureAtlas atlas) {
         GridTileType[] surroundings = gridTile.getSurroundings();
-        System.out.println(gridTile.toString());
         for (int i = 0; i <= 3; i++) {
-            surroundings = GridTile.rotateSuroundings(surroundings, Rotation.getRotationFromInt(i));
-            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.EMTY) {
-                setRegion(atlas.findRegion("wallCurve"));
+            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.EMTY && surroundings[3] == GridTileType.WALL) {
+                setRegion(atlas.findRegion("wall"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.ROAD) {
+            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallBig"));
                 setRotation(90 * i);
                 return;
@@ -55,14 +55,14 @@ public class Wall extends StaticGameObjekt {
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.ROAD) {
+            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallBigTPice"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.EMTY && surroundings[1] == GridTileType.EMTY && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.WALL) {
-                setRegion(atlas.findRegion("wall"));
-                setRotation(90);
+            if (surroundings[0] == GridTileType.EMTY && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.EMTY) {
+                setRegion(atlas.findRegion("wallCurve"));
+                setRotation(90 * i);
                 return;
             }
             if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.ROAD && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.ROAD) {
@@ -70,11 +70,12 @@ public class Wall extends StaticGameObjekt {
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.EMTY) {
+            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.EMTY && surroundings[3] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallToBigTPice"));
                 setRotation(90 * i);
                 return;
             }
+            surroundings = GridTile.rotateSuroundings(surroundings);
         }
     }
 }
