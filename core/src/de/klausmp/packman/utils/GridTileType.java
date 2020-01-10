@@ -33,5 +33,4 @@ public enum GridTileType {
      * @since 0.1.3
      */
     ROAD;
-
 }

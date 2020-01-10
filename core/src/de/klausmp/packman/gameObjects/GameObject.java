@@ -3,6 +3,7 @@ package de.klausmp.packman.gameObjects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Rotation;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
@@ -17,7 +18,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.1.0
+ * @version 0.1.4
  * @see Sprite
  * @since 0.0.1
  */
@@ -37,6 +38,13 @@ public abstract class GameObject extends Sprite {
      * @since 0.0.1
      */
     protected LayerRendererQueQueElement renderElement;
+
+    /**
+     * {@link GridTile gridTile} indem sich dieses {@link GameObject gameOnjekt} befindet
+     *
+     * @since 0.1.4
+     */
+    protected GridTile gridTile;
 
     /**
      * layer auf dem das {@link GameObject gameObject} gerendert wird.
@@ -77,11 +85,12 @@ public abstract class GameObject extends Sprite {
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
      * @param layerToRenderOn {@link de.klausmp.packman.visuals.renderer.Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
      * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link LayerRendererQueQueElement#priority hier}.
-     * @since 0.1.0
+     * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
+     * @since 0.1.4
      */
-    public GameObject(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
+    public GameObject(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region);
-        creat(position, rotation, gameObjectType, layerToRenderOn, renderPriority);
+        creat(position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
     }
 
     /**
@@ -92,15 +101,17 @@ public abstract class GameObject extends Sprite {
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
      * @param layerToRenderOn {@link de.klausmp.packman.visuals.renderer.Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
      * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link LayerRendererQueQueElement#priority hier}.
-     * @since 0.1.0
+     * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
+     * @since 0.1.4
      */
-    private void creat(Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
+    private void creat(Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         this.setX(position.x);
         this.setY(position.y);
         this.rotation = rotation;
         this.gameObjectType = gameObjectType;
         this.layerToRenderOn = layerToRenderOn;
         this.renderPriority = renderPriority;
+        this.gridTile = gridTile;
         renderElement = new LayerRendererQueQueElement(this, layerToRenderOn, renderPriority);
     }
 

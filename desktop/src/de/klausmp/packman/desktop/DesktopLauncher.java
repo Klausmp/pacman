@@ -21,8 +21,8 @@ public class DesktopLauncher {
      * @param arg start argumente.
      */
     public static void main(String[] arg) {
+        packer();
         startDesktop();
-        //packer();
     }
 
     /**
@@ -37,7 +37,7 @@ public class DesktopLauncher {
         //setzen des fenster titels
         config.setTitle("Pac Man");
         //verhinderung der größenänderung des fensters
-        config.setResizable(false);
+        config.setResizable(true);
         //setzen der größe des fensters
         config.setWindowedMode(500, 500);
         new Lwjgl3Application(new Main(), config);

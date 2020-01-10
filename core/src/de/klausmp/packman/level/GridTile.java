@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.GridTileType;
+import de.klausmp.packman.utils.Rotation;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
@@ -12,7 +13,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.1.3
+ * @version 0.1.4
  * @since 0.0.1
  */
 public class GridTile {
@@ -152,18 +153,31 @@ public class GridTile {
      * gibt die {@link GridTileType gridTileTypen} aller umliegenden {@link GridTile gridTiles} zurrück.
      *
      * @return {@link GridTileType gridTileTypen} der umliegenden {@link GridTile gridTiles}
-     * @since 0.1.3
+     * @since 0.1.4
      */
-    public GridTileType[] getSorroundings() {
-        GridTileType[] result = new GridTileType[8];
-        result[0] = grid.getGridTile((int) position.x - 1, (int) position.y + 1).getGridTileType();
-        result[1] = getUpperTile().getGridTileType();
-        result[2] = grid.getGridTile((int) position.x + 1, (int) position.y + 1).getGridTileType();
-        result[3] = getLeftGridTile().getGridTileType();
-        result[4] = getRightGridTile().getGridTileType();
-        result[5] = grid.getGridTile((int) position.x - 1, (int) position.y - 1).getGridTileType();
-        result[6] = getLowerTile().getGridTileType();
-        result[7] = grid.getGridTile((int) position.x + 1, (int) position.y - 1).getGridTileType();
+    public GridTileType[] getSurroundings() {
+        GridTileType[] result = new GridTileType[4];
+        result[0] = getUpperTile().getGridTileType();
+        result[1] = getLeftGridTile().getGridTileType();
+        result[2] = getRightGridTile().getGridTileType();
+        result[3] = getLowerTile().getGridTileType();
+        return result;
+    }
+
+    /**
+     * TODO java doc
+     *
+     * @param suroundings
+     * @param rotation
+     * @return
+     * @since 0.1.4
+     */
+    public static GridTileType[] rotateSuroundings(GridTileType[] suroundings, Rotation rotation) {
+        GridTileType[] result = new GridTileType[4];
+        result[3] = suroundings[0];
+        result[0] = suroundings[1];
+        result[1] = suroundings[2];
+        result[2] = suroundings[3];
         return result;
     }
 
@@ -220,5 +234,9 @@ public class GridTile {
 
     public void setGridTileType(GridTileType gridTileType) {
         this.gridTileType = gridTileType;
+    }
+
+    public Array<GameObject> getGameObjects() {
+        return gameObjects;
     }
 }

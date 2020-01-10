@@ -245,4 +245,8 @@ public class Grid {
     public int getDEFAULTGRIDSIZE() {
         return DEFAULTGRIDSIZE;
     }
+
+    public Array<GridTile> getGridTiles() {
+        return gridTiles;
+    }
 }

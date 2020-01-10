@@ -2,6 +2,7 @@ package de.klausmp.packman.gameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Layers;
 import de.klausmp.packman.utils.Rotation;
@@ -18,7 +19,7 @@ import de.klausmp.packman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.1.2
+ * @version 0.1.4
  * @see GameObject
  * @since 0.1.0
  */
@@ -32,11 +33,13 @@ public abstract class DynamicGameObject extends GameObject {
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
      * @param layerToRenderOn {@link Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
      * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link de.klausmp.packman.visuals.renderer.LayerRendererQueQueElement#priority hier}.
-     * @since 0.1.0
+     * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
+     * @since 0.1.4
      */
-    public DynamicGameObject(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority) {
-        super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority);
+    public DynamicGameObject(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
+        super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
     }
+
 
     @Override
     public void update() {

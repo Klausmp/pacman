@@ -123,63 +123,63 @@ wall
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallCurve
+wallBig
   rotate: false
   xy: 235, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallDouble
+wallBigCrossing
   rotate: false
   xy: 253, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallEnd
+wallBigTPice
   rotate: false
   xy: 271, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhost
+wallCurve
   rotate: false
   xy: 289, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhostCorner
+wallEnd
   rotate: false
   xy: 307, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhostGate
+wallGhost
   rotate: false
   xy: 325, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallSingelCrossing
+wallGhostCorner
   rotate: false
   xy: 343, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallSingelTPice
+wallGhostGate
   rotate: false
   xy: 361, 11
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallSingelToDouble
+wallToBigTPice
   rotate: false
   xy: 379, 11
   size: 16, 16
