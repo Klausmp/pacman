@@ -1,7 +1,7 @@
 package de.klausmp.packman.level;
 
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.packman.gameObjects.PacMan;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**

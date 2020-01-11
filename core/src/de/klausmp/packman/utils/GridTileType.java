@@ -1,5 +1,9 @@
 package de.klausmp.packman.utils;
 
+import de.klausmp.packman.gameObjects.dynamicGameObjects.Ghost;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.packman.gameObjects.staticGameObjects.Wall;
+
 /**
  * type {@link de.klausmp.packman.level.GridTile gridTiles} an,
  *
@@ -11,7 +15,7 @@ public enum GridTileType {
 
     /**
      * {@link de.klausmp.packman.level.GridTile gridTile} welches eine
-     * {@link de.klausmp.packman.gameObjects.Wall wall}
+     * {@link Wall wall}
      * enthällt
      *
      * @since 0.1.3
@@ -27,10 +31,10 @@ public enum GridTileType {
     EMTY,
 
     /**
-     * {@link de.klausmp.packman.level.GridTile gridTile} welches von {@link de.klausmp.packman.gameObjects.PacMan pacMan}
-     * und den {@link de.klausmp.packman.gameObjects.Ghost geistern} zum laufen benutzt wird.
+     * {@link de.klausmp.packman.level.GridTile gridTile} welches von {@link PacMan pacMan}
+     * und den {@link Ghost geistern} zum laufen benutzt wird.
      *
      * @since 0.1.3
      */
-    ROAD;
+    ROAD
 }

@@ -2,8 +2,8 @@ package de.klausmp.packman.level;
 
 
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.packman.gameObjects.Dot;
-import de.klausmp.packman.gameObjects.Wall;
+import de.klausmp.packman.gameObjects.staticGameObjects.Dot;
+import de.klausmp.packman.gameObjects.staticGameObjects.Wall;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.visuals.screens.GameScreen;
 

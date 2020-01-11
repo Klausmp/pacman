@@ -1,6 +1,10 @@
 package de.klausmp.packman.utils;
 
 import de.klausmp.packman.gameObjects.*;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.Ghost;
+import de.klausmp.packman.gameObjects.staticGameObjects.Dot;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.packman.gameObjects.staticGameObjects.Wall;
 
 /**
  * liste aller {@link GameObject GameObject} typen.

@@ -18,7 +18,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.2.0
  * @see Sprite
  * @since 0.0.1
  */
@@ -121,6 +121,7 @@ public abstract class GameObject extends Sprite {
      * @since 0.0.1
      */
     public void update() {
+        animatiom();
     }
 
     /**
@@ -133,6 +134,15 @@ public abstract class GameObject extends Sprite {
     public void render(LayerRenderer renderer) {
         renderer.addToQueque(renderElement);
     }
+
+    /**
+     * hier wird alles mit animationen abgewickelt
+     *
+     * @since 0.2.0
+     */
+    private void animatiom() {
+    }
+
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {
         this.renderElement = renderElement;
