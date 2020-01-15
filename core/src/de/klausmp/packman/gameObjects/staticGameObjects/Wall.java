@@ -39,7 +39,7 @@ public class Wall extends StaticGameObjekt {
      * @since 0.1.4
      */
     public void setTexture(TextureAtlas atlas) {
-        GridTileType[] surroundings = gridTile.getSurroundings();
+        GridTileType[] surroundings = currendGridTile.getSurroundings();
         for (int i = 0; i <= 3; i++) {
             if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.EMTY && surroundings[3] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wall"));

@@ -7,6 +7,7 @@ import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Layers;
 import de.klausmp.packman.utils.Rotation;
+import de.klausmp.packman.visuals.animations.Animation;
 import de.klausmp.packman.visuals.renderer.Layer;
 
 /**
@@ -20,11 +21,26 @@ import de.klausmp.packman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.3.0
  * @see GameObject
  * @since 0.1.0
  */
 public abstract class DynamicGameObject extends GameObject {
+
+    /**
+     * movement animation
+     *
+     * @since 0.3.0
+     */
+    protected Animation movement;
+
+    /**
+     * TODO JAVADOC
+     *
+     * @since o.3.0
+     */
+    protected GridTile nextGridTile;
+
     /**
      * konstruktor mit allen nötien einstellungen.
      *
@@ -54,5 +70,51 @@ public abstract class DynamicGameObject extends GameObject {
      * @since 0.1.0
      */
     protected abstract void movement();
+
+    /**
+     * TODO JAVADC
+     *
+     * @since 0.3.0
+     */
+    protected void moveUp() {
+
+    }
+
+    /**
+     * TODO JAVADC
+     *
+     * @since 0.3.0
+     */
+    protected void moveRight() {
+
+    }
+
+    /**
+     * TODO JAVADC
+     *
+     * @since 0.3.0
+     */
+    protected void moveDown() {
+
+    }
+
+    /**
+     * TODO JAVADC
+     *
+     * @since 0.3.0
+     */
+    protected void moveLeft() {
+
+    }
+
+    /**
+     * TODO JAVADC
+     *
+     * @param rotation
+     * @since 0.3.0
+     */
+    protected void moveToGridTile(Rotation rotation) {
+
+    }
 
 }

@@ -66,7 +66,7 @@ public class Animation {
      * @return gibt immer den paaenden frame zurrück
      * @since 0.2.0
      */
-    public TextureRegion getTextureRegion() {
+    public TextureRegion getCurrentFrame() {
         if ((System.currentTimeMillis() - lastTime) >= delay) {
             lastTime = System.currentTimeMillis();
             currentFrame++;

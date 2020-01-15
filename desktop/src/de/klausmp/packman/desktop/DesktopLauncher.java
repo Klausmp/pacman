@@ -21,7 +21,7 @@ public class DesktopLauncher {
      * @param arg start argumente.
      */
     public static void main(String[] arg) {
-        //packer();
+        packer();
         startDesktop();
     }
 
