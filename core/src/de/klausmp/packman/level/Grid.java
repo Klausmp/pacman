@@ -5,13 +5,12 @@ import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
 import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
-//TODO wert für höhe und breite eines gridTiles
 
 /**
  * raster auf dem die {@link GameObject gameObjekte} sich verweilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.1.3
+ * @version 0.4.0
  * @since 0.0.1
  */
 public class Grid {
@@ -48,6 +47,14 @@ public class Grid {
      *
      * @since 0.0.1
      */
+
+    /**
+     * TODO JAVADOC
+     *
+     * @since 0.4.0
+     */
+    private static Vector2 gridTileSize;
+
     public Grid() {
         create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
     }
@@ -95,6 +102,7 @@ public class Grid {
     public void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
+        gridTileSize = new Vector2(16, 16);
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
                 gridTiles.add(new GridTile(new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
@@ -133,12 +141,19 @@ public class Grid {
      * @param posX x position des gesuchten {@link GridTile gridTiles}.
      * @param posY y position des gesuchten {@link GridTile gridTiles}.
      * @return das gridTile mit den x und y werten
-     * @since 0.1.3
+     * @since 0.4.0
      */
     public GridTile getGridTile(int posX, int posY) {
+        /*
+        alter loop welcher zu problemen führt
         for (GridTile gridTile : gridTiles) {
             if (gridTile.getPosition().x == posX && gridTile.getPosition().y == posY) {
                 return gridTile;
+            }
+        }*/
+        for (int i = 0; i < gridTiles.size; i++) {
+            if (gridTiles.get(i).getPosition().x == posX && gridTiles.get(i).getPosition().y == posY) {
+                return gridTiles.get(i);
             }
         }
         addEmtyGridTile(new Vector2(posX, posY), this);
@@ -214,7 +229,7 @@ public class Grid {
      * @since 0.1.3
      */
     public void addEmtyGridTile(Vector2 position, Grid grid) {
-       addTile(new GridTile(GridTileType.EMTY, position, grid));
+        addTile(new GridTile(GridTileType.ROAD, position, grid));
     }
 
     /**
@@ -228,6 +243,57 @@ public class Grid {
      */
     public void addToGridTile(GameObject gameObject, int posX, int posY) {
         addToGridTile(gameObject, new Vector2(posX, posY));
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @param gridTilePosition
+     * @return
+     * @since 0.4.0
+     */
+    public static Vector2 convertToPixelPosition(Vector2 gridTilePosition) {
+        return new Vector2(gridTilePosition.x * gridTileSize.x, gridTilePosition.y * gridTileSize.x);
+    }
+
+    /**
+     * TODO JAVADOC
+     *
+     * @param pixelPosition
+     * @return
+     * @since 0.4.0
+     */
+    public static Vector2 convertToGridPosition(Vector2 pixelPosition) {
+        return new Vector2(pixelPosition.x / gridTileSize.x, pixelPosition.y / gridTileSize.y);
+    }
+
+    /**
+     * TODO JAVADOC
+     *
+     * @param newGridTile
+     * @since 0.4.0
+     */
+    public void transverToOtherGridTile(GameObject object, GridTile newGridTile) {
+        GridTile oldGridTile = getGridTileFromGameObject(object);
+        newGridTile.addGameObject(object);
+        oldGridTile.removeGameObject(object);
+    }
+
+    /**
+     * TODO JAVADOC
+     *
+     * @param object
+     * @return
+     * @throws NullPointerException
+     * @since 0.4.0
+     */
+    public GridTile getGridTileFromGameObject(GameObject object) throws NullPointerException {
+        for (int i = 0; i < gridTiles.size; i++) {
+            if (gridTiles.get(i).checkForGameObject(object)) {
+                return gridTiles.get(i);
+            }
+        }
+        return null;
     }
 
     public Vector2 getPosition() {

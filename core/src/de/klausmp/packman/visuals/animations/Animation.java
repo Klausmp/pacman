@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @version 0.2.0
  * @since 0.2.0
  */
+@SuppressWarnings("CanBeFinal")
 public class Animation {
 
     /**

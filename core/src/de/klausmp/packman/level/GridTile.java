@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.utils.Rotation;
@@ -14,7 +16,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.4.0
  * @since 0.0.1
  */
 public class GridTile {
@@ -81,8 +83,8 @@ public class GridTile {
      * @since 0.0.1
      */
     public void update() {
-        for (GameObject object : gameObjects) {
-            object.update();
+        for (int i = 0; i < gameObjects.size; i++) {
+            gameObjects.get(i).update();
         }
         removeDeadGameObjects();
     }
@@ -209,7 +211,6 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getLeftGridTile() {
-
         return grid.getGridTile((int) position.x - 1, (int) position.y);
     }
 
@@ -220,8 +221,31 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getRightGridTile() {
-
         return grid.getGridTile((int) position.x + 1, (int) position.y);
+    }
+
+    /**
+     * TODO JAVADOC
+     *
+     * @return
+     * @since 0.4.0
+     */
+    public void removeGameObject(GameObject object) {
+        gameObjects.removeValue(object, false);
+    }
+
+    /**
+     * TODO JAVADOC
+     *
+     * @since 0.4.0
+     */
+    public boolean checkForGameObject(GameObject object) {
+        for (GameObject gameObject : gameObjects) {
+            if (object.equals(gameObject)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Vector2 getPosition() {
@@ -238,5 +262,9 @@ public class GridTile {
 
     public Array<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

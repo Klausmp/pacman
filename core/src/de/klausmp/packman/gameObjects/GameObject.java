@@ -3,6 +3,7 @@ package de.klausmp.packman.gameObjects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.packman.level.Grid;
 import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Rotation;
@@ -19,7 +20,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.3.0
+ * @version 0.4.0
  * @see Sprite
  * @since 0.0.1
  */
@@ -155,14 +156,8 @@ public abstract class GameObject extends Sprite {
         this.renderElement = renderElement;
     }
 
-    /**
-     * TODO JAVADOC
-     *
-     * @param newGridTile
-     * @since 0.3.0
-     */
-    public void transverToOtherGridTile(GridTile newGridTile) {
-
+    public GridTile getCurrendGridTile() {
+        return currendGridTile;
     }
 
     public Layers getLayerToRenderOn() {
@@ -183,5 +178,9 @@ public abstract class GameObject extends Sprite {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public Grid getGrid(){
+        return currendGridTile.getGrid();
     }
 }

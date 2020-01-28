@@ -20,8 +20,8 @@ public class DesktopLauncher {
      *
      * @param arg start argumente.
      */
-    public static void main(String[] arg) {
-        packer();
+    public static void main(String[] args) {
+        //packer();
         startDesktop();
     }
 

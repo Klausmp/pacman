@@ -1,5 +1,5 @@
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -10,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        
+
 
     }
 }
@@ -19,7 +19,7 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    version = '0.4.0'
     ext {
         appName = "pacman"
         gdxVersion = '1.9.9'
@@ -54,7 +54,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         compile "de.tomgrill.gdxfacebook:gdx-facebook-desktop:1.4.1"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.5"
-        
+
     }
 }
 
@@ -80,7 +80,7 @@ project(":core") {
         compile "com.github.czyzby:gdx-kiwi:1.9.1.9.6"
         compile "com.github.czyzby:gdx-lml:1.9.1.9.6"
         compile "com.github.czyzby:gdx-lml-vis:1.9.1.9.6"
-        
+
     }
 }
 

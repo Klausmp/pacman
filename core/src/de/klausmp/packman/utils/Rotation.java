@@ -4,7 +4,7 @@ package de.klausmp.packman.utils;
  * zeigt die rotation an.
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.4.0
  * @since 0.1.0
  */
 public enum Rotation {
@@ -41,7 +41,7 @@ public enum Rotation {
      *
      * @since 0.1.0
      */
-    public static Rotation DEFAULTROTATION = UP;
+    public static Rotation DEFAULTROTATION = getRotationFromInt(0);
 
     /**
      * integer wert passend zu den werten des enums <br>
@@ -66,7 +66,7 @@ public enum Rotation {
      *
      * @param rotation integer wert zu einer rotation (ganze zahl von 0-3)
      * @return enum wert zum eingegebenen integer wert
-     * @sine 0.1.4
+     * @since 0.1.4
      */
     public static Rotation getRotationFromInt(int rotation) {
         switch (rotation) {
