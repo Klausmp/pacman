@@ -20,7 +20,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.4.0
+ * @version 0.4.1
  * @see Sprite
  * @since 0.0.1
  */
@@ -130,7 +130,7 @@ public abstract class GameObject extends Sprite {
      * @since 0.0.1
      */
     public void update() {
-        animatiom();
+        animation();
     }
 
     /**
@@ -149,7 +149,16 @@ public abstract class GameObject extends Sprite {
      *
      * @since 0.2.0
      */
-    protected void animatiom() {
+    protected void animation() {
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.4.1
+     */
+    public void kill() {
+        alive = false;
     }
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {
@@ -176,11 +185,7 @@ public abstract class GameObject extends Sprite {
         return alive;
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    public Grid getGrid(){
+    public Grid getGrid() {
         return currendGridTile.getGrid();
     }
 }

@@ -1,4 +1,4 @@
-package de.klausmp.packman.gameObjects.dynamicGameObjects;
+package de.klausmp.packman.gameObjects.kinematicGameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
