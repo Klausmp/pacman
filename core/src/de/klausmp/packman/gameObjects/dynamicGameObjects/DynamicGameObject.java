@@ -23,7 +23,7 @@ import de.klausmp.packman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.4.0
+ * @version 0.4.3
  * @see GameObject
  * @since 0.1.0
  */
@@ -76,6 +76,7 @@ public abstract class DynamicGameObject extends GameObject {
     public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
         this.movementSpeed = movementSpeed;
+        setObjectRotation(rotation);
     }
 
 
