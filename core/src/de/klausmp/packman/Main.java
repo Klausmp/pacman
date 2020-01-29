@@ -7,24 +7,25 @@ import com.badlogic.gdx.Screen;
 import de.klausmp.packman.visuals.screens.GameScreen;
 
 //TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
-//TODO v 0.2.0 walls mit automatischer wall bildung        (fertig)
+//TODO v 0.2.0 walls mit automatischer wall bildung         (fertig)
 //TODO v 0.3.0 animationen klasse                           (fertig)
 //TODO v 0.4.0 player
 //TODO v 0.5.0 dots + score
-//TODO v 0.6.0 map interpreter
-//TODO v 0.7.0 geister mit ki
-//TODO v 0.8.0 main menue
-//TODO v 0.9.0 intro
-//TODO v 0.10.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
-//TODO v 0.11.0 start des levels mit space
-//TODO v 0.12.0 übergang zwischen leveln
-//TODO v 0.13.0 level kopieren / erstellen
+//TODO v 0.6.0 geister
+//TODO v 0.7.0 map interpreter
+//TODO v 0.8.0 geister ki
+//TODO v 0.9.0 main menue
+//TODO v 0.10.0 intro
+//TODO v 0.11.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
+//TODO v 0.12.0 start des levels mit space
+//TODO v 0.13.0 übergang zwischen leveln
+//TODO v 0.14.0 level kopieren / erstellen
 
 /**
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.4.3
+ * @version 0.4.4
  * @see Game
  * @since 0.0.1
  */

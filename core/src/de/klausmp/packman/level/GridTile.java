@@ -13,7 +13,7 @@ import de.klausmp.packman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.4.0
+ * @version 0.4.4
  * @since 0.0.1
  */
 public class GridTile {
@@ -140,7 +140,7 @@ public class GridTile {
      * @throws NullPointerException wenn kein passendes gameObjekt gefunden wird.
      * @since 0.0.1
      */
-    public GameObject getGameObjectByType(GameObjectType gameObjectType) {
+    public GameObject getGameObjectByType(GameObjectType gameObjectType) throws NullPointerException {
         for (GameObject object : gameObjects) {
             if (object.getGameObjectType().equals(gameObjectType)) {
                 return object;
