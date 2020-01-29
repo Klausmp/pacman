@@ -7,7 +7,7 @@ import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 
 /**
- * raster auf dem die {@link GameObject gameObjekte} sich verweilen, bewegen und gespeichert werden.
+ * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
  * @version 0.4.0

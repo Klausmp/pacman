@@ -7,7 +7,7 @@ import de.klausmp.packman.level.Grid;
 import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Rotation;
-import de.klausmp.packman.visuals.animations.Animation;
+import de.klausmp.packman.visuals.animation.Animation;
 import de.klausmp.packman.visuals.renderer.LayerRenderer;
 import de.klausmp.packman.visuals.renderer.LayerRendererQueQueElement;
 import de.klausmp.packman.utils.Layers;
@@ -20,7 +20,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.4.1
+ * @version 0.4.2
  * @see Sprite
  * @since 0.0.1
  */
@@ -69,14 +69,14 @@ public abstract class GameObject extends Sprite {
      *
      * @since 0.0.1
      */
-    protected boolean alive = true;
+    private boolean alive = true;
 
     /**
      * zeigt die rotation des {@link GameObject gameObjekts} an.
      *
      * @since 0.1.0
      */
-    protected Rotation rotation;
+    private Rotation rotation;
 
     /**
      * idle animation;
@@ -162,7 +162,16 @@ public abstract class GameObject extends Sprite {
     }
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {
+
         this.renderElement = renderElement;
+    }
+
+    public Rotation getObjectRotation() {
+        return rotation;
+    }
+
+    public void setObjectRotation(Rotation rotation) {
+        this.rotation = rotation;
     }
 
     public GridTile getCurrendGridTile() {

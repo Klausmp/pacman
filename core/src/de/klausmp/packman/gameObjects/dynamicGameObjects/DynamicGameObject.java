@@ -9,7 +9,7 @@ import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.utils.Layers;
 import de.klausmp.packman.utils.Rotation;
-import de.klausmp.packman.visuals.animations.Animation;
+import de.klausmp.packman.visuals.animation.Animation;
 import de.klausmp.packman.visuals.renderer.Layer;
 
 /**
@@ -43,7 +43,7 @@ public abstract class DynamicGameObject extends GameObject {
      *
      * @since 0.3.0
      */
-    protected GridTile nextGridTiles;
+    protected GridTile nextGridTile;
 
     /**
      * TODO JAVA DOC
@@ -51,6 +51,13 @@ public abstract class DynamicGameObject extends GameObject {
      * @since 0.4.0
      */
     protected boolean isMoving = false;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.4.2
+     */
+    protected Rotation lastRotation;
 
 
     /**
@@ -91,16 +98,16 @@ public abstract class DynamicGameObject extends GameObject {
      * @since 0.4.0
      */
     public void moveToNextGridTile() {
-        Vector2 pixelPositionFromNextGridTile = Grid.convertToPixelPosition(nextGridTiles.getPosition());
-        switch (rotation) {
+        Vector2 pixelPositionFromNextGridTile = Grid.convertToPixelPosition(nextGridTile.getPosition());
+        switch (getObjectRotation()) {
             case UP:
                 if (pixelPositionFromNextGridTile.y >= getY()) {
                     setY(getY() + movementSpeed);
                     isMoving = true;
                 } else {
-                    setY(Grid.convertToPixelPosition(nextGridTiles.getPosition()).y);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTiles);
-                    currendGridTile = nextGridTiles;
+                    setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
+                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
+                    currendGridTile = nextGridTile;
                     isMoving = false;
                 }
                 break;
@@ -109,9 +116,9 @@ public abstract class DynamicGameObject extends GameObject {
                     setY(getY() - movementSpeed);
                     isMoving = true;
                 } else {
-                    setY(Grid.convertToPixelPosition(nextGridTiles.getPosition()).y);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTiles);
-                    currendGridTile = nextGridTiles;
+                    setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
+                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
+                    currendGridTile = nextGridTile;
                     isMoving = false;
                 }
                 break;
@@ -120,9 +127,9 @@ public abstract class DynamicGameObject extends GameObject {
                     setX(getX() - movementSpeed);
                     isMoving = true;
                 } else {
-                    setX(Grid.convertToPixelPosition(nextGridTiles.getPosition()).x);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTiles);
-                    currendGridTile = nextGridTiles;
+                    setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
+                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
+                    currendGridTile = nextGridTile;
                     isMoving = false;
                 }
                 break;
@@ -131,9 +138,9 @@ public abstract class DynamicGameObject extends GameObject {
                     setX(getX() + movementSpeed);
                     isMoving = true;
                 } else {
-                    setX(Grid.convertToPixelPosition(nextGridTiles.getPosition()).x);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTiles);
-                    currendGridTile = nextGridTiles;
+                    setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
+                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
+                    currendGridTile = nextGridTile;
                     isMoving = false;
                 }
                 break;
@@ -149,8 +156,8 @@ public abstract class DynamicGameObject extends GameObject {
      */
     protected void moveUp() {
         if (currendGridTile.getUpperTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTiles = currendGridTile.getUpperTile();
-            rotation = Rotation.UP;
+            nextGridTile = currendGridTile.getUpperTile();
+            changeRotation(lastRotation, getObjectRotation());
         }
     }
 
@@ -161,8 +168,8 @@ public abstract class DynamicGameObject extends GameObject {
      */
     protected void moveRight() {
         if (currendGridTile.getRightGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTiles = currendGridTile.getRightGridTile();
-            rotation = Rotation.RIGHT;
+            nextGridTile = currendGridTile.getRightGridTile();
+            changeRotation(lastRotation, getObjectRotation());
         }
     }
 
@@ -173,8 +180,8 @@ public abstract class DynamicGameObject extends GameObject {
      */
     protected void moveDown() {
         if (currendGridTile.getLowerTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTiles = currendGridTile.getLowerTile();
-            rotation = Rotation.DOWN;
+            nextGridTile = currendGridTile.getLowerTile();
+            changeRotation(lastRotation, getObjectRotation());
         }
     }
 
@@ -185,12 +192,35 @@ public abstract class DynamicGameObject extends GameObject {
      */
     protected void moveLeft() {
         if (currendGridTile.getLeftGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTiles = currendGridTile.getLeftGridTile();
-            rotation = Rotation.LEFT;
+            nextGridTile = currendGridTile.getLeftGridTile();
+            changeRotation(lastRotation, getObjectRotation());
         }
     }
 
-    public GridTile getNextGridTiles() {
-        return nextGridTiles;
+    /**
+     * TODO JAVA DOC
+     *
+     * @param currentRotation
+     * @param nextRotation
+     * @since 0.4.2
+     */
+    private void changeRotation(Rotation currentRotation, Rotation nextRotation) {
+        rotate((currentRotation.getInt() - nextRotation.getInt()) * 90);
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @param rotation
+     * @since 0.4.2
+     */
+    @Override
+    public void setObjectRotation(Rotation rotation) {
+        this.lastRotation = getObjectRotation();
+        super.setObjectRotation(rotation);
+    }
+
+    public GridTile getNextGridTile() {
+        return nextGridTile;
     }
 }

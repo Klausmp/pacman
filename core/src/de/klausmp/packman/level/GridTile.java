@@ -1,11 +1,8 @@
 package de.klausmp.packman.level;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.packman.gameObjects.GameObject;
-import de.klausmp.packman.gameObjects.dynamicGameObjects.DynamicGameObject;
-import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.GridTileType;
 import de.klausmp.packman.utils.Rotation;
@@ -160,10 +157,10 @@ public class GridTile {
      */
     public GridTileType[] getSurroundings() {
         GridTileType[] result = new GridTileType[4];
-        result[Rotation.UP.getRotation()] = getUpperTile().getGridTileType();
-        result[Rotation.RIGHT.getRotation()] = getRightGridTile().getGridTileType();
-        result[Rotation.DOWN.getRotation()] = getLowerTile().getGridTileType();
-        result[Rotation.LEFT.getRotation()] = getLeftGridTile().getGridTileType();
+        result[Rotation.UP.getInt()] = getUpperTile().getGridTileType();
+        result[Rotation.RIGHT.getInt()] = getRightGridTile().getGridTileType();
+        result[Rotation.DOWN.getInt()] = getLowerTile().getGridTileType();
+        result[Rotation.LEFT.getInt()] = getLeftGridTile().getGridTileType();
         return result;
     }
 
@@ -176,10 +173,10 @@ public class GridTile {
      */
     public static GridTileType[] rotateSuroundings(GridTileType[] suroundings) {
         GridTileType[] result = new GridTileType[4];
-        result[Rotation.UP.getRotation()] = suroundings[Rotation.LEFT.getRotation()];
-        result[Rotation.RIGHT.getRotation()] = suroundings[Rotation.UP.getRotation()];
-        result[Rotation.DOWN.getRotation()] = suroundings[Rotation.RIGHT.getRotation()];
-        result[Rotation.LEFT.getRotation()] = suroundings[Rotation.DOWN.getRotation()];
+        result[Rotation.UP.getInt()] = suroundings[Rotation.LEFT.getInt()];
+        result[Rotation.RIGHT.getInt()] = suroundings[Rotation.UP.getInt()];
+        result[Rotation.DOWN.getInt()] = suroundings[Rotation.RIGHT.getInt()];
+        result[Rotation.LEFT.getInt()] = suroundings[Rotation.DOWN.getInt()];
         return result;
     }
 

@@ -8,34 +8,35 @@ import de.klausmp.packman.level.GridTile;
 import de.klausmp.packman.utils.GameObjectType;
 import de.klausmp.packman.utils.Layers;
 import de.klausmp.packman.utils.Rotation;
-import de.klausmp.packman.utils.Timer;
-import de.klausmp.packman.visuals.animations.Animation;
+import de.klausmp.packman.visuals.animation.Animation;
 import de.klausmp.packman.visuals.screens.GameScreen;
 
 /**
  * @author Klausmp
- * @version 0.4.1
+ * @version 0.4.2
  * @see de.klausmp.packman.gameObjects.dynamicGameObjects.DynamicGameObject
- * @since 0.3.0
+ * @since 0.4.0
  */
 public class PacMan extends DynamicGameObject {
 
-    private Timer test = new Timer(10000);
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.4.2
+     */
+    private Rotation lastInput;
 
     public PacMan(Vector2 position, GridTile gridTile) {
         super(GameScreen.getAtlas().findRegion("pacMan0"), position, 1f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 15f, gridTile);
+        lastInput = getObjectRotation();
         String[] idleAnimationFrames = {"pacMan0", "pacMan1", "pacMan2"};
         idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
-        nextGridTiles = currendGridTile;
-        test.start();
+        nextGridTile = currendGridTile;
     }
 
     @Override
     public void update() {
         super.update();
-        if (test.isExpired()) {
-            kill();
-        }
     }
 
     @Override
@@ -43,25 +44,27 @@ public class PacMan extends DynamicGameObject {
         moveToNextGridTile();
 
         if (!isMoving) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                rotation = Rotation.UP;
-            }
-
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                rotation = Rotation.RIGHT;
-            }
-
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                rotation = Rotation.DOWN;
-            }
-
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                rotation = Rotation.LEFT;
-            }
+            setObjectRotation(lastInput);
         }
 
-        if (currendGridTile.equals(nextGridTiles) && !isMoving) {
-            switch (rotation) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            lastInput = Rotation.UP;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            lastInput = Rotation.RIGHT;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            lastInput = Rotation.DOWN;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            lastInput = Rotation.LEFT;
+        }
+
+        if (currendGridTile.equals(nextGridTile) && !isMoving) {
+            switch (getObjectRotation()) {
                 case RIGHT:
                     moveRight();
                     break;
@@ -86,6 +89,6 @@ public class PacMan extends DynamicGameObject {
     @Override
     public void kill() {
         super.kill();
-        currendGridTile.addGameObject(new DeadPacMan(new Vector2(getX(), getY()), rotation, currendGridTile));
+        currendGridTile.addGameObject(new DeadPacMan(new Vector2(getX(), getY()), getObjectRotation(), currendGridTile));
     }
 }

@@ -1,4 +1,4 @@
-package de.klausmp.packman.visuals.animations;
+package de.klausmp.packman.visuals.animation;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @version 0.2.0
  * @since 0.2.0
  */
-@SuppressWarnings("CanBeFinal")
 public class Animation {
 
     /**
