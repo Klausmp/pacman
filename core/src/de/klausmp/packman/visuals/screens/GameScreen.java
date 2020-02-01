@@ -15,13 +15,14 @@ import de.klausmp.packman.utils.Layers;
  * und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.5.0
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
 public class GameScreen extends ScreenAdapter {
     /**
-     * @see LayerRenderer
+     * TODO JAVA DOC
+     *
      * @since 0.0.1
      */
     private static LayerRenderer layerRenderer;
@@ -40,6 +41,19 @@ public class GameScreen extends ScreenAdapter {
      * @since 0.0.1
      */
     private static Level level;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.5.0
+     */
+    public static int score = 0;
+
+    /**
+     * TODO JAVA DOC
+     * @since
+     */
+    public static boolean chaseMode = false;
 
     /**
      * Constructor ohne eigenschaften.
@@ -80,8 +94,8 @@ public class GameScreen extends ScreenAdapter {
      *
      * @since 0.0.1
      */
-    public void update() {
-        level.update();
+    public void update(float deltaTime) {
+        level.update(deltaTime);
     }
 
     /**
@@ -94,7 +108,7 @@ public class GameScreen extends ScreenAdapter {
      */
     public void render(float delta) {
         super.render(delta);
-        update();
+        update(delta);
         level.render(layerRenderer);
         layerRenderer.render();
     }

@@ -112,12 +112,12 @@ public class Grid {
 
     /**
      * updated alle {@link GridTile gridTiles} in der liste {@link #gridTiles gridTiles}.
-     *
+     *@version 0.5.0
      * @since 0.0.1
      */
-    public void update() {
+    public void update(float deltaTime) {
         for (GridTile gridTile : gridTiles) {
-            gridTile.update();
+            gridTile.update(deltaTime);
         }
     }
 

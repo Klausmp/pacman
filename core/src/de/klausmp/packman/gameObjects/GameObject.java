@@ -129,7 +129,7 @@ public abstract class GameObject extends Sprite {
      *
      * @since 0.0.1
      */
-    public void update() {
+    public void update(float deltaTime) {
         animation();
     }
 

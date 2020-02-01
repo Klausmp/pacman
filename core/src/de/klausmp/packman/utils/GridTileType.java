@@ -1,6 +1,6 @@
 package de.klausmp.packman.utils;
 
-import de.klausmp.packman.gameObjects.kinematicGameObjects.Ghost;
+import de.klausmp.packman.gameObjects.kinematicGameObjects.ghosts.Ghost;
 import de.klausmp.packman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.packman.gameObjects.staticGameObjects.Wall;
 

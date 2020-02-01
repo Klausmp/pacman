@@ -4,184 +4,191 @@ size: 512,32
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+bigFood
+  rotate: false
+  xy: 1, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 black
   rotate: false
-  xy: 1, 11
+  xy: 19, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 food
   rotate: false
-  xy: 1, 1
-  size: 8, 8
-  orig: 8, 8
+  xy: 37, 1
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 pacMan0
   rotate: false
-  xy: 397, 14
-  size: 13, 13
-  orig: 13, 13
+  xy: 55, 1
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 pacMan1
   rotate: false
-  xy: 412, 14
-  size: 13, 13
-  orig: 13, 13
+  xy: 73, 1
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 pacMan2
   rotate: false
-  xy: 427, 14
-  size: 13, 13
-  orig: 13, 13
+  xy: 91, 1
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead0
   rotate: false
-  xy: 19, 11
+  xy: 109, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead1
   rotate: false
-  xy: 37, 11
+  xy: 127, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead10
   rotate: false
-  xy: 199, 11
+  xy: 289, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead2
   rotate: false
-  xy: 55, 11
+  xy: 145, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead3
   rotate: false
-  xy: 73, 11
+  xy: 163, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead4
   rotate: false
-  xy: 91, 11
+  xy: 181, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead5
   rotate: false
-  xy: 109, 11
+  xy: 199, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead6
   rotate: false
-  xy: 127, 11
+  xy: 217, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead7
   rotate: false
-  xy: 145, 11
+  xy: 235, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead8
   rotate: false
-  xy: 163, 11
+  xy: 253, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pacManDead9
   rotate: false
-  xy: 181, 11
+  xy: 271, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wall
   rotate: false
-  xy: 217, 11
+  xy: 307, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallBig
   rotate: false
-  xy: 235, 11
+  xy: 325, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallBigCrossing
   rotate: false
-  xy: 253, 11
+  xy: 343, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallBigTPice
   rotate: false
-  xy: 271, 11
+  xy: 361, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallCurve
   rotate: false
-  xy: 289, 11
+  xy: 379, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallEnd
   rotate: false
-  xy: 307, 11
+  xy: 397, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallGhost
   rotate: false
-  xy: 325, 11
+  xy: 415, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallGhostCorner
   rotate: false
-  xy: 343, 11
+  xy: 433, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallGhostGate
   rotate: false
-  xy: 361, 11
+  xy: 451, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wallToBigTPice
   rotate: false
-  xy: 379, 11
+  xy: 469, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

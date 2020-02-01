@@ -12,8 +12,10 @@ import de.klausmp.packman.visuals.animation.Animation;
 import de.klausmp.packman.visuals.screens.GameScreen;
 
 /**
+ * TODO JAVA DOC
+ *
  * @author Klausmp
- * @version 0.4.2
+ * @version 0.5.0
  * @see de.klausmp.packman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -27,7 +29,7 @@ public class PacMan extends DynamicGameObject {
     private Rotation lastInput;
 
     public PacMan(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("pacMan0"), position, 1f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 15f, gridTile);
+        super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile);
         lastInput = getObjectRotation();
         String[] idleAnimationFrames = {"pacMan0", "pacMan1", "pacMan2"};
         idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
@@ -35,18 +37,12 @@ public class PacMan extends DynamicGameObject {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(float deltaTime) {
+        super.update(deltaTime);
     }
 
     @Override
-    protected void movement() {
-        moveToNextGridTile();
-
-        if (!isMoving) {
-            setObjectRotation(lastInput);
-        }
-
+    protected void movement(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             lastInput = Rotation.UP;
         }
@@ -61,6 +57,10 @@ public class PacMan extends DynamicGameObject {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             lastInput = Rotation.LEFT;
+        }
+
+        if (!isMoving) {
+            setObjectRotation(lastInput);
         }
 
         if (currendGridTile.equals(nextGridTile) && !isMoving) {
@@ -79,6 +79,8 @@ public class PacMan extends DynamicGameObject {
                     break;
             }
         }
+        moveToNextGridTile(deltaTime);
+        checkForFood();
     }
 
     @Override
@@ -90,5 +92,16 @@ public class PacMan extends DynamicGameObject {
     public void kill() {
         super.kill();
         currendGridTile.addGameObject(new DeadPacMan(new Vector2(getX(), getY()), getObjectRotation(), currendGridTile));
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.5.0
+     */
+    public void checkForFood() {
+        if (currendGridTile.getGameObjectByType(GameObjectType.DOT) != null) {
+            currendGridTile.getGameObjectByType(GameObjectType.DOT).kill();
+        }
     }
 }

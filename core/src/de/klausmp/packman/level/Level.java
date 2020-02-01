@@ -116,10 +116,11 @@ public abstract class Level {
      * updated das {@link #grid grid} des {@link Level levels} und damit
      * alle {@link de.klausmp.packman.gameObjects.GameObject gameObjekte}.
      *
+     * @version 0.5.0
      * @since 0.0.1
      */
-    public void update() {
-        grid.update();
+    public void update(float deltaTime) {
+        grid.update(deltaTime);
     }
 
 }

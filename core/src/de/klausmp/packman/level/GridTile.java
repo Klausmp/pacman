@@ -76,12 +76,12 @@ public class GridTile {
     /**
      * updated alle {@link GameObject gameObjekte} in der {@link #gameObjects gameObjekt} liste
      * und entfernt alle die zu entfernen sind.
-     *
+     * @version 0.5.0
      * @since 0.0.1
      */
-    public void update() {
+    public void update(float deltaTime) {
         for (int i = 0; i < gameObjects.size; i++) {
-            gameObjects.get(i).update();
+            gameObjects.get(i).update(deltaTime);
         }
         removeDeadGameObjects();
     }
@@ -227,6 +227,7 @@ public class GridTile {
      * @return
      * @since 0.4.0
      */
+    @Deprecated
     public void removeGameObject(GameObject object) {
         gameObjects.removeValue(object, false);
     }

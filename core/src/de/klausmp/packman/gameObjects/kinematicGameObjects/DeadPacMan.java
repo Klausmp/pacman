@@ -45,8 +45,8 @@ public class DeadPacMan extends KinematicGameObject {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(float deltaTime) {
+        super.update(deltaTime);
         if (deadTimer.isExpired()) {
             kill();
         }

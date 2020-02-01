@@ -1,4 +1,4 @@
-package de.klausmp.packman.gameObjects.kinematicGameObjects;
+package de.klausmp.packman.gameObjects.kinematicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +17,7 @@ public class Ghost extends GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(float deltaTime) {
 
     }
 }

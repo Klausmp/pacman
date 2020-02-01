@@ -81,9 +81,9 @@ public abstract class DynamicGameObject extends GameObject {
 
 
     @Override
-    public void update() {
-        super.update();
-        movement();
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        movement(deltaTime);
     }
 
     /**
@@ -91,19 +91,19 @@ public abstract class DynamicGameObject extends GameObject {
      *
      * @since 0.1.0
      */
-    protected abstract void movement();
+    protected abstract void movement(float deltaTime);
 
     /**
      * TODO JAVA DOC
      *
      * @since 0.4.0
      */
-    public void moveToNextGridTile() {
+    public void moveToNextGridTile(float delataTime) {
         Vector2 pixelPositionFromNextGridTile = Grid.convertToPixelPosition(nextGridTile.getPosition());
         switch (getObjectRotation()) {
             case UP:
                 if (pixelPositionFromNextGridTile.y >= getY()) {
-                    setY(getY() + movementSpeed);
+                    setY(getY() + (movementSpeed * delataTime));
                     isMoving = true;
                 } else {
                     setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
@@ -114,7 +114,7 @@ public abstract class DynamicGameObject extends GameObject {
                 break;
             case DOWN:
                 if (pixelPositionFromNextGridTile.y <= getY()) {
-                    setY(getY() - movementSpeed);
+                    setY(getY() - (movementSpeed * delataTime));
                     isMoving = true;
                 } else {
                     setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
@@ -125,7 +125,7 @@ public abstract class DynamicGameObject extends GameObject {
                 break;
             case LEFT:
                 if (pixelPositionFromNextGridTile.x <= getX()) {
-                    setX(getX() - movementSpeed);
+                    setX(getX() - (movementSpeed * delataTime));
                     isMoving = true;
                 } else {
                     setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
@@ -136,7 +136,7 @@ public abstract class DynamicGameObject extends GameObject {
                 break;
             case RIGHT:
                 if (pixelPositionFromNextGridTile.x >= getX()) {
-                    setX(getX() + movementSpeed);
+                    setX(getX() + (movementSpeed * delataTime));
                     isMoving = true;
                 } else {
                     setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
