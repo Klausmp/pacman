@@ -20,7 +20,7 @@ import de.klausmp.packman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.4.2
+ * @version 0.6.0
  * @see Sprite
  * @since 0.0.1
  */
@@ -147,9 +147,11 @@ public abstract class GameObject extends Sprite {
     /**
      * hier wird alles mit animationen abgewickelt
      *
+     * @version 0.6.0
      * @since 0.2.0
      */
     protected void animation() {
+        setRegion(idle.getCurrentFrame());
     }
 
     /**

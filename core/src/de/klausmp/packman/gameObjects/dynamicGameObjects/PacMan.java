@@ -28,6 +28,14 @@ public class PacMan extends DynamicGameObject {
      */
     private Rotation lastInput;
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @param position
+     * @param gridTile
+     * @version 0.6.0
+     * @since 0.4.2
+     */
     public PacMan(Vector2 position, GridTile gridTile) {
         super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile);
         lastInput = getObjectRotation();
@@ -37,12 +45,18 @@ public class PacMan extends DynamicGameObject {
     }
 
     @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
+    protected void movement(float deltaTime) {
+        findNextGridTile(getObjectRotation());
+        super.movement(deltaTime);
+        checkForFood();
     }
 
+    /**
+     * @version 0.6.0
+     * @since 0.6.0
+     */
     @Override
-    protected void movement(float deltaTime) {
+    protected void findNextGridTile(Rotation nextRotation) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             lastInput = Rotation.UP;
         }
@@ -62,30 +76,12 @@ public class PacMan extends DynamicGameObject {
         if (!isMoving) {
             setObjectRotation(lastInput);
         }
-
-        if (currendGridTile.equals(nextGridTile) && !isMoving) {
-            switch (getObjectRotation()) {
-                case RIGHT:
-                    moveRight();
-                    break;
-                case LEFT:
-                    moveLeft();
-                    break;
-                case DOWN:
-                    moveDown();
-                    break;
-                case UP:
-                    moveUp();
-                    break;
-            }
-        }
-        moveToNextGridTile(deltaTime);
-        checkForFood();
+        super.findNextGridTile(lastInput);
     }
 
     @Override
     protected void animation() {
-        setRegion(idle.getCurrentFrame());
+       super.animation();
     }
 
     @Override
@@ -97,6 +93,7 @@ public class PacMan extends DynamicGameObject {
     /**
      * TODO JAVA DOC
      *
+     * @version 0.5.0
      * @since 0.5.0
      */
     public void checkForFood() {

@@ -11,7 +11,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
 //TODO v 0.3.0 animationen klasse                           (fertig)
 //TODO v 0.4.0 player                                       (fertig)
 //TODO v 0.5.0 dots + score                                 (fertig)
-//TODO v 0.6.0 geister
+//TODO v 0.6.0 geister                                      (fertig bis auf texturen und animationen)
 //TODO v 0.7.0 map interpreter
 //TODO v 0.8.0 gui system
 //TODO v 0.9.0 geister ki
@@ -26,7 +26,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.5.0
+ * @version 0.6.0
  * @see Game
  * @since 0.0.1
  */

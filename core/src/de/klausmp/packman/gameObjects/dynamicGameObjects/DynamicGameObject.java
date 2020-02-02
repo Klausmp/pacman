@@ -23,7 +23,7 @@ import de.klausmp.packman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.4.3
+ * @version 0.6.0
  * @see GameObject
  * @since 0.1.0
  */
@@ -88,10 +88,38 @@ public abstract class DynamicGameObject extends GameObject {
 
     /**
      * hier geschieht das movement des {@link GameObject gameObjekts} in jedem tick.
-     *
+     * @version 0.6.0
      * @since 0.1.0
      */
-    protected abstract void movement(float deltaTime);
+    protected void movement(float deltaTime) {
+        moveToNextGridTile(deltaTime);
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @param nextRotation
+     * @version 0.6.0
+     * @since 0.6.0
+     */
+    protected void findNextGridTile(Rotation nextRotation) {
+        if (currendGridTile.equals(nextGridTile) && !isMoving) {
+            switch (nextRotation) {
+                case RIGHT:
+                    moveRight();
+                    break;
+                case LEFT:
+                    moveLeft();
+                    break;
+                case DOWN:
+                    moveDown();
+                    break;
+                case UP:
+                    moveUp();
+                    break;
+            }
+        }
+    }
 
     /**
      * TODO JAVA DOC
@@ -203,9 +231,10 @@ public abstract class DynamicGameObject extends GameObject {
      *
      * @param currentRotation
      * @param nextRotation
+     * @version 0.6.0
      * @since 0.4.2
      */
-    private void changeRotation(Rotation currentRotation, Rotation nextRotation) {
+    protected void changeRotation(Rotation currentRotation, Rotation nextRotation) {
         rotate((currentRotation.getInt() - nextRotation.getInt()) * 90);
     }
 
