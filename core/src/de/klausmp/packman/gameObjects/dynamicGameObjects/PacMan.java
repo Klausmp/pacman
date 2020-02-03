@@ -15,7 +15,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.5.0
+ * @version 0.7.0
  * @see de.klausmp.packman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -93,12 +93,14 @@ public class PacMan extends DynamicGameObject {
     /**
      * TODO JAVA DOC
      *
-     * @version 0.5.0
+     * @version 0.7.0
      * @since 0.5.0
      */
     public void checkForFood() {
-        if (currendGridTile.getGameObjectByType(GameObjectType.DOT) != null) {
-            currendGridTile.getGameObjectByType(GameObjectType.DOT).kill();
+        for (GameObjectType objectType : GameObjectType.edibles()) {
+            if (currendGridTile.getGameObjectByType(objectType) != null) {
+                currendGridTile.getGameObjectByType(objectType).kill();
+            }
         }
     }
 }

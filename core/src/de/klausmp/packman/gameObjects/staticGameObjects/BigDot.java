@@ -11,13 +11,13 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.5.0
+ * @version 0.7.0
  * @see de.klausmp.packman.gameObjects.staticGameObjects.Dot
  * @since 0.5.0
  */
 public class BigDot extends Dot {
     public BigDot(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("bigFood"), position, 50, Rotation.DEFAULTROTATION, GameObjectType.DOT, Layers.DEFAULT, 10f, gridTile);
+        super(GameScreen.getAtlas().findRegion("bigFood"), position, 50, Rotation.DEFAULTROTATION, GameObjectType.BIGDOT, Layers.DEFAULT, 10f, gridTile);
     }
 
     @Override

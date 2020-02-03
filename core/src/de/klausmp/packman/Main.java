@@ -26,7 +26,7 @@ import de.klausmp.packman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.6.0
+ * @version 0.7.0
  * @see Game
  * @since 0.0.1
  */
