@@ -12,7 +12,7 @@ import de.klausmp.packman.gameObjects.staticGameObjects.Wall;
  * liste aller {@link GameObject GameObject} typen.
  *
  * @author Klausmp
- * @version 0.7.0
+ * @version 0.7.1
  * @since 0.0.1
  */
 public enum GameObjectType {
@@ -42,11 +42,11 @@ public enum GameObjectType {
     DOT(200, 255, 0),
 
     /**
-     * @verson 0.7.0
+     * @verson 0.7.1
      * @see BigDot
      * @since 0.7.0
      */
-    BIGDOT(0, 0, 0);
+    BIGDOT(100, 255, 0);
 
     /**
      * zeigt die r g b werte der einzelnen {@link GameObjectType gameObjectTypen} an.
