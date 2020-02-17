@@ -27,7 +27,7 @@ public enum GameObjectType {
      * @see PacMan
      * @since 0.0.1
      */
-    PACMAN(0, 0, 0),
+    PACMAN(255, 0, 0),
     /**
      * @version 0.7.0
      * @see Ghost
@@ -53,7 +53,7 @@ public enum GameObjectType {
      *
      * @since 0.7.0
      */
-    public int r, g, b;
+    private int r, g, b;
 
     /**
      * @param r
@@ -81,5 +81,51 @@ public enum GameObjectType {
         edibles.add(GameObjectType.DOT);
         edibles.add(GameObjectType.BIGDOT);
         return edibles;
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @param r
+     * @param g
+     * @param b
+     * @return
+     * @throws NullPointerException
+     * @version 0.7.3
+     * @since 0.7.3
+     */
+    public static GameObjectType getGameObjecTypeFromColor(int r, int g, int b) throws NullPointerException {
+        if ((GameObjectType.WALL.getR() == r && (GameObjectType.WALL.getG() == g) && (GameObjectType.WALL.getB() == b))) {
+            return GameObjectType.WALL;
+        }
+
+        if ((GameObjectType.DOT.getR() == r && (GameObjectType.DOT.getG() == g) && (GameObjectType.DOT.getB() == b))) {
+            return GameObjectType.DOT;
+        }
+
+        if ((GameObjectType.BIGDOT.getR() == r && (GameObjectType.BIGDOT.getG() == g) && (GameObjectType.BIGDOT.getB() == b))) {
+            return GameObjectType.BIGDOT;
+        }
+
+        if ((GameObjectType.GHOST.getR() == r && (GameObjectType.GHOST.getG() == g) && (GameObjectType.GHOST.getB() == b))) {
+            return GameObjectType.GHOST;
+        }
+
+        if ((GameObjectType.PACMAN.getR() == r && (GameObjectType.PACMAN.getG() == g) && (GameObjectType.PACMAN.getB() == b))) {
+            return GameObjectType.PACMAN;
+        }
+        return GameObjectType.BIGDOT;
+    }
+
+    public int getR() {
+        return r;
+    }
+
+    public int getG() {
+        return g;
+    }
+
+    public int getB() {
+        return b;
     }
 }

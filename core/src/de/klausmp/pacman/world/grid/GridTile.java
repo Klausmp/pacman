@@ -1,4 +1,4 @@
-package de.klausmp.pacman.level;
+package de.klausmp.pacman.world.grid;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;

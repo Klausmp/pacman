@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.kinematicGameObjects.DeadPacMan;
-import de.klausmp.pacman.level.GridTile;
+import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;

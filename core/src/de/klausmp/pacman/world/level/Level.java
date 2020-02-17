@@ -1,7 +1,9 @@
-package de.klausmp.pacman.level;
+package de.klausmp.pacman.world.level;
 
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.world.MapInterpreter;
+import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 
 /**
@@ -12,7 +14,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * @version 0.0.1
  * @since 0.0.1
  */
-public abstract class Level {
+public abstract class Level implements Runnable {
 
     /**
      * instance von {@link PacMan pacMan} in einem {@link Level level}.
@@ -43,13 +45,22 @@ public abstract class Level {
     protected Vector2 gridPosition;
 
     /**
+     * TODO JAVA DOC
+     *
+     * @version 0.7.3
+     * @since 0.7.3
+     */
+    protected String mapPath;
+
+    protected boolean mapLoaded = false;
+
+    /**
      * konstruktor mit default einstellungen
      *
      * @since 0.0.1
      */
-    public Level() {
-        grid = new Grid();
-        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(0, 0));
+    public Level(String mapPath) {
+        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(0, 0), mapPath);
     }
 
     /**
@@ -60,9 +71,8 @@ public abstract class Level {
      * @param gridPosition {@link #gridPosition siehe gridPosition}
      * @since 0.0.1
      */
-    public Level(Vector2 gridSize, Vector2 gridPosition) {
-        grid = new Grid();
-        create(gridSize, gridPosition);
+    public Level(Vector2 gridSize, Vector2 gridPosition, String mapPath) {
+        create(gridSize, gridPosition, mapPath);
     }
 
     /**
@@ -71,9 +81,8 @@ public abstract class Level {
      * @param gridSize {@link #gridSize siehe gridSize}
      * @since 0.0.1
      */
-    public Level(Vector2 gridSize) {
-        grid = new Grid();
-        create(gridSize, new Vector2(0, 0));
+    public Level(Vector2 gridSize, String mapPath) {
+        create(gridSize, new Vector2(0, 0), mapPath);
     }
 
     /**
@@ -83,9 +92,8 @@ public abstract class Level {
      * @param gridPosY setzt den y wert der {@link #gridPosition gridposition}.
      * @since 0.0.1
      */
-    public Level(int gridPosX, int gridPosY) {
-        grid = new Grid();
-        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY));
+    public Level(int gridPosX, int gridPosY, String mapPath) {
+        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY), mapPath);
     }
 
     /**
@@ -94,11 +102,15 @@ public abstract class Level {
      *
      * @param gridSize     {@link #gridSize siehe gridSize}
      * @param gridPosition {@link #gridPosition siehe gridPosition}.
+     * @version 0.7.3
      * @since 0.0.1
      */
-    public void create(Vector2 gridSize, Vector2 gridPosition) {
+    public void create(Vector2 gridSize, Vector2 gridPosition, String mapPath) {
         this.gridSize = gridSize;
         this.gridPosition = gridPosition;
+        this.mapPath = mapPath;
+        Thread thread = new Thread(this);
+        thread.start();
     }
 
     /**
@@ -109,18 +121,34 @@ public abstract class Level {
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
-        grid.render(renderer);
+        if (mapLoaded) {
+            grid.render(renderer);
+        }
     }
 
     /**
      * updated das {@link #grid grid} des {@link Level levels} und damit
      * alle {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte}.
      *
-     * @version 0.5.0
+     * @version 0.7.3
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        grid.update(deltaTime);
+        if (mapLoaded) {
+            grid.update(deltaTime);
+        }
+
     }
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @version 0.7.3
+     * @since 0.7.3
+     */
+    @Override
+    public void run() {
+        grid = MapInterpreter.loadMap(mapPath);
+        mapLoaded = true;
+    }
 }

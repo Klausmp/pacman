@@ -1,4 +1,4 @@
-package de.klausmp.pacman.level;
+package de.klausmp.pacman.world;
 
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.utils.Rotation;

@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.kinematicGameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.level.GridTile;
+import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;

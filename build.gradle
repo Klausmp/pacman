@@ -17,7 +17,7 @@ buildscript {
 
 allprojects {
 
-    version = '0.7.2'
+    version = '0.7.3'
     ext {
         appName = "pacman"
         gdxVersion = '1.9.10'

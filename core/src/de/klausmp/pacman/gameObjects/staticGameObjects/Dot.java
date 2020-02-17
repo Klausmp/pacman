@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.staticGameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.level.GridTile;
+import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
@@ -44,5 +44,10 @@ public class Dot extends StaticGameObjekt {
     public void kill() {
         super.kill();
         GameScreen.score += score;
+    }
+
+    @Override
+    protected void animation() {
+
     }
 }

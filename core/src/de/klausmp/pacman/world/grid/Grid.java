@@ -1,4 +1,4 @@
-package de.klausmp.pacman.level;
+package de.klausmp.pacman.world.grid;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -19,7 +19,7 @@ public class Grid {
      *
      * @since 0.0.1
      */
-    private final int DEFAULTGRIDSIZE = 32;
+    private static final int DEFAULTGRIDSIZE = 32;
 
     /**
      * liste aller {@link GridTile gridTiles} im {@link Grid grid}.
@@ -53,7 +53,7 @@ public class Grid {
      *
      * @since 0.4.0
      */
-    private static Vector2 gridTileSize;
+    private static Vector2 gridTileSize = new Vector2(16, 16);
 
     public Grid() {
         create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
@@ -102,7 +102,6 @@ public class Grid {
     public void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
-        gridTileSize = new Vector2(16, 16);
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
                 gridTiles.add(new GridTile(new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
@@ -308,11 +307,19 @@ public class Grid {
         return size;
     }
 
-    public int getDEFAULTGRIDSIZE() {
+    public void setSize(Vector2 size) {
+        this.size = size;
+    }
+
+    public static int getDEFAULTGRIDSIZE() {
         return DEFAULTGRIDSIZE;
     }
 
     public Array<GridTile> getGridTiles() {
         return gridTiles;
+    }
+
+    public static Vector2 getGridTileSize() {
+        return gridTileSize;
     }
 }

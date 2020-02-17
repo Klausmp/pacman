@@ -3,7 +3,7 @@ package de.klausmp.pacman.gameObjects.staticGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.level.GridTile;
+import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
@@ -78,5 +78,10 @@ public class Wall extends StaticGameObjekt {
             }
             surroundings = GridTile.rotateSuroundings(surroundings);
         }
+    }
+
+    @Override
+    protected void animation() {
+
     }
 }

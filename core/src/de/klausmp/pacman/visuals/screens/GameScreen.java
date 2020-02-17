@@ -4,10 +4,10 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import de.klausmp.pacman.Main;
-import de.klausmp.pacman.level.Level;
-import de.klausmp.pacman.level.TESTLEVEL;
+import de.klausmp.pacman.world.level.Level;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.utils.Layers;
+import de.klausmp.pacman.world.level.LevelOne;
 
 /**
  * screen in dem das spiel statfindt.
@@ -86,7 +86,7 @@ public class GameScreen extends ScreenAdapter {
     public void create() {
         layerRenderer = new LayerRenderer(Layers.DEFAULTLAYERORDER());
         atlas = new TextureAtlas("spriteSheed.atlas");
-        level = new TESTLEVEL();
+        level = new LevelOne();
     }
 
     /**
