@@ -14,7 +14,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * wände im spiel.
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.7.3
  * @see StaticGameObjekt
  * @since 0.1.0
  */
@@ -28,7 +28,7 @@ public class Wall extends StaticGameObjekt {
      * @since 0.1.4
      */
     public Wall(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("wall"), position, Rotation.UP, GameObjectType.WALL, Layers.BACKGROUND, 5.0f, gridTile);
+        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.UP, GameObjectType.WALL, Layers.BACKGROUND, 5.0f, gridTile);
     }
 
     /**
@@ -36,48 +36,40 @@ public class Wall extends StaticGameObjekt {
      * den umliegenen {@link GridTile gridTiles} um eine durchgehende wand zu erschaffen
      *
      * @param atlas {@link TextureAtlas textureAtlas} mit den gameTexturen;
+     * @version 0.7.3
      * @since 0.1.4
      */
     public void setTexture(TextureAtlas atlas) {
         GridTileType[] surroundings = currendGridTile.getSurroundings();
         for (int i = 0; i <= 3; i++) {
-            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.EMTY && surroundings[3] == GridTileType.WALL) {
-                setRegion(atlas.findRegion("wall"));
-                setRotation(90 * i);
-                return;
-            }
-            if (surroundings[0] == GridTileType.ROAD && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.WALL) {
-                setRegion(atlas.findRegion("wallBig"));
-                setRotation(90 * i);
-                return;
-            }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.WALL) {
+            if (surroundings[Rotation.UP.getInt()] == GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] == GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] == GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallBigCrossing"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.WALL) {
+            if (surroundings[Rotation.UP.getInt()] == GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] == GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] != GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallBigTPice"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.EMTY && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.WALL && surroundings[3] == GridTileType.EMTY) {
-                setRegion(atlas.findRegion("wallCurve"));
+            if (surroundings[Rotation.UP.getInt()] != GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] == GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] != GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
+                setRegion(atlas.findRegion("wallBig"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.ROAD && surroundings[2] == GridTileType.ROAD && surroundings[3] == GridTileType.ROAD) {
-                setRegion(atlas.findRegion("wallEnd"));
+            if (surroundings[Rotation.UP.getInt()] != GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] != GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] == GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
+                setRegion(atlas.findRegion("wallBigCurve"));
                 setRotation(90 * i);
                 return;
             }
-            if (surroundings[0] == GridTileType.WALL && surroundings[1] == GridTileType.WALL && surroundings[2] == GridTileType.EMTY && surroundings[3] == GridTileType.WALL) {
-                setRegion(atlas.findRegion("wallToBigTPice"));
+            if (surroundings[Rotation.UP.getInt()] != GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] != GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] != GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
+                setRegion(atlas.findRegion("wallBigEnd"));
                 setRotation(90 * i);
                 return;
             }
             surroundings = GridTile.rotateSuroundings(surroundings);
         }
+
     }
 
     @Override

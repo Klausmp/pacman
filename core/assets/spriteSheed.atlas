@@ -123,72 +123,58 @@ pacManDead9
   orig: 16, 16
   offset: 0, 0
   index: -1
-wall
+wallBig
   rotate: false
   xy: 307, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallBig
+wallBigCrossing
   rotate: false
   xy: 325, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallBigCrossing
+wallBigCurve
   rotate: false
   xy: 343, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallBigTPice
+wallBigEnd
   rotate: false
   xy: 361, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallCurve
+wallBigTPice
   rotate: false
   xy: 379, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallEnd
+wallGhost
   rotate: false
   xy: 397, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhost
+wallGhostCorner
   rotate: false
   xy: 415, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhostCorner
-  rotate: false
-  xy: 433, 1
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
 wallGhostGate
   rotate: false
-  xy: 451, 1
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-wallToBigTPice
-  rotate: false
-  xy: 469, 1
+  xy: 433, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

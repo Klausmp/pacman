@@ -38,6 +38,7 @@ public abstract class MapInterpreter {
      * @version 0.7.3
      * @since 0.7.1
      */
+    //TODO Etferne Statischen pfad
     public static Grid loadMap(String mapPath) {
         File file = new File("/home/klausmp/dev/java/projekte/pacman/core/assets/maps/map1.png");
         BufferedImage map = null;
@@ -80,9 +81,8 @@ public abstract class MapInterpreter {
                 }
             }
         }
-
-        for (int x = 0; x < result.getSize().x - 1; x++) {
-            for (int y = 0; y < result.getSize().y - 1; y++) {
+        for (int x = 0; x <= result.getSize().x; x++) {
+            for (int y = 0; y <= result.getSize().y; y++) {
                 if (result.getGridTile(x, y).getGameObjectByType(GameObjectType.WALL) != null && result.getGridTile(x, y).getGameObjects().get(0) instanceof Wall) {
                     Wall wall = (Wall) result.getGridTile(x, y).getGameObjects().get(0);
                     wall.setTexture(GameScreen.getAtlas());
