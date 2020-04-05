@@ -86,7 +86,6 @@ public class Ghost extends DynamicGameObject implements Runnable {
             changePath = false;
             currentPath.setPath(nextPath.getPath());
         }
-
     }
 
     @Override
