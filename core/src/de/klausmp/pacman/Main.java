@@ -26,7 +26,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.7.3
+ * @version 0.7.4
  * @see Game
  * @since 0.0.1
  */
@@ -67,7 +67,7 @@ public class Main extends Game {
         /**
          * setzen des Start Screens
          */
-        setScreen(new GameScreen());
+        INSTANCE.setScreen(new GameScreen());
     }
 
     /**

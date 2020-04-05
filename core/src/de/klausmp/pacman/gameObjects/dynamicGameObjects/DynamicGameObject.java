@@ -23,7 +23,7 @@ import de.klausmp.pacman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.6.0
+ * @version 0.7.4
  * @see GameObject
  * @since 0.1.0
  */
@@ -186,7 +186,7 @@ public abstract class DynamicGameObject extends GameObject {
     protected void moveUp() {
         if (currendGridTile.getUpperTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
             nextGridTile = currendGridTile.getUpperTile();
-            changeRotation(lastRotation, getObjectRotation());
+            changeRotation(getObjectRotation());
         }
     }
 
@@ -198,7 +198,7 @@ public abstract class DynamicGameObject extends GameObject {
     protected void moveRight() {
         if (currendGridTile.getRightGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
             nextGridTile = currendGridTile.getRightGridTile();
-            changeRotation(lastRotation, getObjectRotation());
+            changeRotation(getObjectRotation());
         }
     }
 
@@ -210,7 +210,7 @@ public abstract class DynamicGameObject extends GameObject {
     protected void moveDown() {
         if (currendGridTile.getLowerTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
             nextGridTile = currendGridTile.getLowerTile();
-            changeRotation(lastRotation, getObjectRotation());
+            changeRotation(getObjectRotation());
         }
     }
 
@@ -222,7 +222,7 @@ public abstract class DynamicGameObject extends GameObject {
     protected void moveLeft() {
         if (currendGridTile.getLeftGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
             nextGridTile = currendGridTile.getLeftGridTile();
-            changeRotation(lastRotation, getObjectRotation());
+            changeRotation(getObjectRotation());
         }
     }
 
@@ -230,12 +230,12 @@ public abstract class DynamicGameObject extends GameObject {
      * TODO JAVA DOC
      *
      * @param currentRotation
-     * @param nextRotation
-     * @version 0.6.0
+     * @param rotation
+     * @version 0.7.4
      * @since 0.4.2
      */
-    protected void changeRotation(Rotation currentRotation, Rotation nextRotation) {
-        rotate((currentRotation.getInt() - nextRotation.getInt()) * 90);
+    protected void changeRotation(Rotation rotation) {
+        setRotation(rotation.getInt() * 90);
     }
 
     /**

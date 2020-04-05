@@ -13,14 +13,14 @@ public enum Rotation {
      *
      * @since 0.1.0
      */
-    LEFT(3),
+    LEFT(1),
 
     /**
      * rechts
      *
      * @since 0.1.0
      */
-    RIGHT(1),
+    RIGHT(3),
 
     /**
      * oben

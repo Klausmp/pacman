@@ -2,7 +2,10 @@ package de.klausmp.pacman.visuals.screens;
 
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import de.klausmp.pacman.Main;
 import de.klausmp.pacman.world.level.Level;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
@@ -15,7 +18,7 @@ import de.klausmp.pacman.world.level.LevelOne;
  * und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.5.0
+ * @version 0.7.4
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
@@ -30,8 +33,8 @@ public class GameScreen extends ScreenAdapter {
     /**
      * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im spiel verwendet werden.
      *
-     * @see TextureAtlas
-     * @since 0.0.1
+     * @see TextureAtlas* @since 0.0.1
+     * @sine 0.0.1
      */
     private static TextureAtlas atlas;
 

@@ -17,7 +17,7 @@ import de.klausmp.pacman.utils.Layers;
  * zu rendernen elemente hinzugefügt.
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.7.4
  * @since 0.0.1
  */
 public class LayerRenderer {
@@ -27,7 +27,7 @@ public class LayerRenderer {
      *
      * @since 0.0.1
      */
-    private static SpriteBatch batch;
+    private SpriteBatch batch;
 
     /**
      * liste mit allen lyern die zu verfügung stehen
@@ -178,5 +178,9 @@ public class LayerRenderer {
                 layer.add(queQueElement);
             }
         }
+    }
+
+    public SpriteBatch getBatch() {
+        return batch;
     }
 }

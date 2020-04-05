@@ -15,7 +15,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.6.0
+ * @version 0.7.4
  * @since 0.6.0
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @see java.lang.Runnable
@@ -109,10 +109,5 @@ public class Ghost extends DynamicGameObject implements Runnable {
 
         //IMMER ALS LETZTES
         changePath = true;
-    }
-
-    @Override
-    protected void changeRotation(Rotation currentRotation, Rotation nextRotation) {
-
     }
 }
