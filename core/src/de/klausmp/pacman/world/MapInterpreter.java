@@ -55,10 +55,10 @@ public abstract class MapInterpreter {
                 int r = (color & 0x00ff0000) >> 16;
                 int g = (color & 0x0000ff00) >> 8;
                 int b = color & 0x000000ff;
-                System.out.println(r);
-                System.out.println(g);
-                System.out.println(b);
-                System.out.println();
+                //System.out.println(r);
+                //System.out.println(g);
+                //System.out.println(b);
+                //System.out.println();
 
                 int x1 = map.getWidth() - x;
                 int y1 = map.getHeight() - y;
@@ -73,7 +73,7 @@ public abstract class MapInterpreter {
                         result.addToGridTile(new BigDot(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
                     case GHOST:
-                        System.out.println("PALTZHALTER");
+                        //System.out.println("PALTZHALTER");
                         break;
                     case PACMAN:
                         result.addToGridTile(new PacMan(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);

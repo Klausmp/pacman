@@ -15,7 +15,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.7.0
+ * @version 0.8.0
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -102,5 +102,13 @@ public class PacMan extends DynamicGameObject {
                 currendGridTile.getGameObjectByType(objectType).kill();
             }
         }
+    }
+
+    /**
+     * @since 0.8.0
+     */
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

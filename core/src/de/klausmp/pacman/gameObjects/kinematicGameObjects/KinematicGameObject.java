@@ -18,7 +18,7 @@ import de.klausmp.pacman.visuals.renderer.Layer;
  * unter einer bestimmten bedingung aufgerufen werden
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.8.0
  * @see GameObject
  * @since 0.1.0
  */
@@ -46,5 +46,14 @@ public abstract class KinematicGameObject extends GameObject {
      */
     public void movement() {
 
+    }
+
+    /**
+     * TODO JAVA DOC
+     * @snce 0.8.0
+     */
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

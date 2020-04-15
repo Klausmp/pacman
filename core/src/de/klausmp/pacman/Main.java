@@ -1,10 +1,8 @@
 package de.klausmp.pacman;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import de.klausmp.pacman.visuals.screens.GameScreen;
+import com.badlogic.gdx.*;
+import de.klausmp.pacman.visuals.screens.LoadingScreen;
+import de.klausmp.pacman.visuals.screens.MainMenue;
 
 //TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
 //TODO v 0.2.0 walls mit automatischer wall bildung         (fertig)
@@ -12,10 +10,10 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 //TODO v 0.4.0 player                                       (fertig)
 //TODO v 0.5.0 dots + score                                 (fertig)
 //TODO v 0.6.0 geister                                      (fertig bis auf texturen und animationen)
-//TODO v 0.7.0 map interpreter
-//TODO v 0.8.0 gui system
+//TODO v 0.7.0 map interpreter                              (fertig)
+//TODO v 0.8.0 menue
 //TODO v 0.9.0 geister ki
-//TODO v 0.10.0 main menue
+//TODO v 0.10.0 HUD
 //TODO v 0.11.0 intro
 //TODO v 0.12.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
 //TODO v 0.13.0 start des levels mit space
@@ -26,7 +24,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.7.5
+ * @version 0.8.0
  * @see Game
  * @since 0.0.1
  */
@@ -47,11 +45,18 @@ public class Main extends Game {
      * @since 0.0.1
      */
     public static void setActiveScreen(Screen screen) {
+        if (getActiveScreen() != null) {
+            getActiveScreen().dispose();
+        }
         INSTANCE.setScreen(screen);
     }
 
+    public static Screen getActiveScreen() {
+        return INSTANCE.getScreen();
+    }
+
     /**
-     * erstellung des spieles mit der erschaffung einer main-instance
+     * erstellung des spieles mit der erschaimport de.klausmp.pacman.visuals.screens.MainMenue;ffung einer main-instance
      * und setzung des startscreens.
      *
      * @Override
@@ -67,7 +72,7 @@ public class Main extends Game {
         /**
          * setzen des Start Screens
          */
-        INSTANCE.setScreen(new GameScreen());
+        Main.setActiveScreen(new MainMenue());
     }
 
     /**

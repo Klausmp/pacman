@@ -14,7 +14,7 @@ import de.klausmp.pacman.visuals.renderer.Layer;
  * da es statisch und somit unbeweglich ist ferfügt es über keine movement methode.
  *
  * @author Klausmp
- * @version 0.1.4
+ * @version 0.8.0
  * @see GameObject
  * @since 0.1.0
  */
@@ -33,5 +33,15 @@ public abstract class StaticGameObjekt extends GameObject {
      */
     public StaticGameObjekt(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.8.0
+     */
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

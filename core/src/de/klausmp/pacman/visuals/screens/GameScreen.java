@@ -2,15 +2,13 @@ package de.klausmp.pacman.visuals.screens;
 
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.Main;
+import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.level.Level;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.utils.Layers;
-import de.klausmp.pacman.world.level.LevelOne;
 
 /**
  * screen in dem das spiel statfindt.
@@ -22,7 +20,7 @@ import de.klausmp.pacman.world.level.LevelOne;
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends ScreenAdapter implements Disposable {
     /**
      * TODO JAVA DOC
      *
@@ -33,8 +31,8 @@ public class GameScreen extends ScreenAdapter {
     /**
      * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im spiel verwendet werden.
      *
-     * @see TextureAtlas* @since 0.0.1
      * @sine 0.0.1
+     * @see TextureAtlas* @since 0.0.1
      */
     private static TextureAtlas atlas;
 
@@ -54,6 +52,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * TODO JAVA DOC
+     *
      * @since
      */
     public static boolean chaseMode = false;
@@ -64,6 +63,18 @@ public class GameScreen extends ScreenAdapter {
      */
     public GameScreen() {
         create();
+    }
+
+    /**
+     * TODO JAVA DOc
+     *
+     * @param grid
+     * @since 0.8.0
+     */
+    public GameScreen(Grid grid) {
+        layerRenderer = new LayerRenderer(Layers.DEFAULTLAYERORDER());
+        atlas = new TextureAtlas("spriteSheed.atlas");
+        level = new Level("maps/map1.png");
     }
 
     public static LayerRenderer getLayerRenderer() {
@@ -89,7 +100,7 @@ public class GameScreen extends ScreenAdapter {
     public void create() {
         layerRenderer = new LayerRenderer(Layers.DEFAULTLAYERORDER());
         atlas = new TextureAtlas("spriteSheed.atlas");
-        level = new LevelOne();
+        level = new Level("maps/map1.png");
     }
 
     /**
@@ -118,5 +129,8 @@ public class GameScreen extends ScreenAdapter {
 
     public void dispose() {
         super.dispose();
+        layerRenderer.dispose();
+        atlas.dispose();
+        level.dispose();
     }
 }

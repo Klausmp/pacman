@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.utils.Layers;
 
 /**
@@ -17,10 +18,10 @@ import de.klausmp.pacman.utils.Layers;
  * zu rendernen elemente hinzugefügt.
  *
  * @author Klausmp
- * @version 0.7.4
+ * @version 0.8.0
  * @since 0.0.1
  */
-public class LayerRenderer {
+public class LayerRenderer implements Disposable {
 
     /**
      * mit dem sprite batch werden die sprites auf den screen gezeichnet
@@ -182,5 +183,13 @@ public class LayerRenderer {
 
     public SpriteBatch getBatch() {
         return batch;
+    }
+
+    /**
+     * @since 0.8.0
+     */
+    @Override
+    public void dispose() {
+       batch.dispose();
     }
 }

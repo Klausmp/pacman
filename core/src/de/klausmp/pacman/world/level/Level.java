@@ -1,20 +1,23 @@
 package de.klausmp.pacman.world.level;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
+import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.world.MapInterpreter;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * stellt alle grundmethoden des level zu ferfügung. <br>
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.0.1
+ * @version 0.8.0
  * @since 0.0.1
  */
-public abstract class Level implements Runnable {
+public class Level implements Runnable, Disposable {
 
     /**
      * instance von {@link PacMan pacMan} in einem {@link Level level}.
@@ -53,6 +56,19 @@ public abstract class Level implements Runnable {
     protected String mapPath;
 
     protected boolean mapLoaded = false;
+
+    /**
+     * erstellt ein level mit einem grid welches
+     * nicht erst beim erstellen geladen wird.
+     * es kann ein schon vorgeladenes grid verwendet werden.
+     *
+     * @param grid grid welches bespielt werden soll (muss schon Objecte enthalten)
+     * @since 0.8.0
+     */
+    public Level(Grid grid) {
+        this.grid = grid;
+        mapLoaded = true;
+    }
 
     /**
      * konstruktor mit default einstellungen
@@ -150,5 +166,15 @@ public abstract class Level implements Runnable {
     public void run() {
         grid = MapInterpreter.loadMap(mapPath);
         mapLoaded = true;
+    }
+
+    @Override
+    public void dispose() {
+        pacMan.dispose();
+        for (GridTile gridTile : grid.getGridTiles()) {
+            for (GameObject gameObject : gridTile.getGameObjects()) {
+                gameObject.dispose();
+            }
+        }
     }
 }

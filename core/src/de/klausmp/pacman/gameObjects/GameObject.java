@@ -3,6 +3,7 @@ package de.klausmp.pacman.gameObjects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
@@ -20,12 +21,12 @@ import de.klausmp.pacman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.6.0
+ * @version 0.8.0
  * @see Sprite
  * @since 0.0.1
  */
 
-public abstract class GameObject extends Sprite {
+public abstract class GameObject extends Sprite implements Disposable {
 
     /**
      * typ des gameObjekts.
@@ -198,5 +199,13 @@ public abstract class GameObject extends Sprite {
 
     public Grid getGrid() {
         return currendGridTile.getGrid();
+    }
+
+    /**
+     * @since 0.8.0
+     */
+    @Override
+    public void dispose() {
+
     }
 }
