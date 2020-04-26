@@ -16,7 +16,7 @@ import de.klausmp.pacman.utils.Layers;
  * und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.7.4
+ * @version 0.8.1
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
@@ -124,7 +124,9 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         super.render(delta);
         update(delta);
         level.render(layerRenderer);
-        layerRenderer.render();
+        if (level.isMapLoaded()) {
+            layerRenderer.render();
+        }
     }
 
     public void dispose() {

@@ -16,13 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.klausmp.pacman.Main;
-import de.klausmp.pacman.world.MapInterpreter;
 
 /**
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.8.0
+ * @version 0.8.1
  * @since 0.8.0
  */
 public class MainMenue extends ScreenAdapter {
@@ -58,7 +57,7 @@ public class MainMenue extends ScreenAdapter {
         TextButton start_new_game = new TextButton("Start New Game", buttonStyle);
         start_new_game.setWidth(150);
         start_new_game.setHeight(30);
-        start_new_game.setPosition((viewport.getWorldWidth() / 2) - (start_new_game.getWidth() / 2),  100);
+        start_new_game.setPosition((viewport.getWorldWidth() / 2) - (start_new_game.getWidth() / 2),  130);
         start_new_game.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -70,7 +69,7 @@ public class MainMenue extends ScreenAdapter {
         TextButton credits = new TextButton("Credits", buttonStyle);
         credits.setWidth(100);
         credits.setHeight(30);
-        credits.setPosition((viewport.getWorldWidth() / 2) - (credits.getWidth() / 2),  130);
+        credits.setPosition((viewport.getWorldWidth() / 2) - (credits.getWidth() / 2),  100);
         credits.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -128,5 +127,4 @@ public class MainMenue extends ScreenAdapter {
         pacManText.dispose();
         stage.dispose();
     }
-
 }

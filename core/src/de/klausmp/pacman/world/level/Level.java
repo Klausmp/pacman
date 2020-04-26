@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.8.0
+ * @version 0.8.1
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
@@ -58,47 +58,12 @@ public class Level implements Runnable, Disposable {
     protected boolean mapLoaded = false;
 
     /**
-     * erstellt ein level mit einem grid welches
-     * nicht erst beim erstellen geladen wird.
-     * es kann ein schon vorgeladenes grid verwendet werden.
-     *
-     * @param grid grid welches bespielt werden soll (muss schon Objecte enthalten)
-     * @since 0.8.0
-     */
-    public Level(Grid grid) {
-        this.grid = grid;
-        mapLoaded = true;
-    }
-
-    /**
      * konstruktor mit default einstellungen
      *
      * @since 0.0.1
      */
     public Level(String mapPath) {
-        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(0, 0), mapPath);
-    }
-
-    /**
-     * konstruktor mit einstellungsmöglichkeit der {@link #gridSize gridSize}
-     * und der {@link #gridPosition gridposition}.
-     *
-     * @param gridSize     {@link #gridSize siehe gridSize}
-     * @param gridPosition {@link #gridPosition siehe gridPosition}
-     * @since 0.0.1
-     */
-    public Level(Vector2 gridSize, Vector2 gridPosition, String mapPath) {
-        create(gridSize, gridPosition, mapPath);
-    }
-
-    /**
-     * konstruktor mit einstellungsmöglichkeit der {@link #gridSize}.
-     *
-     * @param gridSize {@link #gridSize siehe gridSize}
-     * @since 0.0.1
-     */
-    public Level(Vector2 gridSize, String mapPath) {
-        create(gridSize, new Vector2(0, 0), mapPath);
+        create(new Vector2(Grid.getDEFAULTGRIDSIZE(), Grid.getDEFAULTGRIDSIZE()), new Vector2(0, 0), mapPath);
     }
 
     /**
@@ -109,7 +74,7 @@ public class Level implements Runnable, Disposable {
      * @since 0.0.1
      */
     public Level(int gridPosX, int gridPosY, String mapPath) {
-        create(new Vector2(grid.getDEFAULTGRIDSIZE(), grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY), mapPath);
+        create(new Vector2(Grid.getDEFAULTGRIDSIZE(), Grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY), mapPath);
     }
 
     /**
@@ -118,7 +83,6 @@ public class Level implements Runnable, Disposable {
      *
      * @param gridSize     {@link #gridSize siehe gridSize}
      * @param gridPosition {@link #gridPosition siehe gridPosition}.
-     * @version 0.7.3
      * @since 0.0.1
      */
     public void create(Vector2 gridSize, Vector2 gridPosition, String mapPath) {
@@ -153,19 +117,20 @@ public class Level implements Runnable, Disposable {
         if (mapLoaded) {
             grid.update(deltaTime);
         }
-
     }
 
     /**
      * TODO JAVA DOC
-     *
-     * @version 0.7.3
      * @since 0.7.3
      */
     @Override
     public void run() {
         grid = MapInterpreter.loadMap(mapPath);
         mapLoaded = true;
+    }
+
+    public boolean isMapLoaded() {
+        return mapLoaded;
     }
 
     @Override
