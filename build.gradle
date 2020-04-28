@@ -1,6 +1,4 @@
 buildscript {
-    
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -10,14 +8,12 @@ buildscript {
         google()
     }
     dependencies {
-        
-
     }
 }
 
 allprojects {
 
-    version = '0.8.1'
+    version = '0.9.0'
     ext {
         appName = "pacman"
         gdxVersion = '1.9.10'
@@ -40,7 +36,6 @@ allprojects {
 project(":desktop") {
     apply plugin: "java-library"
 
-
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
@@ -52,13 +47,11 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"
         api "de.tomgrill.gdxfacebook:gdx-facebook-desktop:1.4.1"
         api "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.5"
-        
     }
 }
 
 project(":core") {
     apply plugin: "java-library"
-
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -79,6 +72,5 @@ project(":core") {
         api "com.github.czyzby:gdx-kiwi:1.9.1.9.6"
         api "com.github.czyzby:gdx-lml:1.9.1.9.6"
         api "com.github.czyzby:gdx-lml-vis:1.9.1.9.6"
-        
     }
 }
