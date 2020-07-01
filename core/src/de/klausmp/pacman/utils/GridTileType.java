@@ -9,7 +9,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * type {@link GridTile gridTiles} an,
  *
  * @author Klausmp
- * @version 0.1.3
+ * @version 0.9.1
  * @since 0.1.3
  */
 public enum GridTileType {
@@ -21,7 +21,7 @@ public enum GridTileType {
      *
      * @since 0.1.3
      */
-    WALL,
+    WALL(1),
 
     /**
      * {@link GridTile gridTile} welches kein
@@ -29,7 +29,7 @@ public enum GridTileType {
      *
      * @since 0.1.3
      */
-    EMTY,
+    EMTY(0),
 
     /**
      * {@link GridTile gridTile} welches von {@link PacMan pacMan}
@@ -37,5 +37,27 @@ public enum GridTileType {
      *
      * @since 0.1.3
      */
-    ROAD
+    ROAD(2);
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.1
+     */
+    private int type;
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.1
+     */
+    GridTileType(int type) {
+        this.type = type;
+    }
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.1
+     */
+    public int getType() {
+        return type;
+    }
 }
