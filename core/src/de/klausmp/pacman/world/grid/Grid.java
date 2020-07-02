@@ -3,6 +3,7 @@ package de.klausmp.pacman.world.grid;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 
@@ -55,6 +56,18 @@ public class Grid {
      */
     private static Vector2 gridTileSize = new Vector2(16, 16);
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.1
+     */
+    private PacMan pacMan;
+
+    /**
+     * @since 0.9.2
+     */
+    private boolean pacManFund = false;
+
     public Grid() {
         create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
     }
@@ -104,7 +117,7 @@ public class Grid {
         this.size = size;
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
-                gridTiles.add(new GridTile(new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
+                gridTiles.add(new GridTile(GridTileType.WALL, new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
             }
         }
     }
@@ -115,8 +128,8 @@ public class Grid {
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        for (GridTile gridTile : gridTiles) {
-            gridTile.update(deltaTime);
+        for (int i = 0; i < gridTiles.size; i++) {
+            gridTiles.get(i).update(deltaTime);
         }
     }
 
@@ -186,6 +199,9 @@ public class Grid {
         if (gridTile != null) {
             switch (gameObject.getGameObjectType()) {
                 case DOT:
+                    gridTile.setGridTileType(GridTileType.ROAD);
+                    break;
+                case BIGDOT:
                     gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case WALL:
@@ -321,5 +337,41 @@ public class Grid {
 
     public static Vector2 getGridTileSize() {
         return gridTileSize;
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.1
+     * @return
+     */
+    public PacMan getPacMan() {
+        if (pacManFund) {
+            return this.pacMan;
+        }
+        for (GridTile gridTile: getGridTiles()) {
+            for (GameObject gameObject: gridTile.getGameObjects()) {
+                if (gameObject instanceof PacMan) {
+                    this.pacMan = (PacMan) gameObject;
+                    pacManFund = true;
+                    return (PacMan) gameObject;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void setPacMan(PacMan pacMan) {
+        this.pacMan = pacMan;
+    }
+    
+    public void print() {
+        for (int x = 0; x < gridTileSize.x; x++) {
+            for (int y = 0; y < gridTileSize.y; y++) {
+                getGridTile(x,y).print();
+                System.out.print(", ");
+            }
+            System.out.println();
+        }
     }
 }

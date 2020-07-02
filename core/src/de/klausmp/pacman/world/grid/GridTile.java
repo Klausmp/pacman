@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.4.4
+ * @version 0.9.2
  * @since 0.0.1
  */
 public class GridTile {
@@ -264,5 +264,9 @@ public class GridTile {
 
     public Grid getGrid() {
         return grid;
+    }
+
+    public void print() {
+        System.out.print(gridTileType.getType());
     }
 }

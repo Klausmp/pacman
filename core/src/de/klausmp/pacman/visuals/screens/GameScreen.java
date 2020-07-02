@@ -5,7 +5,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.Main;
-import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.level.Level;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.utils.Layers;
@@ -65,18 +64,6 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         create();
     }
 
-    /**
-     * TODO JAVA DOc
-     *
-     * @param grid
-     * @since 0.8.0
-     */
-    public GameScreen(Grid grid) {
-        layerRenderer = new LayerRenderer(Layers.DEFAULTLAYERORDER());
-        atlas = new TextureAtlas("spriteSheed.atlas");
-        level = new Level("maps/map1.png");
-    }
-
     public static LayerRenderer getLayerRenderer() {
         return layerRenderer;
     }
@@ -130,9 +117,9 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     }
 
     public void dispose() {
-        super.dispose();
-        layerRenderer.dispose();
-        atlas.dispose();
-        level.dispose();
+        //super.dispose();
+        //layerRenderer.dispose();
+        //atlas.dispose();
+        //level.dispose();
     }
 }

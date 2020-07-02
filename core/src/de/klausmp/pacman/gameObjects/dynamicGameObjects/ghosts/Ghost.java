@@ -3,6 +3,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.world.Path;
 import de.klausmp.pacman.utils.GameObjectType;
@@ -15,12 +16,19 @@ import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.7.4
- * @since 0.6.0
+ * @version 0.9.2
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @see java.lang.Runnable
+ * @since 0.6.0
  */
-public class Ghost extends DynamicGameObject implements Runnable {
+public abstract class Ghost extends DynamicGameObject {
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.1
+     */
+    protected GridTile targed;
 
     /**
      * TODO JAVA DOC
@@ -28,7 +36,7 @@ public class Ghost extends DynamicGameObject implements Runnable {
      * @version 0.6.0
      * @since 0.6.0
      */
-    private Path currentPath;
+    protected Path path;
 
     /**
      * TODO JAVA DOC
@@ -36,7 +44,7 @@ public class Ghost extends DynamicGameObject implements Runnable {
      * @version 0.6.0
      * @since 0.6.0
      */
-    private Path nextPath;
+    protected Timer newPathTimer;
 
     /**
      * TODO JAVA DOC
@@ -44,15 +52,9 @@ public class Ghost extends DynamicGameObject implements Runnable {
      * @version 0.6.0
      * @since 0.6.0
      */
-    private Timer newPathTimer;
+    protected boolean changePath = false;
 
-    /**
-     * TODO JAVA DOC
-     *
-     * @version 0.6.0
-     * @since 0.6.0
-     */
-    private boolean changePath = false;
+    protected boolean firstFrame = true;
 
     /**
      * konstruktor mit allen nötien einstellungen.
@@ -69,6 +71,9 @@ public class Ghost extends DynamicGameObject implements Runnable {
      */
     public Ghost(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+        //nextGridTile = currendGridTile;
+        path = new Path(getGrid());
+        newPathTimer = new Timer(3000);
     }
 
     /**
@@ -77,36 +82,55 @@ public class Ghost extends DynamicGameObject implements Runnable {
      */
     @Override
     public void update(float deltaTime) {
+        if (newPathTimer.isExpired()) {
+            newPathTimer.start();
+            setTarged();
+            path.newPath(currendGridTile, targed);
+        }
         super.update(deltaTime);
-        if (newPathTimer.isExpired()){
-            Thread thread = new Thread(this);
-            thread.start();
-        }
-        if (changePath){
-            changePath = false;
-            currentPath.setPath(nextPath.getPath());
-        }
+    }
+
+    @Override
+    public void render(LayerRenderer renderer) {
+        super.render(renderer);
     }
 
     @Override
     protected void movement(float deltaTime) {
-        findNextGridTile(Rotation.DOWN);
+        if (path.isPathLoaded()) {
+            if (currendGridTile == null) {
+                System.out.println("current");
+                currendGridTile = getGrid().getGridTile((int) getX(), (int) getY());
+            }
+            if (nextGridTile == null) {
+                System.out.println("next");
+            }
+            if (currendGridTile.equals(nextGridTile)) {
+                currendGridTile = path.getNext();
+            }
+        }
+        findNextGridTile(getObjectRotation());
         super.movement(deltaTime);
     }
 
     @Override
     protected void findNextGridTile(Rotation nextRotation) {
+        if (currendGridTile.getPosition().x >= nextGridTile.getPosition().x) {
+            nextRotation = Rotation.LEFT;
+        }
+        if (currendGridTile.getPosition().x <= nextGridTile.getPosition().x) {
+            nextRotation = Rotation.RIGHT;
+        }
+
+        if (currendGridTile.getPosition().y >= nextGridTile.getPosition().y) {
+            nextRotation = Rotation.DOWN;
+        }
+
+        if (currendGridTile.getPosition().y <= nextGridTile.getPosition().y) {
+            nextRotation = Rotation.UP;
+        }
         super.findNextGridTile(nextRotation);
     }
 
-    /**
-     * @version 0.6.0
-     * @since 0.6.0
-     */
-    @Override
-    public void run() {
-
-        //IMMER ALS LETZTES
-        changePath = true;
-    }
+    public abstract void setTarged();
 }

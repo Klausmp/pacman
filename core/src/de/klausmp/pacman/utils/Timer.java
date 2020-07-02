@@ -8,7 +8,7 @@ package de.klausmp.pacman.utils;
 public class Timer {
 
     /**
-     * TODO JAVA DOC
+     * dTODO JAVA DOC
      *
      * @since 0.4.1
      */

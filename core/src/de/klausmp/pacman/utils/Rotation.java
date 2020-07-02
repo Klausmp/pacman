@@ -4,7 +4,7 @@ package de.klausmp.pacman.utils;
  * zeigt die rotation an.
  *
  * @author Klausmp
- * @version 0.4.2
+ * @version 0.9.2
  * @since 0.1.0
  */
 public enum Rotation {
@@ -73,11 +73,11 @@ public enum Rotation {
             case 0:
                 return UP;
             case 1:
-                return RIGHT;
+                return LEFT;
             case 2:
                 return DOWN;
             case 3:
-                return LEFT;
+                return RIGHT;
             default:
                 return DEFAULTROTATION;
         }

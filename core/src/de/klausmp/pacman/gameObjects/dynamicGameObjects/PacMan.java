@@ -15,7 +15,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.8.0
+ * @version 0.9.2
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -26,7 +26,7 @@ public class PacMan extends DynamicGameObject {
      *
      * @since 0.4.2
      */
-    private Rotation lastInput;
+    //private Rotation lastInput;
 
     /**
      * TODO JAVA DOC
@@ -38,7 +38,7 @@ public class PacMan extends DynamicGameObject {
      */
     public PacMan(Vector2 position, GridTile gridTile) {
         super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile);
-        lastInput = getObjectRotation();
+        //lastInput = getObjectRotation();
         String[] idleAnimationFrames = {"pacMan0", "pacMan1", "pacMan2"};
         idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
         nextGridTile = currendGridTile;
@@ -57,6 +57,7 @@ public class PacMan extends DynamicGameObject {
      */
     @Override
     protected void findNextGridTile(Rotation nextRotation) {
+        Rotation lastInput = getObjectRotation();
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             lastInput = Rotation.UP;
         }
@@ -71,6 +72,7 @@ public class PacMan extends DynamicGameObject {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             lastInput = Rotation.LEFT;
+
         }
 
         if (!isMoving) {

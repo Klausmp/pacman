@@ -2,6 +2,7 @@ package de.klausmp.pacman.world;
 
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.staticGameObjects.BigDot;
 import de.klausmp.pacman.gameObjects.staticGameObjects.Dot;
 import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
@@ -24,7 +25,7 @@ import java.io.IOException;
  * #BigFood RGB 100 255 0
  *
  * @author Klausmp
- * @versiom 0.7.3
+ * @versiom 0.9.2
  * @since 0.7.0
  */
 //TODO Texture interpreter der aus verschiedenen farben auf einem png oder so das level aufbaut.
@@ -40,7 +41,7 @@ public abstract class MapInterpreter {
      */
     //TODO Etferne Statischen pfad
     public static Grid loadMap(String mapPath) {
-        File file = new File("/home/klausmp/dev/java/projekte/pacman/core/assets/maps/map1.png");
+        File file = new File(mapPath);
         BufferedImage map = null;
         try {
             map = ImageIO.read(file);
@@ -51,7 +52,7 @@ public abstract class MapInterpreter {
         result.setSize(new Vector2(map.getWidth(), map.getHeight()));
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
-                int color = map.getRGB(x, y);
+                int color = map.getRGB(map.getWidth() - x - 1, y);
                 int r = (color & 0x00ff0000) >> 16;
                 int g = (color & 0x0000ff00) >> 8;
                 int b = color & 0x000000ff;
@@ -73,7 +74,7 @@ public abstract class MapInterpreter {
                         result.addToGridTile(new BigDot(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
                     case GHOST:
-                        //System.out.println("PALTZHALTER");
+                        result.addToGridTile(new Blinky(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
                     case PACMAN:
                         result.addToGridTile(new PacMan(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);

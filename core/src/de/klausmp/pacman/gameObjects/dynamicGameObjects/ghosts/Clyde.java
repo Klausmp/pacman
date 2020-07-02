@@ -11,7 +11,7 @@ import de.klausmp.pacman.utils.Rotation;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.6.0
+ * @version 0.9.2
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost
  * @since 0.6.0
  */
@@ -31,6 +31,11 @@ public class Clyde extends Ghost {
      */
     public Clyde(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+    }
+
+    @Override
+    public void setTarged() {
+
     }
 
 

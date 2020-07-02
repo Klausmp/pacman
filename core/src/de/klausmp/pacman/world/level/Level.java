@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.8.1
+ * @version 0.9.2
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
@@ -54,6 +54,13 @@ public class Level implements Runnable, Disposable {
      * @since 0.7.3
      */
     protected String mapPath;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.2
+     */
+    protected boolean pacManFund = false;
 
     protected boolean mapLoaded = false;
 
@@ -115,12 +122,17 @@ public class Level implements Runnable, Disposable {
      */
     public void update(float deltaTime) {
         if (mapLoaded) {
+            if (pacManFund = false) {
+                pacMan = grid.getPacMan();
+                pacManFund = true;
+            }
             grid.update(deltaTime);
         }
     }
 
     /**
      * TODO JAVA DOC
+     *
      * @since 0.7.3
      */
     @Override
@@ -135,11 +147,19 @@ public class Level implements Runnable, Disposable {
 
     @Override
     public void dispose() {
-        pacMan.dispose();
+        //pacMan.dispose();
         for (GridTile gridTile : grid.getGridTiles()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
-                gameObject.dispose();
+                //gameObject.dispose();
             }
         }
+    }
+
+    public PacMan getPacMan() {
+        return pacMan;
+    }
+
+    public void print() {
+        grid.print();
     }
 }

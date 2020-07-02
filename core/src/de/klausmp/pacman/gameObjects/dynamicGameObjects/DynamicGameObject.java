@@ -23,7 +23,7 @@ import de.klausmp.pacman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.8.0
+ * @version 0.9.2
  * @see GameObject
  * @since 0.1.0
  */
@@ -83,7 +83,9 @@ public abstract class DynamicGameObject extends GameObject {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        movement(deltaTime);
+        if (nextGridTile != null) {
+            movement(deltaTime);
+        }
     }
 
     /**
@@ -256,6 +258,7 @@ public abstract class DynamicGameObject extends GameObject {
 
     /**
      * TODO JAVA DOC
+     *
      * @since 0.8.0
      */
     @Override

@@ -29,11 +29,11 @@ public enum GameObjectType {
      */
     PACMAN(255, 0, 0),
     /**
-     * @version 0.7.0
+     * @version 0.9.2
      * @see Ghost
      * @since 0.0.1
      */
-    GHOST(0, 0, 0),
+    GHOST(50, 50, 50),
     /**
      * @version 0.7.0
      * @see Dot

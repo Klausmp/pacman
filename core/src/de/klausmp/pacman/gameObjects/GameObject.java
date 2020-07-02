@@ -21,7 +21,7 @@ import de.klausmp.pacman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.8.0
+ * @version 0.9.2
  * @see Sprite
  * @since 0.0.1
  */
@@ -162,6 +162,7 @@ public abstract class GameObject extends Sprite implements Disposable {
      */
     public void kill() {
         alive = false;
+        currendGridTile.removeGameObject(this);
     }
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {

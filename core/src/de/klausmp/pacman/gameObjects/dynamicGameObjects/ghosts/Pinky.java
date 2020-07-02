@@ -8,6 +8,8 @@ import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 
 /**
+ * @version 0.9.2
+ * @since 0.6.0
  * @author Klausmp
  */
 public class Pinky extends Ghost {
@@ -26,5 +28,10 @@ public class Pinky extends Ghost {
      */
     public Pinky(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+    }
+
+    @Override
+    public void setTarged() {
+
     }
 }

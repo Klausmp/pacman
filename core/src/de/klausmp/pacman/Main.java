@@ -2,7 +2,6 @@ package de.klausmp.pacman;
 
 import com.badlogic.gdx.*;
 import de.klausmp.pacman.visuals.screens.GameScreen;
-import de.klausmp.pacman.visuals.screens.MainMenue;
 
 //TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
 //TODO v 0.2.0 walls mit automatischer wall bildung         (fertig)
@@ -24,7 +23,7 @@ import de.klausmp.pacman.visuals.screens.MainMenue;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.9.0
+ * @version 0.9.2
  * @see Game
  * @since 0.0.1
  */
