@@ -3,14 +3,13 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.world.grid.Grid;
-import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
-import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.renderer.Layer;
+import de.klausmp.pacman.world.grid.Grid;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * dynamisches {@link GameObject gameObjekt}. <br>
@@ -23,7 +22,7 @@ import de.klausmp.pacman.visuals.renderer.Layer;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.3
  * @see GameObject
  * @since 0.1.0
  */
@@ -53,14 +52,6 @@ public abstract class DynamicGameObject extends GameObject {
     protected boolean isMoving = false;
 
     /**
-     * TODO JAVA DOC
-     *
-     * @since 0.4.2
-     */
-    protected Rotation lastRotation;
-
-
-    /**
      * konstruktor mit allen nötien einstellungen.
      *
      * @param region          {@link TextureRegion textur} mit welcher das {@link GameObject gameObject} am start versehen wird.
@@ -83,43 +74,19 @@ public abstract class DynamicGameObject extends GameObject {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if (nextGridTile != null) {
-            movement(deltaTime);
-        }
+        movement(deltaTime);
     }
 
     /**
      * hier geschieht das movement des {@link GameObject gameObjekts} in jedem tick.
+     *
      * @version 0.6.0
      * @since 0.1.0
      */
     protected void movement(float deltaTime) {
-        moveToNextGridTile(deltaTime);
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @param nextRotation
-     * @version 0.6.0
-     * @since 0.6.0
-     */
-    protected void findNextGridTile(Rotation nextRotation) {
-        if (currendGridTile.equals(nextGridTile) && !isMoving) {
-            switch (nextRotation) {
-                case RIGHT:
-                    moveRight();
-                    break;
-                case LEFT:
-                    moveLeft();
-                    break;
-                case DOWN:
-                    moveDown();
-                    break;
-                case UP:
-                    moveUp();
-                    break;
-            }
+        findNextGridTile();
+        if (nextGridTile != null) {
+            moveToNextGridTile(deltaTime);
         }
     }
 
@@ -130,7 +97,7 @@ public abstract class DynamicGameObject extends GameObject {
      */
     public void moveToNextGridTile(float delataTime) {
         Vector2 pixelPositionFromNextGridTile = Grid.convertToPixelPosition(nextGridTile.getPosition());
-        switch (getObjectRotation()) {
+        switch (nextGridTileRotation()) {
             case UP:
                 if (pixelPositionFromNextGridTile.y >= getY()) {
                     setY(getY() + (movementSpeed * delataTime));
@@ -181,51 +148,20 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     /**
-     * TODO JAVADC
+     * TODO JAVA DOC
      *
-     * @since 0.3.0
+     * @return
+     * @throws NullPointerException
+     * @since 0.9.3
      */
-    protected void moveUp() {
-        if (currendGridTile.getUpperTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTile = currendGridTile.getUpperTile();
-            changeRotation(getObjectRotation());
+    private Rotation nextGridTileRotation() throws NullPointerException {
+        GridTile[] sorroundingds = currendGridTile.getSurroundingGridTiles();
+        for (int i = 0; i < 4; i++) {
+            if (nextGridTile.equals(sorroundingds[i])) {
+                return Rotation.getRotationFromInt(i);
+            }
         }
-    }
-
-    /**
-     * TODO JAVADC
-     *
-     * @since 0.3.0
-     */
-    protected void moveRight() {
-        if (currendGridTile.getRightGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTile = currendGridTile.getRightGridTile();
-            changeRotation(getObjectRotation());
-        }
-    }
-
-    /**
-     * TODO JAVADC
-     *
-     * @since 0.3.0
-     */
-    protected void moveDown() {
-        if (currendGridTile.getLowerTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTile = currendGridTile.getLowerTile();
-            changeRotation(getObjectRotation());
-        }
-    }
-
-    /**
-     * TODO JAVADC
-     *
-     * @since 0.3.0
-     */
-    protected void moveLeft() {
-        if (currendGridTile.getLeftGridTile().getGridTileType() == GridTileType.ROAD && !isMoving) {
-            nextGridTile = currendGridTile.getLeftGridTile();
-            changeRotation(getObjectRotation());
-        }
+        return Rotation.UP;
     }
 
     /**
@@ -240,21 +176,28 @@ public abstract class DynamicGameObject extends GameObject {
         setRotation(rotation.getInt() * 90);
     }
 
-    /**
-     * TODO JAVA DOC
-     *
-     * @param rotation
-     * @since 0.4.2
-     */
-    @Override
-    public void setObjectRotation(Rotation rotation) {
-        this.lastRotation = getObjectRotation();
-        super.setObjectRotation(rotation);
-    }
-
     public GridTile getNextGridTile() {
         return nextGridTile;
     }
+
+    /**
+     * @param nextGridTile
+     * @since 0.9.3
+     */
+    public void setNextGridTile(GridTile nextGridTile) {
+        GridTile[] sorroundings = currendGridTile.getSurroundingGridTiles();
+        for (int i = 0; i < 4; i++) {
+            if (sorroundings[i] == nextGridTile) {
+                setObjectRotation(Rotation.getRotationFromInt(i));
+            }
+        }
+        this.nextGridTile = nextGridTile;
+    }
+
+    /**
+     * @since 0.9.3
+     */
+    protected abstract void findNextGridTile();
 
     /**
      * TODO JAVA DOC

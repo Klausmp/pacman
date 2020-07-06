@@ -1,6 +1,9 @@
 package de.klausmp.pacman;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 
 //TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
@@ -12,6 +15,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 //TODO v 0.7.0 map interpreter                              (fertig)
 //TODO v 0.8.0 menue + intro                                (fertig)
 //TODO v 0.9.0 geister ki                                   (in arbeit)
+//TODO v 0.9.3 neues movement                               (in arbeit (priorisiert))
 //TODO v 0.10.0 teleporter
 //TODO v 0.11.0 HUD
 //TODO v 0.12.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
@@ -23,7 +27,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.3
  * @see Game
  * @since 0.0.1
  */

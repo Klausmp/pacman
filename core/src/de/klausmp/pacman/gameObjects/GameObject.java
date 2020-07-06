@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
-import de.klausmp.pacman.world.grid.Grid;
-import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
+import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
-import de.klausmp.pacman.utils.Layers;
+import de.klausmp.pacman.world.grid.Grid;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * diese klasse ist der ursprung aller objekte die im spiel vorhanden sind. <br>
@@ -21,7 +21,7 @@ import de.klausmp.pacman.utils.Layers;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.3
  * @see Sprite
  * @since 0.0.1
  */
@@ -162,7 +162,6 @@ public abstract class GameObject extends Sprite implements Disposable {
      */
     public void kill() {
         alive = false;
-        currendGridTile.removeGameObject(this);
     }
 
     public void setRenderElement(LayerRendererQueQueElement renderElement) {
@@ -176,6 +175,7 @@ public abstract class GameObject extends Sprite implements Disposable {
 
     public void setObjectRotation(Rotation rotation) {
         this.rotation = rotation;
+        setRotation(rotation.getInt() * 90);
     }
 
     public GridTile getCurrendGridTile() {

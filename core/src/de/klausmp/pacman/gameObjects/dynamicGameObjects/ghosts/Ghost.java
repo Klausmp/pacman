@@ -2,21 +2,23 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
-import de.klausmp.pacman.visuals.renderer.LayerRenderer;
-import de.klausmp.pacman.world.grid.GridTile;
-import de.klausmp.pacman.world.Path;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.utils.Timer;
+import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
+import de.klausmp.pacman.world.Path;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.3
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @see java.lang.Runnable
  * @since 0.6.0
@@ -44,7 +46,7 @@ public abstract class Ghost extends DynamicGameObject {
      * @version 0.6.0
      * @since 0.6.0
      */
-    protected Timer newPathTimer;
+    protected Timer pathTimer;
 
     /**
      * TODO JAVA DOC
@@ -71,9 +73,8 @@ public abstract class Ghost extends DynamicGameObject {
      */
     public Ghost(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
-        //nextGridTile = currendGridTile;
         path = new Path(getGrid());
-        newPathTimer = new Timer(3000);
+        pathTimer = new Timer(1000);
     }
 
     /**
@@ -82,12 +83,26 @@ public abstract class Ghost extends DynamicGameObject {
      */
     @Override
     public void update(float deltaTime) {
-        if (newPathTimer.isExpired()) {
-            newPathTimer.start();
+        if (pathTimer.isExpired()) {
+            pathTimer.start();
             setTarged();
             path.newPath(currendGridTile, targed);
         }
+        if (path.getRemainingLenght() <= 2) {
+            pathTimer.start();
+            setTarged();
+            path.newPath(currendGridTile, targed);
+        }
+        killPacMan();
         super.update(deltaTime);
+    }
+
+    private void killPacMan() {
+        for (GameObject gameObject : currendGridTile.getGameObjects()) {
+            if (gameObject instanceof PacMan) {
+                gameObject.kill();
+            }
+        }
     }
 
     @Override
@@ -96,40 +111,21 @@ public abstract class Ghost extends DynamicGameObject {
     }
 
     @Override
-    protected void movement(float deltaTime) {
+    protected void findNextGridTile() {
         if (path.isPathLoaded()) {
-            if (currendGridTile == null) {
-                System.out.println("current");
-                currendGridTile = getGrid().getGridTile((int) getX(), (int) getY());
-            }
             if (nextGridTile == null) {
-                System.out.println("next");
+                setNextGridTile(path.getNext());
+            }
+            try {
+                while (path.peak().equals(currendGridTile) || path.peak().equals(nextGridTile)) {
+                    path.getNext();
+                }
+            } catch (Exception e) {
             }
             if (currendGridTile.equals(nextGridTile)) {
-                currendGridTile = path.getNext();
+                setNextGridTile(path.getNext());
             }
         }
-        findNextGridTile(getObjectRotation());
-        super.movement(deltaTime);
-    }
-
-    @Override
-    protected void findNextGridTile(Rotation nextRotation) {
-        if (currendGridTile.getPosition().x >= nextGridTile.getPosition().x) {
-            nextRotation = Rotation.LEFT;
-        }
-        if (currendGridTile.getPosition().x <= nextGridTile.getPosition().x) {
-            nextRotation = Rotation.RIGHT;
-        }
-
-        if (currendGridTile.getPosition().y >= nextGridTile.getPosition().y) {
-            nextRotation = Rotation.DOWN;
-        }
-
-        if (currendGridTile.getPosition().y <= nextGridTile.getPosition().y) {
-            nextRotation = Rotation.UP;
-        }
-        super.findNextGridTile(nextRotation);
     }
 
     public abstract void setTarged();

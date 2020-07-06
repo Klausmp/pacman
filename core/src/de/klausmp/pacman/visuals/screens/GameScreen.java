@@ -5,9 +5,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.Main;
-import de.klausmp.pacman.world.level.Level;
-import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.utils.Layers;
+import de.klausmp.pacman.visuals.renderer.LayerRenderer;
+import de.klausmp.pacman.world.level.Level;
 
 /**
  * screen in dem das spiel statfindt.
@@ -15,7 +15,7 @@ import de.klausmp.pacman.utils.Layers;
  * und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.8.1
+ * @version 0.9.3
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
@@ -96,7 +96,9 @@ public class GameScreen extends ScreenAdapter implements Disposable {
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        level.update(deltaTime);
+        if (level.isMapLoaded()) {
+            level.update(deltaTime);
+        }
     }
 
     /**

@@ -3,12 +3,12 @@ package de.klausmp.pacman.gameObjects.staticGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * wände im spiel.
@@ -40,7 +40,7 @@ public class Wall extends StaticGameObjekt {
      * @since 0.1.4
      */
     public void setTexture(TextureAtlas atlas) {
-        GridTileType[] surroundings = currendGridTile.getSurroundings();
+        GridTileType[] surroundings = currendGridTile.getSurroundingGridTileTypes();
         for (int i = 0; i <= 3; i++) {
             if (surroundings[Rotation.UP.getInt()] == GridTileType.WALL && surroundings[Rotation.RIGHT.getInt()] == GridTileType.WALL && surroundings[Rotation.DOWN.getInt()] == GridTileType.WALL && surroundings[Rotation.LEFT.getInt()] == GridTileType.WALL) {
                 setRegion(atlas.findRegion("wallBigCrossing"));

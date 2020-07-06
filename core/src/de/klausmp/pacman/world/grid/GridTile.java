@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.3
  * @since 0.0.1
  */
 public class GridTile {
@@ -24,7 +24,7 @@ public class GridTile {
      *
      * @since 0.0.1
      */
-    private Vector2 position;
+    private final Vector2 position;
 
     /**
      * gitb den {@link GridTileType type} des {@link GridTile gridTiles} an.
@@ -38,14 +38,14 @@ public class GridTile {
      *
      * @since 0.0.1
      */
-    private Grid grid;
+    private final Grid grid;
 
     /**
      * liste indem alle {@link GameObject gameObjete} dieses {@link GridTile gridTiles} gespeichert sind.
      *
      * @since 0.0.1
      */
-    private Array<GameObject> gameObjects = new Array<GameObject>();
+    private final Array<GameObject> gameObjects = new Array<GameObject>();
 
     /**
      * konstructor mit einstellung der {@link #position position} und setzung des {@link #grid grids} von dem
@@ -150,12 +150,28 @@ public class GridTile {
     }
 
     /**
+     * dreht ein array von {@link GridTileType gridTileTypen} im uhrzeigersinn um 90°.
+     *
+     * @param suroundings array der umliegenden {@link GridTileType gridTileTypen} eines {@link GridTile gridTiles}.
+     * @return {@link GridTile#getSurroundingGridTileTypes() surrundings} werden um 90° im uhrzeigersinn gedreht.
+     * @since 0.1.4
+     */
+    public static GridTileType[] rotateSuroundings(GridTileType[] suroundings) {
+        GridTileType[] result = new GridTileType[4];
+        result[Rotation.UP.getInt()] = suroundings[Rotation.LEFT.getInt()];
+        result[Rotation.RIGHT.getInt()] = suroundings[Rotation.UP.getInt()];
+        result[Rotation.DOWN.getInt()] = suroundings[Rotation.RIGHT.getInt()];
+        result[Rotation.LEFT.getInt()] = suroundings[Rotation.DOWN.getInt()];
+        return result;
+    }
+
+    /**
      * gibt die {@link GridTileType gridTileTypen} aller umliegenden {@link GridTile gridTiles} zurrück.
      *
      * @return {@link GridTileType gridTileTypen} der umliegenden {@link GridTile gridTiles}
      * @since 0.1.4
      */
-    public GridTileType[] getSurroundings() {
+    public GridTileType[] getSurroundingGridTileTypes() {
         GridTileType[] result = new GridTileType[4];
         result[Rotation.UP.getInt()] = getUpperTile().getGridTileType();
         result[Rotation.RIGHT.getInt()] = getRightGridTile().getGridTileType();
@@ -165,18 +181,17 @@ public class GridTile {
     }
 
     /**
-     * dreht ein array von {@link GridTileType gridTileTypen} im uhrzeigersinn um 90°.
+     * TODO JAVA DOC
      *
-     * @param suroundings array der umliegenden {@link GridTileType gridTileTypen} eines {@link GridTile gridTiles}.
-     * @return {@link GridTile#getSurroundings() surrundings} werden um 90° im uhrzeigersinn gedreht.
-     * @since 0.1.4
+     * @return
+     * @since 0.9.3
      */
-    public static GridTileType[] rotateSuroundings(GridTileType[] suroundings) {
-        GridTileType[] result = new GridTileType[4];
-        result[Rotation.UP.getInt()] = suroundings[Rotation.LEFT.getInt()];
-        result[Rotation.RIGHT.getInt()] = suroundings[Rotation.UP.getInt()];
-        result[Rotation.DOWN.getInt()] = suroundings[Rotation.RIGHT.getInt()];
-        result[Rotation.LEFT.getInt()] = suroundings[Rotation.DOWN.getInt()];
+    public GridTile[] getSurroundingGridTiles() {
+        GridTile[] result = new GridTile[4];
+        result[Rotation.UP.getInt()] = getUpperTile();
+        result[Rotation.RIGHT.getInt()] = getRightGridTile();
+        result[Rotation.DOWN.getInt()] = getLowerTile();
+        result[Rotation.LEFT.getInt()] = getLeftGridTile();
         return result;
     }
 

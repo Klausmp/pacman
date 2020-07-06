@@ -3,7 +3,6 @@ package de.klausmp.pacman.world;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.utils.GridTileType;
-import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
 
@@ -11,7 +10,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.1
+ * @version 0.9.3
  * @since 0.9.0
  */
 public class Path implements Runnable {
@@ -23,14 +22,14 @@ public class Path implements Runnable {
      *
      * @since 0.9.0
      */
-    private Array<GridTile> path;
+    private final Array<GridTile> path;
 
     /**
      * TODO JAVA DOC
      *
      * @since 0.9.0
      */
-    private Grid grid;
+    private final Grid grid;
 
     /**
      * TODO JAVA DOC
@@ -71,35 +70,9 @@ public class Path implements Runnable {
         } else return null;
     }
 
-    /***
-     * TODO JAVA DOC
-     *
-     * @param currendGridTile
-     * @return
-     * @throws
-     * @since 0.9.1
-     */
-    public Rotation getNetxtRotation(GridTile currendGridTile) throws NullPointerException {
-        GridTile nextGridTile = getNext();
-        if (nextGridTile == currendGridTile.getUpperTile()) {
-            return Rotation.UP;
-        }
-        if (nextGridTile == currendGridTile.getRightGridTile()) {
-            return Rotation.RIGHT;
-        }
-        if (nextGridTile == currendGridTile.getLowerTile()) {
-            return Rotation.DOWN;
-        }
-        if (nextGridTile == currendGridTile.getLeftGridTile()) {
-            return Rotation.UP;
-        }
-        return null;
-    }
-
     public void newPath(GridTile target, GridTile root) {
         this.target = target;
         this.root = root;
-        pathLoaded = false;
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -138,6 +111,7 @@ public class Path implements Runnable {
 
     @Override
     public void run() {
+        long startTime = System.currentTimeMillis();
         Node targetNode = new Node(null, null, target.getPosition());
         Node rootNode = new Node(null, targetNode, root.getPosition());
         Array<Node> openList = new Array<Node>();
@@ -179,6 +153,9 @@ public class Path implements Runnable {
                     openList.clear();
                 }
             }
+            if (System.currentTimeMillis() - startTime >= 30) {
+                return;
+            }
         }
         Array<GridTile> newPath = new Array<GridTile>();
         Node currentNode = targetNode;
@@ -192,8 +169,8 @@ public class Path implements Runnable {
             getNext();
         }
         pathLoaded = true;
-        grid.print();
-        print();
+        //grid.print();
+        //print();
     }
 
     /**
@@ -201,12 +178,38 @@ public class Path implements Runnable {
      *
      * @since 0.9.0
      */
-    public Array<GridTile> getPath() {
+    private Array<GridTile> getPath() {
         return path;
     }
 
     public boolean isPathLoaded() {
         return pathLoaded;
+    }
+
+    /**
+     * @return
+     * @since 0.9.3
+     */
+    public GridTile peak() throws NullPointerException {
+        return path.get(0);
+    }
+
+    /**
+     * @return
+     * @since 0.9.3
+     */
+    public int getRemainingLenght() {
+        return path.size;
+    }
+
+    /**
+     * @since 0.9.3
+     */
+    public void print() {
+        System.out.println(path.size);
+        for (GridTile gridTile : path) {
+            System.out.println(gridTile.getPosition().toString());
+        }
     }
 
     public class Node {
@@ -223,14 +226,15 @@ public class Path implements Runnable {
          *
          * @since 0.9.0
          */
-        private Vector2 pos;
-
+        private final Vector2 pos;
+        private final int g = 10;
         /**
          * TODO JAVA DOC
          *
          * @since 0.9.0
          */
-        private int f = 0, g = 10, h = 0;
+        private int f = 0;
+        private int h = 0;
 
         public Node(Node parent, Node target, Vector2 pos) {
             this.parrent = parent;
@@ -241,13 +245,6 @@ public class Path implements Runnable {
                 h = 0;
             }
             f = h + g;
-        }
-    }
-
-    public void print() {
-        System.out.println(path.size);
-        for (GridTile gridTile : path) {
-            System.out.println(gridTile.getPosition().toString());
         }
     }
 }
