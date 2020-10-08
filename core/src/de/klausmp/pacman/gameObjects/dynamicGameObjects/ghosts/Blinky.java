@@ -13,7 +13,7 @@ import de.klausmp.pacman.utils.Rotation;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.4
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost
  * @since 0.6.0
  */
@@ -36,10 +36,5 @@ public class Blinky extends Ghost {
         String[] idleAnimationFrames = {"black"};
         idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
         targed = getGrid().getGridTile(10, 4);
-    }
-
-    @Override
-    public void setTarged() {
-        targed = getGrid().getPacMan().getCurrendGridTile();
     }
 }

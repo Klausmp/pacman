@@ -7,6 +7,7 @@ import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
+import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
 
 /**
  * einzelteil eines {@link Grid grids}. <br>
@@ -212,7 +213,6 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getLowerTile() {
-
         return grid.getGridTile((int) position.x, (int) position.y - 1);
     }
 

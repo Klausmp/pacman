@@ -2,14 +2,18 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.IDynamicMovementControler;
 import de.klausmp.pacman.utils.GameObjectType;
+import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.renderer.Layer;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * dynamisches {@link GameObject gameObjekt}. <br>
@@ -28,28 +32,41 @@ import de.klausmp.pacman.world.grid.GridTile;
  */
 public abstract class DynamicGameObject extends GameObject {
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.7.4
+     */
     protected float movementSpeed;
 
     /**
      * movement animation
+     * TODO JAVA DOC
      *
      * @since 0.3.0
      */
     protected Animation movement;
 
     /**
-     * TODO JAVADOC
+     * TODO JAVA DOC
      *
-     * @since 0.3.0
+     * @since 0.9.4
      */
-    protected GridTile nextGridTile;
+    protected Rotation nextRotation;
 
     /**
      * TODO JAVA DOC
      *
-     * @since 0.4.0
+     * @since 0.9.4
      */
-    protected boolean isMoving = false;
+    protected Rotation rotation;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.4
+     */
+    protected IDynamicMovementControler movementControler;
 
     /**
      * konstruktor mit allen nötien einstellungen.
@@ -64,12 +81,13 @@ public abstract class DynamicGameObject extends GameObject {
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
+    public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile, IDynamicMovementControler movementControler) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
         this.movementSpeed = movementSpeed;
-        setObjectRotation(rotation);
+        this.movementControler = movementControler;
+        changeRotation(rotation);
+        nextRotation = rotation;
     }
-
 
     @Override
     public void update(float deltaTime) {
@@ -80,88 +98,112 @@ public abstract class DynamicGameObject extends GameObject {
     /**
      * hier geschieht das movement des {@link GameObject gameObjekts} in jedem tick.
      *
-     * @version 0.6.0
+     * @version 0.9.4
      * @since 0.1.0
      */
     protected void movement(float deltaTime) {
-        findNextGridTile();
-        if (nextGridTile != null) {
-            moveToNextGridTile(deltaTime);
-        }
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.4.0
-     */
-    public void moveToNextGridTile(float delataTime) {
-        Vector2 pixelPositionFromNextGridTile = Grid.convertToPixelPosition(nextGridTile.getPosition());
-        switch (nextGridTileRotation()) {
-            case UP:
-                if (pixelPositionFromNextGridTile.y >= getY()) {
-                    setY(getY() + (movementSpeed * delataTime));
-                    isMoving = true;
-                } else {
-                    setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
-                    currendGridTile = nextGridTile;
-                    isMoving = false;
-                }
-                break;
-            case DOWN:
-                if (pixelPositionFromNextGridTile.y <= getY()) {
-                    setY(getY() - (movementSpeed * delataTime));
-                    isMoving = true;
-                } else {
-                    setY(Grid.convertToPixelPosition(nextGridTile.getPosition()).y);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
-                    currendGridTile = nextGridTile;
-                    isMoving = false;
-                }
-                break;
-            case LEFT:
-                if (pixelPositionFromNextGridTile.x <= getX()) {
-                    setX(getX() - (movementSpeed * delataTime));
-                    isMoving = true;
-                } else {
-                    setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
-                    currendGridTile = nextGridTile;
-                    isMoving = false;
-                }
-                break;
-            case RIGHT:
-                if (pixelPositionFromNextGridTile.x >= getX()) {
-                    setX(getX() + (movementSpeed * delataTime));
-                    isMoving = true;
-                } else {
-                    setX(Grid.convertToPixelPosition(nextGridTile.getPosition()).x);
-                    currendGridTile.getGrid().transverToOtherGridTile(this, nextGridTile);
-                    currendGridTile = nextGridTile;
-                    isMoving = false;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @return
-     * @throws NullPointerException
-     * @since 0.9.3
-     */
-    private Rotation nextGridTileRotation() throws NullPointerException {
-        GridTile[] sorroundingds = currendGridTile.getSurroundingGridTiles();
-        for (int i = 0; i < 4; i++) {
-            if (nextGridTile.equals(sorroundingds[i])) {
-                return Rotation.getRotationFromInt(i);
+        float remainingDistance = 0;
+        movementControler.choseNextRotationToMove(this);
+        if (currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+            switch (rotation) {
+                case UP:
+                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y > getY()) {
+                        setY(getY() + movementSpeed * deltaTime);
+                    } else {
+                        remainingDistance = getY() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y;
+                        moveToNextGridTile();
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+                            setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
+                            changeRotation(nextRotation);
+                            //moveRemainingDistance(remainingDistance);
+                        }
+                        movement(deltaTime);
+                    }
+                    break;
+                case LEFT:
+                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x < getX()) {
+                        setX(getX() - movementSpeed * deltaTime);
+                    } else {
+                        remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x - getX();
+                        moveToNextGridTile();
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+                            setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
+                            changeRotation(nextRotation);
+                            //moveRemainingDistance(remainingDistance);
+                        }
+                        movement(deltaTime);
+                    }
+                    break;
+                case DOWN:
+                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y < getY()) {
+                        setY(getY() - movementSpeed * deltaTime);
+                    } else {
+                        remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y - getY();
+                        moveToNextGridTile();
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+                            setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
+                            changeRotation(nextRotation);
+                            //moveRemainingDistance(remainingDistance);
+                        }
+                        movement(deltaTime);
+                    }
+                    break;
+                case RIGHT:
+                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x > getX()) {
+                        setX(getX() + movementSpeed * deltaTime);
+                    } else {
+                        remainingDistance = getX() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x;
+                        moveToNextGridTile();
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+                            setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
+                            changeRotation(nextRotation);
+                            //moveRemainingDistance(remainingDistance);
+                        }
+                        movement(deltaTime);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+                changeRotation(nextRotation);
             }
         }
-        return Rotation.UP;
+    }
+
+    /**
+     * TODO JACA DOC
+     *
+     * @param remainingDistance
+     * @since 0.9.4
+     */
+    private void moveRemainingDistance(float remainingDistance) {
+        switch (rotation) {
+            case UP:
+                setY(getY() + remainingDistance);
+                break;
+            case LEFT:
+                setX(getX() - remainingDistance);
+                break;
+            case DOWN:
+                setY(getY() - remainingDistance);
+                break;
+            case RIGHT:
+                setX(getX() + remainingDistance);
+                break;
+            default:
+        }
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.4
+     */
+    private void moveToNextGridTile() {
+        currendGridTile.getGrid().transverToOtherGridTile(this, currendGridTile.getSurroundingGridTiles()[rotation.getInt()]);
+        currendGridTile = currendGridTile.getSurroundingGridTiles()[rotation.getInt()];
     }
 
     /**
@@ -173,31 +215,39 @@ public abstract class DynamicGameObject extends GameObject {
      * @since 0.4.2
      */
     protected void changeRotation(Rotation rotation) {
+        this.rotation = rotation;
         setRotation(rotation.getInt() * 90);
     }
 
-    public GridTile getNextGridTile() {
-        return nextGridTile;
+    /**
+     * TODO JAVA DOC
+     *
+     * @return
+     * @since0.9.4
+     */
+    public Rotation getNextRotation() {
+        return nextRotation;
     }
 
     /**
-     * @param nextGridTile
-     * @since 0.9.3
+     * TODO JAVA DOC
+     *
+     * @return
+     * @since0.9.4
      */
-    public void setNextGridTile(GridTile nextGridTile) {
-        GridTile[] sorroundings = currendGridTile.getSurroundingGridTiles();
-        for (int i = 0; i < 4; i++) {
-            if (sorroundings[i] == nextGridTile) {
-                setObjectRotation(Rotation.getRotationFromInt(i));
-            }
-        }
-        this.nextGridTile = nextGridTile;
+    public void setNextRotation(@NotNull Rotation nextRotation) {
+        this.nextRotation = nextRotation;
     }
 
     /**
-     * @since 0.9.3
+     * TODO JAVA DOC
+     *
+     * @return
+     * @since 0.9.4
      */
-    protected abstract void findNextGridTile();
+    public Rotation getObjectRotation() {
+        return rotation;
+    }
 
     /**
      * TODO JAVA DOC

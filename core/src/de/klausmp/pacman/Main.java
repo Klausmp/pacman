@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 
+//TODO Klasse die dingine folgt aus geist auslagern für eventuell noch andere deinge dien den spieler z.b. nicht killen
+
 //TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
 //TODO v 0.2.0 walls mit automatischer wall bildung         (fertig)
 //TODO v 0.3.0 animationen klasse                           (fertig)
@@ -14,8 +16,9 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 //TODO v 0.6.0 geister                                      (fertig bis auf texturen und animationen)
 //TODO v 0.7.0 map interpreter                              (fertig)
 //TODO v 0.8.0 menue + intro                                (fertig)
-//TODO v 0.9.0 geister ki                                   (in arbeit)
-//TODO v 0.9.3 neues movement                               (in arbeit (priorisiert))
+//TODO v 0.9.0 geister ki                                   (unterbrochen)
+//TODO v 0.9.3 neues movement                               (abgebrochen)
+//TODO v 0.9.4 neues movement                               (in arbeit)
 //TODO v 0.10.0 teleporter
 //TODO v 0.11.0 HUD
 //TODO v 0.12.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
@@ -27,7 +30,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.4
  * @see Game
  * @since 0.0.1
  */

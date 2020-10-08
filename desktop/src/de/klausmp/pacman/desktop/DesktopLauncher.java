@@ -15,9 +15,9 @@ import de.klausmp.pacman.Main;
 public class DesktopLauncher {
 
     public final static Vector2 WINDOW_SIZE = new Vector2(500, 500);
+
     /**
-	 * TODO JAVA DOC
-	 *
+     * TODO JAVA DOC
      * @param arg
      * @version 0.7.2
      * @since 0.7.1

@@ -23,7 +23,7 @@ public class TestLevel extends Level {
         if (mapLoaded) {
             if (veryFistRun) {
                 veryFistRun = false;
-                path.newPath(grid.getGridTile(2, 2), grid.getGridTile(5, 5));
+                //path.newPath(grid.getGridTile(2, 2), grid.getGridTile(5, 5));
             }
             if (path.isPathLoaded() && firstRun) {
                 firstRun = false;

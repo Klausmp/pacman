@@ -3,14 +3,16 @@ package de.klausmp.pacman.world;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.utils.GridTileType;
+import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * TODO JAVA DOC
+ * Diese Classe verwendet den A* Pfadfinde Algorithmus
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.4
  * @since 0.9.0
  */
 public class Path implements Runnable {
@@ -22,7 +24,7 @@ public class Path implements Runnable {
      *
      * @since 0.9.0
      */
-    private final Array<GridTile> path;
+    private final Array<PathElement> path = new Array<PathElement>();
 
     /**
      * TODO JAVA DOC
@@ -47,13 +49,19 @@ public class Path implements Runnable {
     private GridTile root;
 
     /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.4
+     */
+    private Rotation initialRotation;
+
+    /**
      * TODO JAVA Doc
      *
      * @since 0.9.0
      */
     public Path(Grid grid) {
         this.grid = grid;
-        path = new Array<GridTile>();
     }
 
     /**
@@ -62,17 +70,18 @@ public class Path implements Runnable {
      * @throws NullPointerException
      * @since 0.9.0
      */
-    public GridTile getNext() throws NullPointerException {
-        if (path != null && !path.isEmpty()) {
-            GridTile result = path.get(0);
+    public Rotation getNext() throws NullPointerException {
+        if (!path.isEmpty()) {
+            Rotation result = path.get(0).getRotation();
             path.removeIndex(0);
             return result;
         } else return null;
     }
 
-    public void newPath(GridTile target, GridTile root) {
+    public void newPath(GridTile target, GridTile root, Rotation initialRotation) {
         this.target = target;
         this.root = root;
+        this.initialRotation = initialRotation;
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -82,16 +91,26 @@ public class Path implements Runnable {
      *
      * @since 0.9.0
      */
-    public void setPath(Array<GridTile> newPath) {
+    public void setPath(Array<PathElement> newPath) {
         path.clear();
         path.addAll(newPath);
         pathLoaded = true;
     }
 
+    /**
+     * TODO JAVA Doc
+     *
+     * @since 0.9.0
+     */
     private Node gridTileToNode(Node parent, Node targetNode, GridTile gridTile) {
         return new Node(parent, targetNode, gridTile.getPosition());
     }
 
+    /**
+     * TODO JAVA Doc
+     *
+     * @since 0.9.0
+     */
     private boolean isNodeInList(Array<Node> nodeList, int nodePosX, int nodePosY) {
         for (Node node : nodeList) {
             if (node.pos.x == nodePosX && node.pos.y == nodePosY) {
@@ -99,14 +118,6 @@ public class Path implements Runnable {
             }
         }
         return false;
-    }
-
-    private void setInvertedPath(Array<GridTile> newPath) {
-        Array<GridTile> result = new Array<GridTile>();
-        for (GridTile gridTile: newPath) {
-            result.add(gridTile);
-        }
-        setPath(result);
     }
 
     @Override
@@ -163,11 +174,30 @@ public class Path implements Runnable {
             newPath.add(grid.getGridTile(currentNode.pos));
             currentNode = currentNode.parrent;
         } while (currentNode != null);
-        setInvertedPath(newPath);
-        if (path.get(0).getPosition().x == path.get(1).getPosition().x &&
-                path.get(0).getPosition().y == path.get(1).getPosition().y) {
-            getNext();
+
+        newPath.reverse();
+
+        Array<PathElement> result = new Array<PathElement>();
+        Rotation currentRotation = initialRotation;
+        int indexOfLastChange = 0;
+
+        if (!newPath.isEmpty()) {
+            GridTile lastGridTile = newPath.get(0);
+            for (int i = 1; i < newPath.size - 1; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (lastGridTile.getSurroundingGridTiles()[j] == newPath.get(i)) {
+                        if (Rotation.getRotationFromInt(j) != currentRotation) {
+                            currentRotation = Rotation.getRotationFromInt(j);
+                            result.add(new PathElement(Rotation.getRotationFromInt(j), calcAmountOfSkip(newPath, indexOfLastChange, i, Rotation.getRotationFromInt(j))));
+                            indexOfLastChange = i;
+                        }
+                    }
+                }
+                lastGridTile = newPath.get(i);
+            }
         }
+
+        setPath(result);
         pathLoaded = true;
         //grid.print();
         //print();
@@ -176,9 +206,29 @@ public class Path implements Runnable {
     /**
      * TODO JAVA DOC
      *
+     * @param path
+     * @param indexOfLastChange
+     * @param currentIndex
+     * @param checkedRotation
+     * @return
+     * @since 0.9.4
+     */
+    private int calcAmountOfSkip(Array<GridTile> path, int indexOfLastChange, int currentIndex, Rotation checkedRotation) {
+        int skipps = 0;
+        for (int i = indexOfLastChange; i <= currentIndex; i++) {
+            if (path.get(i).getSurroundingGridTiles()[checkedRotation.getInt()].getGridTileType() != GridTileType.WALL) {
+               skipps++;
+            }
+        }
+        return skipps;
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
      * @since 0.9.0
      */
-    private Array<GridTile> getPath() {
+    private Array<PathElement> getPath() {
         return path;
     }
 
@@ -190,8 +240,12 @@ public class Path implements Runnable {
      * @return
      * @since 0.9.3
      */
-    public GridTile peak() throws NullPointerException {
-        return path.get(0);
+    public PathElement peek() throws NullPointerException {
+        if (!path.isEmpty()) {
+            return path.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -207,8 +261,8 @@ public class Path implements Runnable {
      */
     public void print() {
         System.out.println(path.size);
-        for (GridTile gridTile : path) {
-            System.out.println(gridTile.getPosition().toString());
+        for (PathElement pathElement : path) {
+            System.out.println(pathElement);
         }
     }
 
@@ -227,18 +281,31 @@ public class Path implements Runnable {
          * @since 0.9.0
          */
         private final Vector2 pos;
-        private final int g = 10;
+
         /**
          * TODO JAVA DOC
          *
          * @since 0.9.0
          */
-        private int f = 0;
-        private int h = 0;
+        private final int g = 10;
+
+        /**
+         * TODO JAVA DOC
+         *
+         * @since 0.9.0
+         */
+        private final int f;
 
         public Node(Node parent, Node target, Vector2 pos) {
             this.parrent = parent;
             this.pos = pos;
+
+            /**
+             * TODO JAVA DOC
+             *
+             * @since 0.9.0
+             */
+            int h;
             if (target != null) {
                 h = (int) (10 * (Math.abs(pos.x - target.pos.x) + Math.abs(pos.y - target.pos.y)));
             } else {

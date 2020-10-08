@@ -1,7 +1,8 @@
-package de.klausmp.pacman.gameObjects.kinematicGameObjects;
+package de.klausmp.pacman.gameObjects.staticGameObjects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.kinematicGameObjects.KinematicGameObject;
 import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -12,11 +13,11 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 
 /**
  * @author Klausmp
- * @version 0.4.2
+ * @version 0.9.4
  * @see de.klausmp.pacman.gameObjects.kinematicGameObjects.KinematicGameObject
  * @since 0.4.1
  */
-public class DeadPacMan extends KinematicGameObject {
+public class DeadPacMan extends StaticGameObjekt {
 
     private Timer deadTimer;
 

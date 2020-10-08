@@ -1,11 +1,9 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.gameObjects.kinematicGameObjects.DeadPacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.PlayerMovementControler;
+import de.klausmp.pacman.gameObjects.staticGameObjects.DeadPacMan;
 import de.klausmp.pacman.utils.GameObjectType;
-import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.animation.Animation;
@@ -16,7 +14,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.4
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -30,10 +28,9 @@ public class PacMan extends DynamicGameObject {
      * @since 0.4.2
      */
     public PacMan(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.DEFAULTROTATION, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile);
+        super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.RIGHT, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile, new PlayerMovementControler());
         String[] idleAnimationFrames = {"pacMan0", "pacMan1", "pacMan2", "pacMan1"};
         idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
-        nextGridTile = currendGridTile;
     }
 
     @Override
@@ -43,73 +40,14 @@ public class PacMan extends DynamicGameObject {
     }
 
     @Override
-    protected void findNextGridTile() {
-        if (currendGridTile.equals(nextGridTile)) {
-            GridTile[] sorroundings = currendGridTile.getSurroundingGridTiles();
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                if (sorroundings[Rotation.UP.getInt()].getGridTileType() == GridTileType.ROAD) {
-                    setNextGridTile(sorroundings[Rotation.UP.getInt()]);
-                    return;
-                }
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                if (sorroundings[Rotation.RIGHT.getInt()].getGridTileType() == GridTileType.ROAD) {
-                    setNextGridTile(sorroundings[Rotation.RIGHT.getInt()]);
-                    return;
-                }
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                if (sorroundings[Rotation.DOWN.getInt()].getGridTileType() == GridTileType.ROAD) {
-                    setNextGridTile(sorroundings[Rotation.DOWN.getInt()]);
-                    return;
-                }
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                if (sorroundings[Rotation.LEFT.getInt()].getGridTileType() == GridTileType.ROAD) {
-                    setNextGridTile(sorroundings[Rotation.LEFT.getInt()]);
-                    return;
-                }
-            }
-            switch (getObjectRotation()) {
-                case UP:
-                    if (sorroundings[Rotation.UP.getInt()].getGridTileType() == GridTileType.ROAD) {
-                        setNextGridTile(sorroundings[Rotation.UP.getInt()]);
-                        return;
-                    }
-                    break;
-                case DOWN:
-                    if (sorroundings[Rotation.DOWN.getInt()].getGridTileType() == GridTileType.ROAD) {
-                        setNextGridTile(sorroundings[Rotation.DOWN.getInt()]);
-                        return;
-                    }
-                    break;
-                case LEFT:
-                    if (sorroundings[Rotation.LEFT.getInt()].getGridTileType() == GridTileType.ROAD) {
-                        setNextGridTile(sorroundings[Rotation.LEFT.getInt()]);
-                        return;
-                    }
-                    break;
-                case RIGHT:
-                    if (sorroundings[Rotation.RIGHT.getInt()].getGridTileType() == GridTileType.ROAD) {
-                        setNextGridTile(sorroundings[Rotation.RIGHT.getInt()]);
-                        return;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    @Override
     protected void animation() {
         super.animation();
     }
 
     @Override
     public void kill() {
-        super.kill();
         currendGridTile.addGameObject(new DeadPacMan(new Vector2(getX(), getY()), getObjectRotation(), currendGridTile));
+        super.kill();
     }
 
     /**

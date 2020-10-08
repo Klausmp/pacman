@@ -32,9 +32,4 @@ public class Inky extends Ghost {
     public Inky(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
     }
-
-    @Override
-    public void setTarged() {
-
-    }
 }

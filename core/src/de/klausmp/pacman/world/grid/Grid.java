@@ -199,6 +199,7 @@ public class Grid {
         if (gridTile != null) {
             switch (gameObject.getGameObjectType()) {
                 case DOT:
+                case GHOST:
                     gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case BIGDOT:
@@ -206,9 +207,6 @@ public class Grid {
                     break;
                 case WALL:
                     gridTile.setGridTileType(GridTileType.WALL);
-                    break;
-                case GHOST:
-                    gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case PACMAN:
                     gridTile.setGridTileType(GridTileType.ROAD);

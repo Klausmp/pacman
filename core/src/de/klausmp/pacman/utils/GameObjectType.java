@@ -16,24 +16,28 @@ import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
  * @since 0.0.1
  */
 public enum GameObjectType {
+
     /**
      * @version 0.7.0
      * @see Wall
      * @since 0.0.1
      */
     WALL(0, 0, 255),
+
     /**
      * @version 0.7.0
      * @see PacMan
      * @since 0.0.1
      */
     PACMAN(255, 0, 0),
+
     /**
      * @version 0.9.2
      * @see Ghost
      * @since 0.0.1
      */
     GHOST(50, 50, 50),
+
     /**
      * @version 0.7.0
      * @see Dot
