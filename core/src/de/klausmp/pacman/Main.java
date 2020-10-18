@@ -8,23 +8,26 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 
 //TODO Klasse die dingine folgt aus geist auslagern für eventuell noch andere deinge dien den spieler z.b. nicht killen
 
-//TODO v 0.1.0 rendering, grid, und start des programmes    (fertig)
-//TODO v 0.2.0 walls mit automatischer wall bildung         (fertig)
-//TODO v 0.3.0 animationen klasse                           (fertig)
-//TODO v 0.4.0 player                                       (fertig)
-//TODO v 0.5.0 dots + score                                 (fertig)
-//TODO v 0.6.0 geister                                      (fertig bis auf texturen und animationen)
-//TODO v 0.7.0 map interpreter                              (fertig)
-//TODO v 0.8.0 menue + intro                                (fertig)
-//TODO v 0.9.0 geister ki                                   (unterbrochen)
+//TODO Interfacess nutzen für das target setzen
+
+//TODO v 0.1.* rendering, grid, und start des programmes    (fertig)
+//TODO v 0.2.* walls mit automatischer wall bildung         (fertig)
+//TODO v 0.3.* animationen klasse                           (fertig)
+//TODO v 0.4.* player                                       (fertig)
+//TODO v 0.5.* dots + score                                 (fertig)
+//TODO v 0.6.* geister                                      (fertig bis auf texturen und animationen)
+//TODO v 0.7.* map interpreter                              (fertig)
+//TODO v 0.8.* menue + intro                                (fertig)
+//TODO v 0.9.* geister ki + fertige geister                 (unterbrochen)
 //TODO v 0.9.3 neues movement                               (abgebrochen)
-//TODO v 0.9.4 neues movement                               (in arbeit)
-//TODO v 0.10.0 teleporter
-//TODO v 0.11.0 HUD
-//TODO v 0.12.0 esc menue in neuem screen (maby mit nem screenshoot oder so)
-//TODO v 0.13.0 start des levels mit space
-//TODO v 0.14.0 übergang zwischen leveln
-//TODO v 0.15.0 level kopieren / erstellen
+//TODO v 0.9.4 neues movement                               (fertig)
+//TODO v 0.10.* JAVA DOC Ausnahmen, generelles cleanup und nutzung neuer java fetures
+//TODO v 0.11.* teleporter
+//TODO v 0.12.* HUD
+//TODO v 0.13.* esc menue in neuem screen (maby mit nem screenshoot oder so)
+//TODO v 0.14.* start des levels mit space
+//TODO v 0.15.* übergang zwischen leveln
+//TODO v 0.16.* level kopieren / erstellen
 
 /**
  * startmethode des haubtspieles (platformunabhaenig (Core))

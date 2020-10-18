@@ -5,6 +5,11 @@ import com.badlogic.gdx.Input;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
 import de.klausmp.pacman.utils.Rotation;
 
+/**
+ * TODO JAVA DOC
+ *
+ * @since 0.9.4
+ */
 public class PlayerMovementControler implements IDynamicMovementControler {
 
     @Override

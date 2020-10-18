@@ -49,7 +49,7 @@ public enum Rotation {
      *
      * @since 0.1.4
      */
-    private int rotation;
+    private final int rotation;
 
     /**
      * konstruktor mit einstellungsmöglichkeit der rotation
@@ -91,5 +91,19 @@ public enum Rotation {
      */
     public int getInt() {
         return rotation;
+    }
+
+    public static Rotation getOpposite(Rotation rotation) {
+        switch (rotation) {
+            case UP:
+                return Rotation.DOWN;
+            case LEFT:
+                return Rotation.RIGHT;
+            case DOWN:
+                return Rotation.UP;
+            case RIGHT:
+                return Rotation.LEFT;
+        }
+        return null;
     }
 }

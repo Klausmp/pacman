@@ -3,15 +3,14 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.GhostMovementControler;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.GhostMovementControler;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.utils.Timer;
 import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
-import de.klausmp.pacman.world.Path;
 import de.klausmp.pacman.world.grid.GridTile;
 
 /**
@@ -38,23 +37,7 @@ public abstract class Ghost extends DynamicGameObject {
      * @version 0.6.0
      * @since 0.6.0
      */
-    protected Path path;
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @version 0.6.0
-     * @since 0.6.0
-     */
     protected Timer pathTimer;
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @version 0.6.0
-     * @since 0.6.0
-     */
-    protected boolean changePath = false;
 
     /**
      * konstruktor mit allen nötien einstellungen.
@@ -69,10 +52,8 @@ public abstract class Ghost extends DynamicGameObject {
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public Ghost(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
-        super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile, new GhostMovementControler());
-        path = new Path(getGrid());
-        pathTimer = new Timer(1000);
+    public Ghost(TextureRegion region, Vector2 position, Rotation rotation, GridTile gridTile) {
+        super(region, position, 90f, Rotation.DEFAULTROTATION, GameObjectType.GHOST, Layers.DEFAULT, 5f, gridTile, new GhostMovementControler());
     }
 
     /**
@@ -81,28 +62,10 @@ public abstract class Ghost extends DynamicGameObject {
      */
     @Override
     public void update(float deltaTime) {
-
-        if (pathTimer.isExpired()) {
-            pathTimer.start();
-            ((GhostMovementControler) movementControler).generateNewPath(this);
-        }
-        if (path.peek() == null) {
-            pathTimer.start();
-            ((GhostMovementControler) movementControler).generateNewPath(this);
-        }
         killPacMan();
         super.update(deltaTime);
     }
 
-    /**
-     * TODO JAVA DOC
-     *
-     * @return
-     * @since 0.9.4
-     */
-    public Path getPath() {
-        return path;
-    }
 
     /**
      * TODO JAVA DOC
@@ -110,8 +73,8 @@ public abstract class Ghost extends DynamicGameObject {
      * @param targed
      * @sijnce 0.9.4
      */
-    public void setTarged(GridTile targed) {
-        this.targed = targed;
+    public void setTarged() {
+
     }
 
     /**

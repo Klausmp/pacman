@@ -10,6 +10,11 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
 
 public interface IDynamicMovementControler {
 
-    public void choseNextRotationToMove(DynamicGameObject object);
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.4
+     */
+    void choseNextRotationToMove(DynamicGameObject object);
 
 }

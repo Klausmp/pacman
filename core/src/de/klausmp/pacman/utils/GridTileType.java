@@ -1,7 +1,7 @@
 package de.klausmp.pacman.utils;
 
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
 import de.klausmp.pacman.world.grid.GridTile;
 
@@ -37,16 +37,25 @@ public enum GridTileType {
      *
      * @since 0.1.3
      */
-    ROAD(2);
+    ROAD(2),
 
     /**
      * TODO JAVA DOC
+     *
+     * @since 0.9.4
+     */
+    INTERSECTION(3);
+
+    /**
+     * TODO JAVA DOC
+     *
      * @since 0.9.1
      */
-    private int type;
+    private final int type;
 
     /**
      * TODO JAVA DOC
+     *
      * @since 0.9.1
      */
     GridTileType(int type) {

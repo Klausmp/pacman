@@ -2,10 +2,9 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.world.grid.GridTile;
-import de.klausmp.pacman.utils.GameObjectType;
-import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
+import de.klausmp.pacman.visuals.screens.GameScreen;
+import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * TODO JAVA DOC
@@ -29,7 +28,7 @@ public class Inky extends Ghost {
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public Inky(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
-        super(region, position, movementSpeed, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+    public Inky(Vector2 position, GridTile gridTile) {
+        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.DEFAULTROTATION, gridTile);
     }
 }
