@@ -15,7 +15,7 @@ import de.klausmp.pacman.world.level.Level;
  * und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.5
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
@@ -30,8 +30,8 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     /**
      * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im spiel verwendet werden.
      *
-     * @sine 0.0.1
-     * @see TextureAtlas* @since 0.0.1
+     * @see TextureAtlas
+     * @since 0.0.1
      */
     private static TextureAtlas atlas;
 
@@ -48,13 +48,6 @@ public class GameScreen extends ScreenAdapter implements Disposable {
      * @since 0.5.0
      */
     public static int score = 0;
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since
-     */
-    public static boolean chaseMode = false;
 
     /**
      * Constructor ohne eigenschaften.
@@ -112,6 +105,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     public void render(float delta) {
         super.render(delta);
         update(delta);
+        //System.out.println(delta);
         level.render(layerRenderer);
         if (level.isMapLoaded()) {
             layerRenderer.render();

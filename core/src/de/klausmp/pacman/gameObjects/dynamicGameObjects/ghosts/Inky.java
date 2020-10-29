@@ -2,7 +2,8 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.utils.Rotation;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.InkyTargetControler;
+import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
 
@@ -29,6 +30,10 @@ public class Inky extends Ghost {
      * @since 0.1.4
      */
     public Inky(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.DEFAULTROTATION, gridTile);
+        super(GameScreen.getAtlas().findRegion("inkyUp1"), position, gridTile, new InkyTargetControler());
+        this.idleUP = new Animation(idleAnimationTime, new String[]{"inkyUp1", "inkyUp2"});
+        this.idleLeft = new Animation(idleAnimationTime, new String[]{"inkyLeft1", "inkyLeft2"});
+        this.idleDonw = new Animation(idleAnimationTime, new String[]{"inkyDown1", "inkyDown2"});
+        this.idleRight = new Animation(idleAnimationTime, new String[]{"inkyRight1", "inkyRight2"});
     }
 }

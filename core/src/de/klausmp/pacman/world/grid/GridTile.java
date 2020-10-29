@@ -3,7 +3,6 @@ package de.klausmp.pacman.world.grid;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Dot;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Rotation;
@@ -96,9 +95,6 @@ public class GridTile {
     public void render(LayerRenderer renderer) {
         for (GameObject object : gameObjects) {
             object.render(renderer);
-            if (object instanceof Dot && gridTileType == GridTileType.INTERSECTION) {
-                object.kill();
-            }
         }
     }
 

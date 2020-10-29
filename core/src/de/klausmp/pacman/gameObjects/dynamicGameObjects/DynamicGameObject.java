@@ -3,7 +3,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.IDynamicMovementControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicMovementControler;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;

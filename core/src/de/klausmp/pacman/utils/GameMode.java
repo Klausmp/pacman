@@ -2,10 +2,11 @@ package de.klausmp.pacman.utils;
 
 /**
  * TODO JAVA DOC
+ *
  * @author Klausmp
  * @since 0.7.5
  */
-public enum GameModes {
+public enum GameMode {
 
     //TODO JAVA DOC
     CHASE(0),
@@ -16,9 +17,9 @@ public enum GameModes {
     //TODO JAVA DOC
     FRIGHTEND(2);
 
-    private int mode;
+    private final int mode;
 
-    GameModes(int mode) {
+    GameMode(int mode) {
         this.mode = mode;
     }
 

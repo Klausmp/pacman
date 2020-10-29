@@ -1,11 +1,13 @@
 package de.klausmp.pacman.gameObjects.staticGameObjects;
 
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.world.grid.GridTile;
+import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
+import de.klausmp.pacman.world.grid.GridTile;
+import de.klausmp.pacman.world.level.Level;
 
 /**
  * TODO JAVA DOC
@@ -23,7 +25,7 @@ public class BigDot extends Dot {
     @Override
     public void kill() {
         super.kill();
-        GameScreen.chaseMode = true;
+        Level.changeGameMode(GameMode.FRIGHTEND);
     }
 
     @Override

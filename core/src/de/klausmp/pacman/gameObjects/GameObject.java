@@ -164,11 +164,6 @@ public abstract class GameObject extends Sprite implements Disposable {
         alive = false;
     }
 
-    public void setRenderElement(LayerRendererQueQueElement renderElement) {
-
-        this.renderElement = renderElement;
-    }
-
     public Rotation getObjectRotation() {
         return rotation;
     }

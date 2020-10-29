@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.utils.Rotation;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.PinkyTargetControler;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -27,14 +27,10 @@ public class Pinky extends Ghost {
      * @since 0.1.4
      */
     public Pinky(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.DEFAULTROTATION, gridTile);
-        String[] idleAnimationFrames = {"black"};
-        idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
-    }
-
-    @Override
-    public void setTarged() {
-        int pacManRotation = currendGridTile.getGrid().getPacMan().getObjectRotation().getInt();
-        this.targed = currendGridTile.getGrid().getPacMan().getCurrendGridTile().getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation];
+        super(GameScreen.getAtlas().findRegion("pinkyUp1"), position, gridTile, new PinkyTargetControler());
+        this.idleUP = new Animation(idleAnimationTime, new String[]{"pinkyUp1", "pinkyUp2"});
+        this.idleLeft = new Animation(idleAnimationTime, new String[]{"pinkyLeft1", "pinkyLeft2"});
+        this.idleDonw = new Animation(idleAnimationTime, new String[]{"pinkyDown1", "pinkyDown2"});
+        this.idleRight = new Animation(idleAnimationTime, new String[]{"pinkyRight1", "pinkyRight2"});
     }
 }

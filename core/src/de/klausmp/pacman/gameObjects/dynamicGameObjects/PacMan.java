@@ -1,7 +1,7 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.PlayerMovementControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.PlayerMovementControler;
 import de.klausmp.pacman.gameObjects.staticGameObjects.DeadPacMan;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -30,18 +30,13 @@ public class PacMan extends DynamicGameObject {
     public PacMan(Vector2 position, GridTile gridTile) {
         super(GameScreen.getAtlas().findRegion("pacMan0"), position, 100f, Rotation.RIGHT, GameObjectType.PACMAN, Layers.FRONT, 5f, gridTile, new PlayerMovementControler());
         String[] idleAnimationFrames = {"pacMan0", "pacMan1", "pacMan2", "pacMan1"};
-        idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
+        idle = new Animation(125, idleAnimationFrames);
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
         eatFood();
-    }
-
-    @Override
-    protected void animation() {
-        super.animation();
     }
 
     @Override

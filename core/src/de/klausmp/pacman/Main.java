@@ -8,7 +8,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 
 //TODO Klasse die dingine folgt aus geist auslagern für eventuell noch andere deinge dien den spieler z.b. nicht killen
 
-//TODO Interfacess nutzen für das target setzen
+//TODO Ersetze GameObject.getCurrentGridTile.getGrid mit GameObject.getGrid!!
 
 //TODO v 0.1.* rendering, grid, und start des programmes    (fertig)
 //TODO v 0.2.* walls mit automatischer wall bildung         (fertig)
@@ -18,9 +18,12 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 //TODO v 0.6.* geister                                      (fertig bis auf texturen und animationen)
 //TODO v 0.7.* map interpreter                              (fertig)
 //TODO v 0.8.* menue + intro                                (fertig)
-//TODO v 0.9.* geister ki + fertige geister                 (unterbrochen)
+//TODO v 0.9.* geister ki + fertige geister                 (in arbeit)
 //TODO v 0.9.3 neues movement                               (abgebrochen)
 //TODO v 0.9.4 neues movement                               (fertig)
+//TODO v 0.9.5 implementation der taget suche und texturen  (fertig)
+//TODO v 0.9.6 richtiger ablauf der gameModes               (in arbeit)
+//TODO v 0.9.7 geister betten
 //TODO v 0.10.* JAVA DOC Ausnahmen, generelles cleanup und nutzung neuer java fetures
 //TODO v 0.11.* teleporter
 //TODO v 0.12.* HUD
@@ -33,7 +36,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.9.4
+ * @version 0.9.5
  * @see Game
  * @since 0.0.1
  */

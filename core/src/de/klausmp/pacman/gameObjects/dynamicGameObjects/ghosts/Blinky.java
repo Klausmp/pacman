@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.utils.Rotation;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.BlinkyTargetControler;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -30,13 +30,10 @@ public class Blinky extends Ghost {
      * @since 0.1.4
      */
     public Blinky(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.DEFAULTROTATION, gridTile);
-        String[] idleAnimationFrames = {"black"};
-        idle = new Animation(125, idleAnimationFrames, GameScreen.getAtlas());
-    }
-
-    @Override
-    public void setTarged() {
-        this.targed = getCurrendGridTile().getGrid().getPacMan().getCurrendGridTile();
+        super(GameScreen.getAtlas().findRegion("blinkyUp1"), position, gridTile, new BlinkyTargetControler());
+        this.idleUP = new Animation(idleAnimationTime, new String[]{"blinkyUp1", "blinkyUp2"});
+        this.idleLeft = new Animation(idleAnimationTime, new String[]{"blinkyLeft1", "blinkyLeft2"});
+        this.idleDonw = new Animation(idleAnimationTime, new String[]{"blinkyDown1", "blinkyDown2"});
+        this.idleRight = new Animation(idleAnimationTime, new String[]{"blinkyRight1", "blinkyRight2"});
     }
 }

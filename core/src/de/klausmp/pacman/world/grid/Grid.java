@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 
@@ -11,7 +12,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.4.0
+ * @version 0.9.5
  * @since 0.0.1
  */
 public class Grid {
@@ -20,14 +21,14 @@ public class Grid {
      *
      * @since 0.0.1
      */
-    private static final int DEFAULTGRIDSIZE = 32;
+    private static final int DEFAULTGRIDSIZE = 27;
 
     /**
      * liste aller {@link GridTile gridTiles} im {@link Grid grid}.
      *
      * @since 0.0.1
      */
-    private Array<GridTile> gridTiles = new Array<GridTile>();
+    private final Array<GridTile> gridTiles = new Array<GridTile>();
 
     /**
      * verschiebung des {@link Grid grids} (in pixel) in x und y richtung.
@@ -44,17 +45,11 @@ public class Grid {
     private Vector2 size;
 
     /**
-     * default konstruktor mit standart einstellungen.
-     *
-     * @since 0.0.1
-     */
-
-    /**
      * TODO JAVADOC
      *
      * @since 0.4.0
      */
-    private static Vector2 gridTileSize = new Vector2(16, 16);
+    private static final Vector2 gridTileSize = new Vector2(16, 16);
 
     /**
      * TODO JAVA DOC
@@ -66,8 +61,22 @@ public class Grid {
     /**
      * @since 0.9.2
      */
-    private boolean pacManFund = false;
+    private boolean pacManFound = false;
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.5
+     */
+    private Blinky blinky;
+
+    private boolean blinkyFound = false;
+
+    /**
+     * default konstruktor mit standart einstellungen.
+     *
+     * @since 0.0.1
+     */
     public Grid() {
         create(new Vector2(0, 0), new Vector2(DEFAULTGRIDSIZE, DEFAULTGRIDSIZE));
     }
@@ -112,7 +121,7 @@ public class Grid {
      * @param size
      * @since 0.0.1
      */
-    public void create(Vector2 position, Vector2 size) {
+    private void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
         for (int x = 0; x < size.x; x++) {
@@ -156,13 +165,6 @@ public class Grid {
      * @since 0.4.0
      */
     public GridTile getGridTile(int posX, int posY) {
-        /*
-        alter loop welcher zu problemen führt
-        for (GridTile gridTile : gridTiles) {
-            if (gridTile.getPosition().x == posX && gridTile.getPosition().y == posY) {
-                return gridTile;
-            }
-        }*/
         for (int i = 0; i < gridTiles.size; i++) {
             if (gridTiles.get(i).getPosition().x == posX && gridTiles.get(i).getPosition().y == posY) {
                 return gridTiles.get(i);
@@ -199,17 +201,13 @@ public class Grid {
         if (gridTile != null) {
             switch (gameObject.getGameObjectType()) {
                 case DOT:
-                case GHOST:
-                    gridTile.setGridTileType(GridTileType.ROAD);
-                    break;
                 case BIGDOT:
+                case GHOST:
+                case PACMAN:
                     gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case WALL:
                     gridTile.setGridTileType(GridTileType.WALL);
-                    break;
-                case PACMAN:
-                    gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 default:
                     System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden");
@@ -340,33 +338,52 @@ public class Grid {
     /**
      * TODO JAVA DOC
      *
-     * @since 0.9.1
      * @return
+     * @since 0.9.1
      */
-    public PacMan getPacMan() {
-        if (pacManFund) {
+    public PacMan getPacMan() throws NullPointerException {
+        if (pacManFound) {
             return this.pacMan;
         }
-        for (GridTile gridTile: getGridTiles()) {
-            for (GameObject gameObject: gridTile.getGameObjects()) {
+        for (GridTile gridTile : getGridTiles()) {
+            for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof PacMan) {
                     this.pacMan = (PacMan) gameObject;
-                    pacManFund = true;
+                    pacManFound = true;
                     return (PacMan) gameObject;
+                }
+            }
+        }
+        System.out.println("tot");
+        return null;
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @return
+     * @since 0.9.5
+     */
+    public Blinky getBlinky() throws NullPointerException {
+        if (blinkyFound) {
+            return this.blinky;
+        }
+        for (GridTile gridTile : getGridTiles()) {
+            for (GameObject gameObject : gridTile.getGameObjects()) {
+                if (gameObject instanceof Blinky) {
+                    this.blinky = (Blinky) gameObject;
+                    blinkyFound = true;
+                    return (Blinky) gameObject;
                 }
             }
         }
         return null;
     }
 
-    public void setPacMan(PacMan pacMan) {
-        this.pacMan = pacMan;
-    }
-    
     public void print() {
         for (int x = 0; x < gridTileSize.x; x++) {
             for (int y = 0; y < gridTileSize.y; y++) {
-                getGridTile(x,y).print();
+                getGridTile(x, y).print();
                 System.out.print(", ");
             }
             System.out.println();

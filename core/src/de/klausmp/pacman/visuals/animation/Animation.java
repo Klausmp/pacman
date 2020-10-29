@@ -2,6 +2,7 @@ package de.klausmp.pacman.visuals.animation;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import de.klausmp.pacman.visuals.screens.GameScreen;
 
 /**
  * @author Klausmp
@@ -22,7 +23,7 @@ public class Animation {
      *
      * @since 0.2.0
      */
-    private int delay;
+    private final int delay;
 
     /**
      * nummer des frames der im moment angezeiggt wird.
@@ -36,14 +37,14 @@ public class Animation {
      *
      * @since 0.2.0
      */
-    private String[] regionNames;
+    private final String[] regionNames;
 
     /**
      * {@link TextureAtlas textureAtlas} aus dem die textur regionen gesucht werden.
      *
      * @since 0.2.0
      */
-    private TextureAtlas atlas;
+    private final TextureAtlas atlas = GameScreen.getAtlas();
 
     /**
      * konstruktor mit verschiedenen einstellungsmöglicheiten.
@@ -53,10 +54,9 @@ public class Animation {
      * @param atlas       {@link TextureAtlas textureAtlas} aus dem die {@link TextureRegion textureRegionen} gesucht werden
      * @since 0.2.0
      */
-    public Animation(int delay, String[] regionNames, TextureAtlas atlas) {
+    public Animation(int delay, String[] regionNames) {
         this.delay = delay;
         this.regionNames = regionNames;
-        this.atlas = atlas;
         lastTime = System.currentTimeMillis();
     }
 

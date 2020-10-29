@@ -2,7 +2,8 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.utils.Rotation;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.ClydeTargetControler;
+import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
 
@@ -29,6 +30,10 @@ public class Clyde extends Ghost {
      * @since 0.1.4
      */
     public Clyde(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, Rotation.DEFAULTROTATION, gridTile);
+        super(GameScreen.getAtlas().findRegion("black"), position, gridTile, new ClydeTargetControler());
+        this.idleUP = new Animation(idleAnimationTime, new String[]{"clydeUp1", "clydeUp2"});
+        this.idleLeft = new Animation(idleAnimationTime, new String[]{"clydeLeft1", "clydeLeft2"});
+        this.idleDonw = new Animation(idleAnimationTime, new String[]{"clydeDown1", "clydeDown2"});
+        this.idleRight = new Animation(idleAnimationTime, new String[]{"clydeRight1", "clydeRight2"});
     }
 }

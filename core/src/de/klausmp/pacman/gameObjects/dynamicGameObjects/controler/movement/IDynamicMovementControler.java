@@ -1,4 +1,4 @@
-package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler;
+package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
 

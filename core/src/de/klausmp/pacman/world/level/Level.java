@@ -4,9 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.utils.GameMode;
+import de.klausmp.pacman.utils.Timer;
+import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.world.MapInterpreter;
 import de.klausmp.pacman.world.grid.Grid;
-import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.world.grid.GridTile;
 
 /**
@@ -14,10 +16,24 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.5
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.5
+     */
+    private static Timer frightedTimer;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.5
+     */
+    private static GameMode gameMode = GameMode.FRIGHTEND;
 
     /**
      * instance von {@link PacMan pacMan} in einem {@link Level level}.
@@ -96,6 +112,7 @@ public class Level implements Runnable, Disposable {
         this.gridSize = gridSize;
         this.gridPosition = gridPosition;
         this.mapPath = mapPath;
+        frightedTimer = new Timer(800000);
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -127,7 +144,11 @@ public class Level implements Runnable, Disposable {
                 pacManFund = true;
             }
             grid.update(deltaTime);
+            if (frightedTimer.isExpired() && gameMode != GameMode.CHASE) {
+                gameMode = GameMode.CHASE;
+            }
         }
+        //System.out.println(gameMode);
     }
 
     /**
@@ -161,5 +182,18 @@ public class Level implements Runnable, Disposable {
 
     public void print() {
         grid.print();
+    }
+
+    public static void changeGameMode(GameMode newGameMode) {
+        switch (newGameMode) {
+            case FRIGHTEND:
+                frightedTimer.start();
+                break;
+        }
+        gameMode = newGameMode;
+    }
+
+    public static GameMode getGameMode() {
+        return gameMode;
     }
 }

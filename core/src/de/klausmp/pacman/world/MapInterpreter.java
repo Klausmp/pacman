@@ -1,7 +1,11 @@
 package de.klausmp.pacman.world;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Clyde;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Inky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Pinky;
 import de.klausmp.pacman.gameObjects.staticGameObjects.BigDot;
 import de.klausmp.pacman.gameObjects.staticGameObjects.Dot;
@@ -41,7 +45,7 @@ public abstract class MapInterpreter {
      * @since 0.7.1
      */
     public static Grid loadMap(String mapPath) {
-        File file = new File(mapPath);
+        File file = new File(Gdx.files.internal(mapPath).path());
         BufferedImage map = null;
         try {
             map = ImageIO.read(file);
@@ -75,7 +79,10 @@ public abstract class MapInterpreter {
                         result.addToGridTile(new BigDot(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
                     case GHOST:
+                        result.addToGridTile(new Blinky(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
+                        result.addToGridTile(new Inky(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         result.addToGridTile(new Pinky(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
+                        result.addToGridTile(new Clyde(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
                     case PACMAN:
                         result.addToGridTile(new PacMan(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
