@@ -65,6 +65,10 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         return atlas;
     }
 
+    int fps = 0;
+
+    long lastTime = System.currentTimeMillis();
+
     /**
      * initalisierung des {@link LayerRenderer LayerRenderes} mit der zu verwendenen
      * layerorder einem array aus {@link Layers layers}. <br>
@@ -105,7 +109,12 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     public void render(float delta) {
         super.render(delta);
         update(delta);
-        //System.out.println(delta);
+        fps++;
+        if ((System.currentTimeMillis() - lastTime) >= 1000) {
+            System.out.println(fps);
+            fps = 0;
+            lastTime = System.currentTimeMillis();
+        }
         level.render(layerRenderer);
         if (level.isMapLoaded()) {
             layerRenderer.render();
