@@ -15,7 +15,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.9.6
+ * @version 0.9.7
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
@@ -46,7 +46,7 @@ public class Level implements Runnable, Disposable {
      *
      * @since 0.9.5
      */
-    private static Timer frightedTimer;
+    public static Timer frightedTimer;
 
     /**
      * TODO JAVA DOC
@@ -173,7 +173,6 @@ public class Level implements Runnable, Disposable {
      * @since 0.9.6
      */
     private void setCurrentGameMode() {
-        System.out.println(gameMode);
         if (frightedTimer.isExpired() && gameMode == GameMode.FRIGHTEND) {
             gameMode = lastGameMode;
         }

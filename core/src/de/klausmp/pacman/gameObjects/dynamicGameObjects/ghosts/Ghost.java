@@ -20,7 +20,7 @@ import de.klausmp.pacman.world.level.Level;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.7
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @see java.lang.Runnable
  * @since 0.6.0
@@ -118,6 +118,8 @@ public abstract class Ghost extends DynamicGameObject {
      */
     protected Animation frightendAnimation;
 
+    protected Animation whiteFrightendAnimation;
+
     /**
      * TODO JAVA DOC
      *
@@ -147,6 +149,7 @@ public abstract class Ghost extends DynamicGameObject {
         this.eatenTextureDown = GameScreen.getAtlas().findRegion("eyeDown");
         this.eatenTextureRight = GameScreen.getAtlas().findRegion("eyeRight");
         this.frightendAnimation = new Animation(125, new String[]{"blueGhost1", "blueGhost2"});
+        this.whiteFrightendAnimation = new Animation(125, new String[]{"whiteGhost1", "whiteGhost2", "blueGhost1", "blueGhost2"});
         this.eatenTexture = eatenTextureUp;
     }
 
@@ -271,7 +274,11 @@ public abstract class Ghost extends DynamicGameObject {
                 if (eaten) {
                     setRegion(eatenTexture);
                 } else {
-                    setRegion(frightendAnimation.getCurrentFrame());
+                    if (Level.frightedTimer.getRemainingTime() <= 2000) {
+                        setRegion(whiteFrightendAnimation.getCurrentFrame());
+                    } else {
+                        setRegion(frightendAnimation.getCurrentFrame());
+                    }
                 }
                 break;
         }

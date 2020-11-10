@@ -2,13 +2,13 @@ package de.klausmp.pacman.utils;
 
 /**
  * @author Klausmp
- * @version 0.9.6
+ * @version 0.9.7
  * @since 0.4.1
  */
 public class Timer {
 
     /**
-     * dTODO JAVA DOC
+     * TODO JAVA DOC
      *
      * @since 0.4.1
      */
@@ -42,6 +42,7 @@ public class Timer {
 
     /**
      * TODO JAVA DOC
+     *
      * @since 0.9.6
      */
     public void setDelay(int delay) {
@@ -50,9 +51,23 @@ public class Timer {
 
     /**
      * TODO JAVA DOC
+     * @since 0.9.7
+     */
+    public int getRemainingTime() {
+        int remainingTime = (int) (delay - (System.currentTimeMillis() - start));
+        System.out.println(remainingTime);
+        if (remainingTime <= 0) {
+            return 0;
+        } else {
+            return remainingTime;
+        }
+    }
+
+    /**
+     * TODO JAVA DOC
      *
-     * @since 0.4.1
      * @return
+     * @since 0.4.1
      */
     public boolean isExpired() {
         return System.currentTimeMillis() - delay >= start;

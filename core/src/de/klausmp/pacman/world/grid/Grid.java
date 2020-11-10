@@ -354,7 +354,6 @@ public class Grid {
                 }
             }
         }
-        System.out.println("tot");
         return null;
     }
 
