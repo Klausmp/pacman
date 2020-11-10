@@ -2,7 +2,7 @@ package de.klausmp.pacman.utils;
 
 /**
  * @author Klausmp
- * @version 0.4.1
+ * @version 0.9.6
  * @since 0.4.1
  */
 public class Timer {
@@ -38,6 +38,14 @@ public class Timer {
      */
     public void start() {
         start = System.currentTimeMillis();
+    }
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.6
+     */
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 
     /**

@@ -24,8 +24,8 @@ public class DesktopLauncher {
      */
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.useVsync(true);
-        config.setResizable(true);
+        config.useVsync(false);
+        config.setResizable(false);
         config.setWindowedMode((int) WINDOW_SIZE.x, (int) WINDOW_SIZE.y);
         config.setTitle("Pac Man");
         new Lwjgl3Application(new Main(), config);

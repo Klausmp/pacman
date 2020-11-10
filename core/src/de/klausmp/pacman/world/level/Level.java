@@ -3,7 +3,6 @@ package de.klausmp.pacman.world.level;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.Timer;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
@@ -16,10 +15,31 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.9.5
+ * @version 0.9.6
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.6
+     */
+    private int gameModeDelays[] = {7000, 20000, 7000, 20000, 5000, 20000, 5000, 1};
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.6
+     */
+    private static GameMode lastGameMode = GameMode.SCATTER;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.6
+     */
+    private int gameModeDelayNumber = 0;
 
     /**
      * TODO JAVA DOC
@@ -31,16 +51,16 @@ public class Level implements Runnable, Disposable {
     /**
      * TODO JAVA DOC
      *
-     * @since 0.9.5
+     * @since 0.9.6
      */
-    private static GameMode gameMode = GameMode.FRIGHTEND;
+    private static Timer gameModeTimer;
 
     /**
-     * instance von {@link PacMan pacMan} in einem {@link Level level}.
+     * TODO JAVA DOC
      *
-     * @since 0.0.1
+     * @since 0.9.5
      */
-    protected PacMan pacMan;
+    private static GameMode gameMode = GameMode.SCATTER;
 
     /**
      * instance von {@link Grid grid} in einem {@link Level level}.
@@ -112,7 +132,10 @@ public class Level implements Runnable, Disposable {
         this.gridSize = gridSize;
         this.gridPosition = gridPosition;
         this.mapPath = mapPath;
-        frightedTimer = new Timer(800000);
+        frightedTimer = new Timer(7000);
+        gameModeTimer = new Timer(gameModeDelays[gameModeDelayNumber]);
+        gameModeTimer.start();
+        gameModeDelayNumber++;
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -139,16 +162,31 @@ public class Level implements Runnable, Disposable {
      */
     public void update(float deltaTime) {
         if (mapLoaded) {
-            if (pacManFund = false) {
-                pacMan = grid.getPacMan();
-                pacManFund = true;
-            }
+            setCurrentGameMode();
             grid.update(deltaTime);
-            if (frightedTimer.isExpired() && gameMode != GameMode.CHASE) {
+        }
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.6
+     */
+    private void setCurrentGameMode() {
+        System.out.println(gameMode);
+        if (frightedTimer.isExpired() && gameMode == GameMode.FRIGHTEND) {
+            gameMode = lastGameMode;
+        }
+        if (gameModeTimer.isExpired() && gameMode != GameMode.FRIGHTEND && gameModeDelayNumber < gameModeDelays.length) {
+            gameModeTimer.setDelay(gameModeDelays[gameModeDelayNumber]);
+            gameModeTimer.start();
+            gameModeDelayNumber++;
+            if (gameMode == GameMode.CHASE) {
+                gameMode = GameMode.SCATTER;
+            } else if (gameMode == GameMode.SCATTER) {
                 gameMode = GameMode.CHASE;
             }
         }
-        //System.out.println(gameMode);
     }
 
     /**
@@ -176,10 +214,6 @@ public class Level implements Runnable, Disposable {
         }
     }
 
-    public PacMan getPacMan() {
-        return pacMan;
-    }
-
     public void print() {
         grid.print();
     }
@@ -189,6 +223,9 @@ public class Level implements Runnable, Disposable {
             case FRIGHTEND:
                 frightedTimer.start();
                 break;
+        }
+        if (gameMode != GameMode.FRIGHTEND) {
+            lastGameMode = gameMode;
         }
         gameMode = newGameMode;
     }
