@@ -7,9 +7,10 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Clyde;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Inky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Pinky;
-import de.klausmp.pacman.gameObjects.staticGameObjects.BigDot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Dot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.dots.BigDot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.dots.Dot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Door;
+import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Wall;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.screens.GameScreen;
@@ -69,6 +70,9 @@ public abstract class MapInterpreter {
                 int x1 = map.getWidth() - x;
                 int y1 = map.getHeight() - y;
                 switch (GameObjectType.getGameObjecTypeFromColor(r, g, b)) {
+                    case DOOR:
+                        result.addToGridTile(new Door(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
+                        break;
                     case WALL:
                         result.addToGridTile(new Wall(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;

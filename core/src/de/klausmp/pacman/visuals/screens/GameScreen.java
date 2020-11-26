@@ -111,7 +111,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         update(delta);
         fps++;
         if ((System.currentTimeMillis() - lastTime) >= 1000) {
-            System.out.println(fps);
+            //System.out.println(fps);
             fps = 0;
             lastTime = System.currentTimeMillis();
         }

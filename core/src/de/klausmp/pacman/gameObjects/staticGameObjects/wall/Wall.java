@@ -1,8 +1,10 @@
-package de.klausmp.pacman.gameObjects.staticGameObjects;
+package de.klausmp.pacman.gameObjects.staticGameObjects.wall;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.staticGameObjects.StaticGameObjekt;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
@@ -14,11 +16,25 @@ import de.klausmp.pacman.world.grid.GridTile;
  * wände im spiel.
  *
  * @author Klausmp
- * @version 0.7.3
+ * @version 0.9.7
  * @see StaticGameObjekt
  * @since 0.1.0
  */
 public class Wall extends StaticGameObjekt {
+
+    /**
+     * @param region
+     * @param position
+     * @param rotation
+     * @param gameObjectType
+     * @param layerToRenderOn
+     * @param renderPriority
+     * @param gridTile
+     * @since 0.9.7
+     */
+    public Wall(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
+        super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+    }
 
     /**
      * konstrucktor mit einstellungsmöglichkeiten bei der startposition.

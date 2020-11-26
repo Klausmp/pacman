@@ -12,7 +12,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.9.5
+ * @version 0.9.7
  * @since 0.0.1
  */
 public class Grid {
@@ -133,7 +133,8 @@ public class Grid {
 
     /**
      * updated alle {@link GridTile gridTiles} in der liste {@link #gridTiles gridTiles}.
-     *@version 0.5.0
+     *
+     * @version 0.5.0
      * @since 0.0.1
      */
     public void update(float deltaTime) {
@@ -204,10 +205,18 @@ public class Grid {
                 case BIGDOT:
                 case GHOST:
                 case PACMAN:
+                case INKYBED:
+                case CLYDEBED:
+                case PINKYBED:
+                case BLINKYBED:
+                case DOOR:
                     gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case WALL:
                     gridTile.setGridTileType(GridTileType.WALL);
+                    break;
+                case NULL:
+                    System.out.println("Null");
                     break;
                 default:
                     System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden");

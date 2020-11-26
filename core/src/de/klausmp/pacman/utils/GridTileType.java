@@ -2,7 +2,7 @@ package de.klausmp.pacman.utils;
 
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Wall;
 import de.klausmp.pacman.world.grid.GridTile;
 
 /**

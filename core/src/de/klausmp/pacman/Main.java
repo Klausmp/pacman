@@ -23,9 +23,9 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
 //TODO v 0.9.4 neues movement                               (fertig)
 //TODO v 0.9.5 implementation der taget suche und texturen  (fertig)
 //TODO v 0.9.6 richtiger ablauf der gameModes               (fertig)
-//TODO v 0.9.7 geister blinken vor ende des frightend Modes (in arbeit)
-//TODO v 0.9.8 geister betten
-//TODO v 0.10.* JAVA DOC Ausnahmen, generelles cleanup und nutzung neuer java fetures
+//TODO v 0.9.7 geister blinken vor ende des frightend Modes (fertig)
+//TODO v 0.9.8 geister betten                               (in arbeit)
+//TODO v 0.10.* JAVA DOC Ausnahmen, generelles cleanup und nutzung neuer java fetures und vorlamme fucking streams!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //TODO v 0.11.* teleporter
 //TODO v 0.12.* HUD
 //TODO v 0.13.* esc menue in neuem screen (maby mit nem screenshoot oder so)
@@ -37,7 +37,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * startmethode des haubtspieles (platformunabhaenig (Core))
  *
  * @author Klausmp
- * @version 0.9.7
+ * @version 0.9.8
  * @see Game
  * @since 0.0.1
  */

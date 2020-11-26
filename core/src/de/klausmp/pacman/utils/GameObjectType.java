@@ -4,9 +4,9 @@ import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
-import de.klausmp.pacman.gameObjects.staticGameObjects.BigDot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Dot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.Wall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.dots.BigDot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.dots.Dot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Wall;
 
 /**
  * liste aller {@link GameObject GameObject} typen.
@@ -23,6 +23,12 @@ public enum GameObjectType {
      * @since 0.0.1
      */
     WALL(0, 0, 255),
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.7
+     */
+    DOOR(255,255,255),
 
     /**
      * @version 0.7.0
@@ -50,7 +56,42 @@ public enum GameObjectType {
      * @see BigDot
      * @since 0.7.0
      */
-    BIGDOT(100, 255, 0);
+    BIGDOT(100, 255, 0),
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.7
+     */
+    INKYBED(0, 255, 255),
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.7
+     */
+    PINKYBED(252, 181, 255),
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.7
+     */
+    BLINKYBED(255, 255, 255),
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.7
+     */
+    CLYDEBED(248, 187, 85),
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.7
+     */
+    NULL(0, 0, 0);
 
     /**
      * zeigt die r g b werte der einzelnen {@link GameObjectType gameObjectTypen} an.
@@ -90,9 +131,9 @@ public enum GameObjectType {
     /**
      * TODO JAVA DOC
      *
-     * @param r
-     * @param g
-     * @param b
+     * @param r red
+     * @param g green
+     * @param b blue
      * @return
      * @throws NullPointerException
      * @version 0.7.3
@@ -118,7 +159,12 @@ public enum GameObjectType {
         if ((GameObjectType.PACMAN.getR() == r && (GameObjectType.PACMAN.getG() == g) && (GameObjectType.PACMAN.getB() == b))) {
             return GameObjectType.PACMAN;
         }
-        return GameObjectType.BIGDOT;
+
+        if ((GameObjectType.DOOR.getR() == r && (GameObjectType.DOOR.getG() == g) && (GameObjectType.DOOR.getB() == b))) {
+            return GameObjectType.DOOR;
+        }
+
+        return NULL;
     }
 
     public int getR() {

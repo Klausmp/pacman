@@ -1,7 +1,8 @@
-package de.klausmp.pacman.gameObjects.staticGameObjects;
+package de.klausmp.pacman.gameObjects.staticGameObjects.dots;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.staticGameObjects.StaticGameObjekt;
 import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;

@@ -13,11 +13,11 @@ buildscript {
 
 allprojects {
 
-    version = '0.9.7'
+    version = '0.9.8'
     ext {
         appName = "pacman"
-        gdxVersion = '1.9.11'
-        roboVMVersion = '2.3.8'
+        gdxVersion = '1.9.12'
+        roboVMVersion = '2.3.11'
         box2DLightsVersion = '1.5'
         ashleyVersion = '1.7.3'
         aiVersion = '1.8.2'

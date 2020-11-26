@@ -1,4 +1,4 @@
-package de.klausmp.pacman.gameObjects.staticGameObjects;
+package de.klausmp.pacman.gameObjects.staticGameObjects.dots;
 
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.utils.GameMode;
@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.level.Level;
  *
  * @author Klausmp
  * @version 0.7.0
- * @see de.klausmp.pacman.gameObjects.staticGameObjects.Dot
+ * @see Dot
  * @since 0.5.0
  */
 public class BigDot extends Dot {
