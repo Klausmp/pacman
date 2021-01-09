@@ -1,8 +1,8 @@
-package de.klausmp.pacman.gameObjects.staticGameObjects.dots;
+package de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.gameObjects.staticGameObjects.StaticGameObjekt;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.StaticGameObjekt;
 import de.klausmp.pacman.world.grid.GridTile;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -13,8 +13,8 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.5.0
- * @see de.klausmp.pacman.gameObjects.staticGameObjects.StaticGameObjekt
+ * @version 0.9.8
+ * @see StaticGameObjekt
  * @since 0.5.0
  */
 public class Dot extends StaticGameObjekt {

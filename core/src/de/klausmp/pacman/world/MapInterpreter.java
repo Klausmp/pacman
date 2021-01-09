@@ -7,10 +7,12 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Clyde;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Inky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Pinky;
-import de.klausmp.pacman.gameObjects.staticGameObjects.dots.BigDot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.dots.Dot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Door;
-import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Wall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured.Bed;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots.BigDot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots.Dot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.wall.Door;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.wall.InvisibleWall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.wall.Wall;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.screens.GameScreen;
@@ -31,7 +33,7 @@ import java.io.IOException;
  * #BigFood RGB 100 255 0
  *
  * @author Klausmp
- * @versiom 0.9.2
+ * @versiom 0.9.8
  * @since 0.7.0
  */
 //TODO Texture interpreter der aus verschiedenen farben auf einem png oder so das level aufbaut.
@@ -69,6 +71,7 @@ public abstract class MapInterpreter {
 
                 int x1 = map.getWidth() - x;
                 int y1 = map.getHeight() - y;
+                //System.out.println("r: " +r +" g: " +g +" b: " +b);
                 switch (GameObjectType.getGameObjecTypeFromColor(r, g, b)) {
                     case DOOR:
                         result.addToGridTile(new Door(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
@@ -91,6 +94,12 @@ public abstract class MapInterpreter {
                     case PACMAN:
                         result.addToGridTile(new PacMan(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
                         break;
+                    case BED:
+                        result.addToGridTile(new Bed(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
+                        break;
+                    case INVWALL:
+                        result.addToGridTile(new InvisibleWall(new Vector2(Grid.getGridTileSize().x * x1, Grid.getGridTileSize().y * y1), result.getGridTile(x1, y1)), x1, y1);
+                        break;
                 }
             }
         }
@@ -105,10 +114,10 @@ public abstract class MapInterpreter {
 
         for (int x = 0; x <= result.getSize().x; x++) {
             for (int y = 0; y <= result.getSize().y; y++) {
-                if (result.getGridTile(x, y).getGridTileType() == GridTileType.ROAD) {
+                if (result.getGridTile(x, y).canWalkOn(GameObjectType.GHOST)) {
                     int amountOfRoads = 0;
                     for (int i = 0; i < 4; i++) {
-                        if (result.getGridTile(x, y).getSurroundingGridTiles()[i].getGridTileType() == GridTileType.ROAD) {
+                        if (result.getGridTile(x, y).getSurroundingGridTiles()[i].canWalkOn(GameObjectType.GHOST)) {
                             amountOfRoads++;
                         }
                     }

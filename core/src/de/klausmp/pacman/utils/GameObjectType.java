@@ -4,15 +4,15 @@ import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
-import de.klausmp.pacman.gameObjects.staticGameObjects.dots.BigDot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.dots.Dot;
-import de.klausmp.pacman.gameObjects.staticGameObjects.wall.Wall;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots.BigDot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots.Dot;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.wall.Wall;
 
 /**
  * liste aller {@link GameObject GameObject} typen.
  *
  * @author Klausmp
- * @version 0.7.1
+ * @version 0.9.8
  * @since 0.0.1
  */
 public enum GameObjectType {
@@ -26,9 +26,10 @@ public enum GameObjectType {
 
     /**
      * TODO JAVA DOC
+     *
      * @since 0.9.7
      */
-    DOOR(255,255,255),
+    DOOR(255, 255, 255),
 
     /**
      * @version 0.7.0
@@ -61,30 +62,16 @@ public enum GameObjectType {
     /**
      * TODO JAVA DOC
      *
-     * @since 0.9.7
+     * @since 0.9.8
      */
-    INKYBED(0, 255, 255),
+    BED(252, 181, 255),
 
     /**
      * TODO JAVA DOC
      *
-     * @since 0.9.7
+     * @since 0.9.8
      */
-    PINKYBED(252, 181, 255),
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.9.7
-     */
-    BLINKYBED(255, 255, 255),
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.9.7
-     */
-    CLYDEBED(248, 187, 85),
+    INVWALL(0, 74, 127),
 
     /**
      * TODO JAVA DOC
@@ -136,7 +123,7 @@ public enum GameObjectType {
      * @param b blue
      * @return
      * @throws NullPointerException
-     * @version 0.7.3
+     * @version 0.9.8
      * @since 0.7.3
      */
     public static GameObjectType getGameObjecTypeFromColor(int r, int g, int b) throws NullPointerException {
@@ -162,6 +149,14 @@ public enum GameObjectType {
 
         if ((GameObjectType.DOOR.getR() == r && (GameObjectType.DOOR.getG() == g) && (GameObjectType.DOOR.getB() == b))) {
             return GameObjectType.DOOR;
+        }
+
+        if ((GameObjectType.BED.getR() == r && (GameObjectType.BED.getG() == g) && (GameObjectType.BED.getB() == b))) {
+            return GameObjectType.BED;
+        }
+
+        if ((GameObjectType.INVWALL.getR() == r && (GameObjectType.INVWALL.getG() == g) && (GameObjectType.INVWALL.getB() == b))) {
+            return GameObjectType.INVWALL;
         }
 
         return NULL;

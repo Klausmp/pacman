@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.GhostMovementControler;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.ITargetControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.GhostTargetControler;
 import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -20,7 +20,7 @@ import de.klausmp.pacman.world.level.Level;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.7
+ * @version 0.9.8
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @see java.lang.Runnable
  * @since 0.6.0
@@ -39,7 +39,7 @@ public abstract class Ghost extends DynamicGameObject {
      *
      * @since 0.9.5
      */
-    protected ITargetControler targetControler;
+    protected GhostTargetControler targetControler;
 
     /**
      * TODO JAVA DOC
@@ -47,6 +47,12 @@ public abstract class Ghost extends DynamicGameObject {
      * @since 0.9.5
      */
     protected boolean eaten = false;
+
+    /**
+     * TODO JAVA DOC
+     * @since 0.9.8
+     */
+    protected boolean frightend = false;
 
     /**
      * TODO JAVA DOC
@@ -118,6 +124,11 @@ public abstract class Ghost extends DynamicGameObject {
      */
     protected Animation frightendAnimation;
 
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.9.5
+     */
     protected Animation whiteFrightendAnimation;
 
     /**
@@ -141,7 +152,7 @@ public abstract class Ghost extends DynamicGameObject {
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public Ghost(TextureRegion region, Vector2 position, GridTile gridTile, ITargetControler targetControler) {
+    public Ghost(TextureRegion region, Vector2 position, GridTile gridTile, GhostTargetControler targetControler) {
         super(region, position, 80f, Rotation.DEFAULTROTATION, GameObjectType.GHOST, Layers.DEFAULT, 5f, gridTile, new GhostMovementControler());
         this.targetControler = targetControler;
         this.eatenTextureUp = GameScreen.getAtlas().findRegion("eyeUp");
@@ -208,19 +219,19 @@ public abstract class Ghost extends DynamicGameObject {
         Vector2 ghost = currendGridTile.getPosition();
         Vector2 pacMan = currendGridTile.getGrid().getPacMan().getCurrendGridTile().getPosition();
         Vector2 direction = new Vector2(ghost.x - pacMan.x, ghost.y - pacMan.y);
-        if (direction.angle() >= 315) {
+        if (direction.angleDeg() >= 315) {
             return Rotation.LEFT;
         }
-        if (direction.angle() <= 45) {
+        if (direction.angleDeg() <= 45) {
             return Rotation.LEFT;
         }
-        if (direction.angle() >= 45 && direction.angle() <= 135) {
+        if (direction.angleDeg() >= 45 && direction.angle() <= 135) {
             return Rotation.DOWN;
         }
-        if (direction.angle() >= 135 && direction.angle() <= 225) {
+        if (direction.angleDeg() >= 135 && direction.angle() <= 225) {
             return Rotation.RIGHT;
         }
-        if (direction.angle() >= 225 && direction.angle() <= 315) {
+        if (direction.angleDeg() >= 225 && direction.angle() <= 315) {
             return Rotation.UP;
         }
         return Rotation.DEFAULTROTATION;
@@ -295,6 +306,10 @@ public abstract class Ghost extends DynamicGameObject {
         setRotation(0f);
     }
 
+    public boolean isEaten() {
+        return eaten;
+    }
+
     private void killPacMan() {
         if (currendGridTile == currendGridTile.getGrid().getPacMan().getCurrendGridTile()) {
             if (Level.getGameMode() == GameMode.FRIGHTEND) {
@@ -302,6 +317,23 @@ public abstract class Ghost extends DynamicGameObject {
             } else if (!eaten) {
                 currendGridTile.getGrid().getPacMan().kill();
             }
+        }
+    }
+
+    public void setEaten(boolean eaten) {
+        this.eaten = eaten;
+    }
+
+    public boolean isFrightend() {
+        return frightend;
+    }
+
+    @Override
+    public float getMovementSpeed() {
+        if (isEaten()) {
+            return super.getMovementSpeed() * 3;
+        } else {
+            return super.getMovementSpeed();
         }
     }
 }

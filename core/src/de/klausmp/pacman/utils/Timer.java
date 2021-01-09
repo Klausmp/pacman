@@ -2,7 +2,7 @@ package de.klausmp.pacman.utils;
 
 /**
  * @author Klausmp
- * @version 0.9.7
+ * @version 0.9.8
  * @since 0.4.1
  */
 public class Timer {
@@ -55,7 +55,7 @@ public class Timer {
      */
     public int getRemainingTime() {
         int remainingTime = (int) (delay - (System.currentTimeMillis() - start));
-        System.out.println(remainingTime);
+        //System.out.println(remainingTime);
         if (remainingTime <= 0) {
             return 0;
         } else {

@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.PlayerMovementControler;
-import de.klausmp.pacman.gameObjects.staticGameObjects.DeadPacMan;
+import de.klausmp.pacman.gameObjects.staticGameObjects.textured.DeadPacMan;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.4
+ * @version 0.9.8
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */

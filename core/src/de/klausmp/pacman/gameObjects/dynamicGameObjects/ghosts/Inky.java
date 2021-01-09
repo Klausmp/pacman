@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.InkyTargetControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.InkyGhostTargetControler;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -11,7 +11,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.8
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost
  * @since 0.6.0
  */
@@ -30,7 +30,7 @@ public class Inky extends Ghost {
      * @since 0.1.4
      */
     public Inky(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("inkyUp1"), position, gridTile, new InkyTargetControler());
+        super(GameScreen.getAtlas().findRegion("inkyUp1"), position, gridTile, new InkyGhostTargetControler());
         this.idleUP = new Animation(idleAnimationTime, new String[]{"inkyUp1", "inkyUp2"});
         this.idleLeft = new Animation(idleAnimationTime, new String[]{"inkyLeft1", "inkyLeft2"});
         this.idleDonw = new Animation(idleAnimationTime, new String[]{"inkyDown1", "inkyDown2"});

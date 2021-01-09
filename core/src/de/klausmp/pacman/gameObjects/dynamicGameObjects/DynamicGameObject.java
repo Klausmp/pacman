@@ -5,10 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicMovementControler;
 import de.klausmp.pacman.utils.GameObjectType;
-import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
-import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.renderer.Layer;
 import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -25,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.8
  * @see GameObject
  * @since 0.1.0
  */
@@ -36,15 +34,7 @@ public abstract class DynamicGameObject extends GameObject {
      *
      * @since 0.7.4
      */
-    protected float movementSpeed;
-
-    /**
-     * movement animation
-     * TODO JAVA DOC
-     *
-     * @since 0.3.0
-     */
-    protected Animation movement;
+    private float movementSpeed;
 
     /**
      * TODO JAVA DOC
@@ -65,7 +55,7 @@ public abstract class DynamicGameObject extends GameObject {
      *
      * @since 0.9.4
      */
-    protected IDynamicMovementControler movementControler;
+    private IDynamicMovementControler movementControler;
 
     /**
      * konstruktor mit allen nötien einstellungen.
@@ -106,15 +96,15 @@ public abstract class DynamicGameObject extends GameObject {
         if (getObjectRotation() == nextRotation) {
             setObjectRotation(nextRotation);
         }
-        if (currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getGridTileType() == GridTileType.ROAD || currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+        if (currendGridTile.getSurroundingGridTiles()[rotation.getInt()].canWalkOn(gameObjectType)) {
             switch (rotation) {
                 case UP:
                     if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y > getY()) {
-                        setY(getY() + movementSpeed * deltaTime);
+                        setY(getY() + getMovementSpeed() * deltaTime);
                     } else {
                         remainingDistance = getY() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y;
                         moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD || currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
                             setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
                             changeRotation(nextRotation);
                             moveRemainingDistance(remainingDistance);
@@ -124,11 +114,11 @@ public abstract class DynamicGameObject extends GameObject {
                     break;
                 case LEFT:
                     if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x < getX()) {
-                        setX(getX() - movementSpeed * deltaTime);
+                        setX(getX() - getMovementSpeed() * deltaTime);
                     } else {
                         remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x - getX();
                         moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD || currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
                             setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
                             changeRotation(nextRotation);
                             moveRemainingDistance(remainingDistance);
@@ -138,11 +128,11 @@ public abstract class DynamicGameObject extends GameObject {
                     break;
                 case DOWN:
                     if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y < getY()) {
-                        setY(getY() - movementSpeed * deltaTime);
+                        setY(getY() - getMovementSpeed() * deltaTime);
                     } else {
                         remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y - getY();
                         moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD || currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
                             setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
                             changeRotation(nextRotation);
                             moveRemainingDistance(remainingDistance);
@@ -152,11 +142,11 @@ public abstract class DynamicGameObject extends GameObject {
                     break;
                 case RIGHT:
                     if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x > getX()) {
-                        setX(getX() + movementSpeed * deltaTime);
+                        setX(getX() + getMovementSpeed() * deltaTime);
                     } else {
                         remainingDistance = getX() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x;
                         moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD || currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
                             setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
                             changeRotation(nextRotation);
                             moveRemainingDistance(remainingDistance);
@@ -168,7 +158,7 @@ public abstract class DynamicGameObject extends GameObject {
                     break;
             }
         } else {
-            if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].getGridTileType() == GridTileType.ROAD) {
+            if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
                 changeRotation(nextRotation);
             }
         }
@@ -259,5 +249,9 @@ public abstract class DynamicGameObject extends GameObject {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    public float getMovementSpeed() {
+        return movementSpeed;
     }
 }

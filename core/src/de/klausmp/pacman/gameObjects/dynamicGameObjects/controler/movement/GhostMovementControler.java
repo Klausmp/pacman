@@ -11,7 +11,7 @@ import de.klausmp.pacman.world.level.Level;
 
 /**
  * TODO JAVA DOC
- *
+ * @version 0.9.8
  * @since 0.9.5
  */
 public class GhostMovementControler implements IDynamicMovementControler {
@@ -47,21 +47,35 @@ public class GhostMovementControler implements IDynamicMovementControler {
 
                 if (useTunnelMode) {
                     for (int i = 0; i < 4; i++) {
-                        if (ghost.getCurrendGridTile().getSurroundingGridTiles()[i].getGridTileType() == GridTileType.ROAD) {
+                        if (ghost.getCurrendGridTile().getSurroundingGridTiles()[i].canWalkOn(object.getGameObjectType())) {
                             if (Rotation.getRotationFromInt(i) != Rotation.getOpposite(ghost.getObjectRotation())) {
                                 ghost.setNextRotation(Rotation.getRotationFromInt(i));
                             }
                         }
                     }
 
-                    if (Level.getGameMode() != GameMode.FRIGHTEND) {
-                        if (ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()].getGridTileType() == GridTileType.INTERSECTION) {
-                            GridTile intersection = ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()];
-                            useTunnelMode = false;
-                            float bestCost = Integer.MAX_VALUE;
-                            for (int j = 0; j < 4; j++) {
-                                if (intersection.getSurroundingGridTiles()[j].getGridTileType() == GridTileType.ROAD) {
-                                    if (Rotation.getRotationFromInt(j) != Rotation.getOpposite(ghost.getObjectRotation())) {
+                    Array<Rotation> options = new Array<Rotation>();
+                    if (ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()].getGridTileType() == GridTileType.INTERSECTION) {
+                        GridTile intersection = ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()];
+                        useTunnelMode = false;
+                        float bestCost = Integer.MAX_VALUE;
+                        for (int j = 0; j < 4; j++) {
+                            if (intersection.getSurroundingGridTiles()[j].canWalkOn(object.getGameObjectType())) {
+                                if (Rotation.getRotationFromInt(j) != Rotation.getOpposite(ghost.getObjectRotation())) {
+                                    if (Level.getGameMode() == GameMode.FRIGHTEND) {
+                                        if (!ghost.isEaten()) {
+                                            options.add(Rotation.getRotationFromInt(j));
+                                            if (!options.isEmpty()) {
+                                                ghost.setNextRotation(options.get((int) (Math.random() * options.size)));
+                                            }
+                                        } else {
+                                            float cost = intersection.getSurroundingGridTiles()[j].getPosition().dst(ghost.getTarged().getPosition());
+                                            if (cost < bestCost) {
+                                                bestCost = cost;
+                                                ghost.setNextRotation(Rotation.getRotationFromInt(j));
+                                            }
+                                        }
+                                    } else {
                                         float cost = intersection.getSurroundingGridTiles()[j].getPosition().dst(ghost.getTarged().getPosition());
                                         if (cost < bestCost) {
                                             bestCost = cost;
@@ -70,25 +84,6 @@ public class GhostMovementControler implements IDynamicMovementControler {
                                     }
                                 }
                             }
-                        }
-                    }
-
-                    if (Level.getGameMode() == GameMode.FRIGHTEND) {
-                        Array<Rotation> options = new Array<Rotation>();
-                        if (ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()].getGridTileType() == GridTileType.INTERSECTION) {
-                            GridTile intersection = ghost.getCurrendGridTile().getSurroundingGridTiles()[ghost.getObjectRotation().getInt()];
-                            useTunnelMode = false;
-                            for (int j = 0; j < 4; j++) {
-                                if (intersection.getSurroundingGridTiles()[j].getGridTileType() == GridTileType.ROAD) {
-                                    if (Rotation.getRotationFromInt(j) != Rotation.getOpposite(ghost.getObjectRotation())) {
-                                        options.add(Rotation.getRotationFromInt(j));
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!options.isEmpty()) {
-                            ghost.setNextRotation(options.get((int) (Math.random() * options.size)));
                         }
                     }
                 }

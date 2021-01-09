@@ -5,9 +5,9 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 
 /**
  * @author Klausmp
- * @since 0.9.5
+ * @since 0.9.8
  */
-public class ClydeTargetControler implements ITargetControler {
+public class ClydeGhostTargetControler extends GhostTargetControler {
 
     @Override
     public void findScatterTarget(Ghost ghost) {
@@ -25,8 +25,4 @@ public class ClydeTargetControler implements ITargetControler {
         }
     }
 
-    @Override
-    public void findBed(Ghost ghost) {
-
-    }
 }

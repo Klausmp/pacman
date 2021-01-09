@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.8
  * @since 0.0.1
  */
 public class GridTile {
@@ -76,6 +76,7 @@ public class GridTile {
     /**
      * updated alle {@link GameObject gameObjekte} in der {@link #gameObjects gameObjekt} liste
      * und entfernt alle die zu entfernen sind.
+     *
      * @version 0.5.0
      * @since 0.0.1
      */
@@ -258,6 +259,34 @@ public class GridTile {
             }
         }
         return false;
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @param object
+     * @return
+     * @since 0.9.8
+     */
+    public boolean canWalkOn(GameObjectType gameObjectType) {
+        switch (getGridTileType()) {
+            case DOOR:
+            case BED:
+                if (gameObjectType == GameObjectType.GHOST) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case INFWALL:
+            case WALL:
+            case EMTY:
+                return false;
+            case INTERSECTION:
+            case ROAD:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public Vector2 getPosition() {

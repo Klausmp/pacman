@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
+import de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured.Bed;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 
@@ -12,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.9.7
+ * @version 0.9.8
  * @since 0.0.1
  */
 public class Grid {
@@ -59,18 +60,14 @@ public class Grid {
     private PacMan pacMan;
 
     /**
-     * @since 0.9.2
-     */
-    private boolean pacManFound = false;
-
-    /**
      * TODO JAVA DOC
      *
      * @since 0.9.5
      */
     private Blinky blinky;
 
-    private boolean blinkyFound = false;
+    private Bed bed;
+
 
     /**
      * default konstruktor mit standart einstellungen.
@@ -205,21 +202,25 @@ public class Grid {
                 case BIGDOT:
                 case GHOST:
                 case PACMAN:
-                case INKYBED:
-                case CLYDEBED:
-                case PINKYBED:
-                case BLINKYBED:
-                case DOOR:
                     gridTile.setGridTileType(GridTileType.ROAD);
                     break;
                 case WALL:
                     gridTile.setGridTileType(GridTileType.WALL);
                     break;
                 case NULL:
-                    System.out.println("Null");
+                    gridTile.setGridTileType(GridTileType.EMTY);
+                    break;
+                case DOOR:
+                    gridTile.setGridTileType(GridTileType.DOOR);
+                    break;
+                case BED:
+                    gridTile.setGridTileType(GridTileType.BED);
+                    break;
+                case INVWALL:
+                    gridTile.setGridTileType(GridTileType.INFWALL);
                     break;
                 default:
-                    System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden");
+                    System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden: " + gameObject.getGameObjectType());
                     break;
             }
             gridTile.addGameObject(gameObject);
@@ -351,14 +352,13 @@ public class Grid {
      * @since 0.9.1
      */
     public PacMan getPacMan() throws NullPointerException {
-        if (pacManFound) {
+        if (pacMan != null) {
             return this.pacMan;
         }
         for (GridTile gridTile : getGridTiles()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof PacMan) {
                     this.pacMan = (PacMan) gameObject;
-                    pacManFound = true;
                     return (PacMan) gameObject;
                 }
             }
@@ -373,15 +373,29 @@ public class Grid {
      * @since 0.9.5
      */
     public Blinky getBlinky() throws NullPointerException {
-        if (blinkyFound) {
+        if (blinky != null) {
             return this.blinky;
         }
         for (GridTile gridTile : getGridTiles()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof Blinky) {
                     this.blinky = (Blinky) gameObject;
-                    blinkyFound = true;
                     return (Blinky) gameObject;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Bed getBed() throws NullPointerException {
+        if (bed != null) {
+            return this.bed;
+        }
+        for (GridTile gridTile : getGridTiles()) {
+            for (GameObject gameObject : gridTile.getGameObjects()) {
+                if (gameObject instanceof Bed) {
+                    this.bed = (Bed) gameObject;
+                    return (Bed) gameObject;
                 }
             }
         }

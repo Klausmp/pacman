@@ -452,7 +452,7 @@ wallBigTPice
   orig: 16, 16
   offset: 0, 0
   index: -1
-wallGhost
+door
   rotate: false
   xy: 19, 19
   size: 16, 16

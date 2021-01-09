@@ -21,7 +21,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.9.3
+ * @version 0.9.8
  * @see Sprite
  * @since 0.0.1
  */
@@ -195,6 +195,10 @@ public abstract class GameObject extends Sprite implements Disposable {
 
     public Grid getGrid() {
         return currendGridTile.getGrid();
+    }
+
+    public void setRotation(Rotation rotation) {
+        this.rotation = rotation;
     }
 
     /**

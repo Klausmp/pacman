@@ -5,9 +5,9 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 
 /**
  * @author Klausmp
- * @since 0.9.5
+ * @since 0.9.8
  */
-public class PinkyTargetControler implements ITargetControler {
+public class PinkyGhostTargetControler extends GhostTargetControler {
 
     @Override
     public void findScatterTarget(Ghost ghost) {
@@ -20,8 +20,4 @@ public class PinkyTargetControler implements ITargetControler {
         ghost.setTarged(ghost.getCurrendGridTile().getGrid().getPacMan().getCurrendGridTile().getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation].getSurroundingGridTiles()[pacManRotation]);
     }
 
-    @Override
-    public void findBed(Ghost ghost) {
-
-    }
 }

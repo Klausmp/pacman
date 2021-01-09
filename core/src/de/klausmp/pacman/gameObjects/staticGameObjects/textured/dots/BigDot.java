@@ -1,4 +1,4 @@
-package de.klausmp.pacman.gameObjects.staticGameObjects.dots;
+package de.klausmp.pacman.gameObjects.staticGameObjects.textured.dots;
 
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.utils.GameMode;

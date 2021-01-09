@@ -6,9 +6,9 @@ import de.klausmp.pacman.utils.Rotation;
 
 /**
  * @author Klausmp
- * @since 0.9.5
+ * @since 0.9.8
  */
-public class InkyTargetControler implements ITargetControler {
+public class InkyGhostTargetControler extends GhostTargetControler {
 
     @Override
     public void findScatterTarget(Ghost ghost) {
@@ -22,10 +22,5 @@ public class InkyTargetControler implements ITargetControler {
         Vector2 blinkysPosition = ghost.getCurrendGridTile().getGrid().getBlinky().getCurrendGridTile().getPosition();
         Vector2 vector = new Vector2((blinkysPosition.x - inFrontOfPacman.x) * 2, (blinkysPosition.y - inFrontOfPacman.y) * 2);
         ghost.setTarged(ghost.getCurrendGridTile().getGrid().getGridTile((int) (blinkysPosition.x + vector.x), (int) (blinkysPosition.y + vector.y)));
-    }
-
-    @Override
-    public void findBed(Ghost ghost) {
-
     }
 }

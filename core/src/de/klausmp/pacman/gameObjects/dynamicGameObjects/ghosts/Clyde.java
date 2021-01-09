@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.ClydeTargetControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.ClydeGhostTargetControler;
 import de.klausmp.pacman.visuals.animation.Animation;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -11,9 +11,9 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.2
+ * @version 0.9.8
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost
- * @since 0.6.0
+ * @since 0.6.8
  */
 public class Clyde extends Ghost {
     /**
@@ -30,7 +30,7 @@ public class Clyde extends Ghost {
      * @since 0.1.4
      */
     public Clyde(Vector2 position, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, gridTile, new ClydeTargetControler());
+        super(GameScreen.getAtlas().findRegion("black"), position, gridTile, new ClydeGhostTargetControler());
         this.idleUP = new Animation(idleAnimationTime, new String[]{"clydeUp1", "clydeUp2"});
         this.idleLeft = new Animation(idleAnimationTime, new String[]{"clydeLeft1", "clydeLeft2"});
         this.idleDonw = new Animation(idleAnimationTime, new String[]{"clydeDown1", "clydeDown2"});
