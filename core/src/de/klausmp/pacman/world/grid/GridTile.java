@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.0
  * @since 0.0.1
  */
 public class GridTile {
@@ -46,6 +46,8 @@ public class GridTile {
      * @since 0.0.1
      */
     private final Array<GameObject> gameObjects = new Array<GameObject>();
+
+    private GridTile[] surroundingGridTiles = new GridTile[4];
 
     /**
      * konstructor mit einstellung der {@link #position position} und setzung des {@link #grid grids} von dem
@@ -188,11 +190,15 @@ public class GridTile {
      * @since 0.9.3
      */
     public GridTile[] getSurroundingGridTiles() {
+        if (surroundingGridTiles[Rotation.UP.getInt()] != null && surroundingGridTiles[Rotation.LEFT.getInt()] != null && surroundingGridTiles[Rotation.DOWN.getInt()] != null && surroundingGridTiles[Rotation.RIGHT.getInt()] != null) {
+            return surroundingGridTiles;
+        }
         GridTile[] result = new GridTile[4];
         result[Rotation.UP.getInt()] = getUpperTile();
         result[Rotation.RIGHT.getInt()] = getRightGridTile();
         result[Rotation.DOWN.getInt()] = getLowerTile();
         result[Rotation.LEFT.getInt()] = getLeftGridTile();
+        surroundingGridTiles = result;
         return result;
     }
 
@@ -203,6 +209,9 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getUpperTile() {
+        if (surroundingGridTiles[Rotation.UP.getInt()] != null) {
+            return surroundingGridTiles[Rotation.UP.getInt()];
+        }
         return grid.getGridTile((int) position.x, (int) position.y + 1);
     }
 
@@ -213,6 +222,9 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getLowerTile() {
+        if (surroundingGridTiles[Rotation.DOWN.getInt()] != null) {
+            return surroundingGridTiles[Rotation.DOWN.getInt()];
+        }
         return grid.getGridTile((int) position.x, (int) position.y - 1);
     }
 
@@ -223,6 +235,9 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getLeftGridTile() {
+        if (surroundingGridTiles[Rotation.LEFT.getInt()] != null) {
+            return surroundingGridTiles[Rotation.LEFT.getInt()];
+        }
         return grid.getGridTile((int) position.x - 1, (int) position.y);
     }
 
@@ -233,6 +248,9 @@ public class GridTile {
      * @since 0.1.3
      */
     public GridTile getRightGridTile() {
+        if (surroundingGridTiles[Rotation.RIGHT.getInt()] != null) {
+            return surroundingGridTiles[Rotation.RIGHT.getInt()];
+        }
         return grid.getGridTile((int) position.x + 1, (int) position.y);
     }
 
