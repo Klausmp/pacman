@@ -15,7 +15,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
- * @version 0.9.7
+ * @version 0.10.2
  * @since 0.0.1
  */
 public class Level implements Runnable, Disposable {
@@ -206,7 +206,7 @@ public class Level implements Runnable, Disposable {
     @Override
     public void dispose() {
         //pacMan.dispose();
-        for (GridTile gridTile : grid.getGridTiles()) {
+        for (GridTile gridTile : grid.getGridTilesAsList()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 //gameObject.dispose();
             }

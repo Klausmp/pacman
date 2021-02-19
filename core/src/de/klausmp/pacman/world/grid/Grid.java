@@ -9,11 +9,13 @@ import de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured.Bed;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 
+import java.util.HashMap;
+
 /**
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.10.1
+ * @version 0.10.2
  * @since 0.0.1
  */
 public class Grid {
@@ -25,11 +27,11 @@ public class Grid {
     private static final int DEFAULTGRIDSIZE = 27;
 
     /**
-     * liste aller {@link GridTile gridTiles} im {@link Grid grid}.
+     * hasmap aller {@link GridTile gridTiles} im {@link Grid grid}.
      *
-     * @since 0.0.1
+     * @since 0.10.2
      */
-    private final Array<GridTile> gridTiles = new Array<GridTile>();
+    private final HashMap<String, GridTile> gridTiles = new HashMap<String, GridTile>();
 
     /**
      * verschiebung des {@link Grid grids} (in pixel) in x und y richtung.
@@ -121,11 +123,11 @@ public class Grid {
     private void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
-        for (int x = 0; x < size.x; x++) {
+        /*for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
-                gridTiles.add(new GridTile(GridTileType.WALL, new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
+                addTile(new GridTile(GridTileType.WALL, new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
             }
-        }
+        }*/
     }
 
     /**
@@ -135,9 +137,7 @@ public class Grid {
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        for (int i = 0; i < gridTiles.size; i++) {
-            gridTiles.get(i).update(deltaTime);
-        }
+        gridTiles.forEach((string, gridTile) -> gridTile.update(deltaTime));
     }
 
     /**
@@ -147,9 +147,7 @@ public class Grid {
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
-        for (GridTile gridTile : gridTiles) {
-            gridTile.render(renderer);
-        }
+       gridTiles.forEach((string, gridTile) -> gridTile.render(renderer));
     }
 
     /**
@@ -162,13 +160,14 @@ public class Grid {
      * @return das gridTile mit den x und y werten
      * @since 0.4.0
      */
-    public GridTile getGridTile(int posX, int posY) {
-        for (int i = 0; i < gridTiles.size; i++) {
-            if (gridTiles.get(i).getPosition().x == posX && gridTiles.get(i).getPosition().y == posY) {
-                return gridTiles.get(i);
-            }
+    public GridTile getGridTile(float posX, float posY) {
+        GridTile gridTile = gridTiles.get(posX +"-" +posY);
+        if (gridTile == null) {
+            addEmtyGridTile(new Vector2(posX, posY), this);
+            return getGridTile(posX, posY);
+        } else {
+            return gridTile;
         }
-        return addEmtyGridTile(new Vector2(posX, posY), this);
     }
 
     /**
@@ -298,26 +297,9 @@ public class Grid {
      * @since 0.4.0
      */
     public void transverToOtherGridTile(GameObject object, GridTile newGridTile) {
-        GridTile oldGridTile = getGridTileFromGameObject(object);
+        GridTile oldGridTile = object.getCurrendGridTile();
         newGridTile.addGameObject(object);
         oldGridTile.removeGameObject(object);
-    }
-
-    /**
-     * TODO JAVADOC
-     *
-     * @param object
-     * @return
-     * @throws NullPointerException
-     * @since 0.4.0
-     */
-    public GridTile getGridTileFromGameObject(GameObject object) throws NullPointerException {
-        for (int i = 0; i < gridTiles.size; i++) {
-            if (gridTiles.get(i).checkForGameObject(object)) {
-                return gridTiles.get(i);
-            }
-        }
-        return null;
     }
 
     public Vector2 getPosition() {
@@ -325,7 +307,8 @@ public class Grid {
     }
 
     public void addTile(GridTile gridTile) {
-        gridTiles.add(gridTile);
+        //System.out.println(gridTile.getPosition().x +"-" +gridTile.getPosition().y);
+        gridTiles.put(gridTile.getPosition().x +"-" +gridTile.getPosition().y, gridTile);
     }
 
     public Vector2 getSize() {
@@ -340,8 +323,15 @@ public class Grid {
         return DEFAULTGRIDSIZE;
     }
 
-    public Array<GridTile> getGridTiles() {
+    public HashMap<String, GridTile> getGridTiles() {
         return gridTiles;
+    }
+
+    @Deprecated
+    public Array<GridTile> getGridTilesAsList() {
+        Array<GridTile> array = new Array<GridTile>();
+        gridTiles.forEach((string, gridTile) -> array.add(gridTile));
+        return array;
     }
 
     public static Vector2 getGridTileSize() {
@@ -358,7 +348,7 @@ public class Grid {
         if (pacMan != null) {
             return this.pacMan;
         }
-        for (GridTile gridTile : getGridTiles()) {
+        for (GridTile gridTile : getGridTilesAsList()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof PacMan) {
                     this.pacMan = (PacMan) gameObject;
@@ -379,7 +369,7 @@ public class Grid {
         if (blinky != null) {
             return this.blinky;
         }
-        for (GridTile gridTile : getGridTiles()) {
+        for (GridTile gridTile : getGridTilesAsList()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof Blinky) {
                     this.blinky = (Blinky) gameObject;
@@ -394,7 +384,7 @@ public class Grid {
         if (bed != null) {
             return this.bed;
         }
-        for (GridTile gridTile : getGridTiles()) {
+        for (GridTile gridTile : getGridTilesAsList()) {
             for (GameObject gameObject : gridTile.getGameObjects()) {
                 if (gameObject instanceof Bed) {
                     this.bed = (Bed) gameObject;
