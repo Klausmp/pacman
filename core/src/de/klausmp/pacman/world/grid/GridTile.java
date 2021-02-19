@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * alle {@link GameObject gameObjete} werden in einem gridTile gespeichert
  *
  * @author Klausmp
- * @version 0.10.0
+ * @version 0.10.3
  * @since 0.0.1
  */
 public class GridTile {
@@ -84,7 +84,7 @@ public class GridTile {
      */
     public void update(float deltaTime) {
         for (int i = 0; i < gameObjects.size; i++) {
-            gameObjects.get(i).update(deltaTime);
+            //gameObjects.get(i).update(deltaTime);
         }
         removeDeadGameObjects();
     }
@@ -106,7 +106,7 @@ public class GridTile {
      *
      * @since 0.0.1
      */
-    private void removeDeadGameObjects() {
+    public void removeDeadGameObjects() {
         Array<GameObject> gameObjectsToRemove = new Array<GameObject>();
         for (GameObject object : gameObjects) {
             if (!object.isAlive()) {

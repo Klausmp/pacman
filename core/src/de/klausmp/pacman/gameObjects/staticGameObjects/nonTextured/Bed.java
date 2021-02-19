@@ -3,6 +3,7 @@ package de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -13,9 +14,9 @@ import de.klausmp.pacman.world.grid.GridTile;
 /**
  * TODO JAVA DOC
  * @since 0.9.8
- * @version 0.9.8
+ * @version 0.10.3
  */
-public class Bed extends NonTexturedStaticGameObject {
+public class Bed extends NonTexturedStaticGameObject implements UpdatebleGameObject {
     /**
      * konstruktor mit allen nötien einstellungen.
      *
@@ -34,7 +35,6 @@ public class Bed extends NonTexturedStaticGameObject {
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
         for (GameObject object : currendGridTile.getGameObjects()) {
             if (object instanceof Ghost) {
                 Ghost ghost = (Ghost) object;

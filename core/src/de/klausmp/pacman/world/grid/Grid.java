@@ -3,6 +3,7 @@ package de.klausmp.pacman.world.grid;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured.Bed;
@@ -15,7 +16,7 @@ import java.util.HashMap;
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.10.2
+ * @version 0.10.3
  * @since 0.0.1
  */
 public class Grid {
@@ -25,6 +26,20 @@ public class Grid {
      * @since 0.0.1
      */
     private static final int DEFAULTGRIDSIZE = 27;
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.10.3
+     */
+    private final Array<GridTile> gridTilesWereSomethingDied = new Array<GridTile>();
+
+    /**
+     * TODO JAVA DOC
+     *
+     * @since 0.10.3
+     */
+    private final Array<UpdatebleGameObject> updatebleGameObjects = new Array<UpdatebleGameObject>();
 
     /**
      * hasmap aller {@link GridTile gridTiles} im {@link Grid grid}.
@@ -137,7 +152,11 @@ public class Grid {
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        gridTiles.forEach((string, gridTile) -> gridTile.update(deltaTime));
+        updatebleGameObjects.forEach(updatebleGameObject -> updatebleGameObject.update(deltaTime));
+        if (!gridTilesWereSomethingDied.isEmpty()) {
+            removeDeadGameObjects();
+            gridTilesWereSomethingDied.clear();
+        }
     }
 
     /**
@@ -147,7 +166,7 @@ public class Grid {
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
-       gridTiles.forEach((string, gridTile) -> gridTile.render(renderer));
+        gridTiles.forEach((string, gridTile) -> gridTile.render(renderer));
     }
 
     /**
@@ -161,7 +180,7 @@ public class Grid {
      * @since 0.4.0
      */
     public GridTile getGridTile(float posX, float posY) {
-        GridTile gridTile = gridTiles.get(posX +"-" +posY);
+        GridTile gridTile = gridTiles.get(posX + "-" + posY);
         if (gridTile == null) {
             addEmtyGridTile(new Vector2(posX, posY), this);
             return getGridTile(posX, posY);
@@ -195,6 +214,9 @@ public class Grid {
     public void addToGridTile(GameObject gameObject, Vector2 position) {
         GridTile gridTile = getGridTile((int) position.x, (int) position.y);
         if (gridTile != null) {
+            if (gameObject instanceof UpdatebleGameObject) {
+                updatebleGameObjects.add((UpdatebleGameObject) gameObject);
+            }
             switch (gameObject.getGameObjectType()) {
                 case DOT:
                 case BIGDOT:
@@ -308,7 +330,7 @@ public class Grid {
 
     public void addTile(GridTile gridTile) {
         //System.out.println(gridTile.getPosition().x +"-" +gridTile.getPosition().y);
-        gridTiles.put(gridTile.getPosition().x +"-" +gridTile.getPosition().y, gridTile);
+        gridTiles.put(gridTile.getPosition().x + "-" + gridTile.getPosition().y, gridTile);
     }
 
     public Vector2 getSize() {
@@ -341,6 +363,26 @@ public class Grid {
     /**
      * TODO JAVA DOC
      *
+     * @since 0.10.3
+     */
+    private void removeDeadGameObjects() {
+        for (GridTile gridTile: gridTilesWereSomethingDied) {
+            gridTile.removeDeadGameObjects();
+        }
+        Array<UpdatebleGameObject> deadGameObjects = new Array<UpdatebleGameObject>();
+        for (UpdatebleGameObject updatable : updatebleGameObjects) {
+            GameObject gameObject = (GameObject) updatable;
+            if (!gameObject.isAlive()) {
+                deadGameObjects.add((UpdatebleGameObject) gameObject);
+            }
+        }
+        updatebleGameObjects.removeAll(deadGameObjects, true);
+
+    }
+
+    /**
+     * TODO JAVA DOC
+     *
      * @return
      * @since 0.9.1
      */
@@ -357,6 +399,10 @@ public class Grid {
             }
         }
         return null;
+    }
+
+    public void addGridTilesToRemoveDeadObjectsFrom(GridTile gridTile) {
+        gridTilesWereSomethingDied.add(gridTile);
     }
 
     /**

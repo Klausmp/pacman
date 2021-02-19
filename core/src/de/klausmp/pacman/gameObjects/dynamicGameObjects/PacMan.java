@@ -1,6 +1,7 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.PlayerMovementControler;
 import de.klausmp.pacman.gameObjects.staticGameObjects.textured.DeadPacMan;
 import de.klausmp.pacman.utils.GameObjectType;
@@ -14,7 +15,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.3
  * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
  * @since 0.4.0
  */
@@ -53,8 +54,10 @@ public class PacMan extends DynamicGameObject {
      */
     public void eatFood() {
         for (GameObjectType objectType : GameObjectType.edibles()) {
-            if (currendGridTile.getGameObjectByType(objectType) != null) {
-                currendGridTile.getGameObjectByType(objectType).kill();
+            //System.out.println(currendGridTile.getGameObjectByType(objectType));
+            GameObject gameObject = currendGridTile.getGameObjectByType(objectType);
+            if (gameObject != null) {
+                gameObject.kill();
             }
         }
     }

@@ -2,6 +2,7 @@ package de.klausmp.pacman.gameObjects.staticGameObjects.textured;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
@@ -12,11 +13,11 @@ import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * @author Klausmp
- * @version 0.9.4
+ * @version 0.10.3
  * @see de.klausmp.pacman.gameObjects.kinematicGameObjects.KinematicGameObject
  * @since 0.4.1
  */
-public class DeadPacMan extends StaticGameObjekt {
+public class DeadPacMan extends StaticGameObjekt implements UpdatebleGameObject {
 
     private final Timer deadTimer;
 
@@ -46,7 +47,6 @@ public class DeadPacMan extends StaticGameObjekt {
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
         if (deadTimer.isExpired()) {
             kill();
         }

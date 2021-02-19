@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.screens.GameScreen;
  * TODO JAVA DOC
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.3
  * @see StaticGameObjekt
  * @since 0.5.0
  */
@@ -34,11 +34,6 @@ public class Dot extends StaticGameObjekt {
     public Dot(TextureRegion region, Vector2 position, int score,Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
         this.score = score;
-    }
-
-    @Override
-    public void update(float deltaTime) {
-
     }
 
     @Override

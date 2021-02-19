@@ -21,7 +21,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.3
  * @see Sprite
  * @since 0.0.1
  */
@@ -126,15 +126,6 @@ public abstract class GameObject extends Sprite implements Disposable {
     }
 
     /**
-     * updated das {@link GameObject gameObjekt} jeden tick.
-     *
-     * @since 0.0.1
-     */
-    public void update(float deltaTime) {
-        animation();
-    }
-
-    /**
      * rendert die {@link Sprite sprite} der oberKlasse auf den screen. <br>
      * hierzu wird in bei jedem tick das {@link LayerRendererQueQueElement renderElement} zur verwendeten inctanze des {@link LayerRenderer leyerrenderers} übergeben.
      *
@@ -142,6 +133,7 @@ public abstract class GameObject extends Sprite implements Disposable {
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
+        animation();
         renderer.addToQueque(renderElement);
     }
 
@@ -161,6 +153,7 @@ public abstract class GameObject extends Sprite implements Disposable {
      * @since 0.4.1
      */
     public void kill() {
+        getGrid().addGridTilesToRemoveDeadObjectsFrom(getCurrendGridTile());
         alive = false;
     }
 

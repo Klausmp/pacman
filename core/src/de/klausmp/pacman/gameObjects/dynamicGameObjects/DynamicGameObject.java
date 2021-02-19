@@ -3,6 +3,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
+import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicMovementControler;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -23,11 +24,11 @@ import org.jetbrains.annotations.NotNull;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.3
  * @see GameObject
  * @since 0.1.0
  */
-public abstract class DynamicGameObject extends GameObject {
+public abstract class DynamicGameObject extends GameObject implements UpdatebleGameObject {
 
     /**
      * TODO JAVA DOC
@@ -78,9 +79,7 @@ public abstract class DynamicGameObject extends GameObject {
         nextRotation = rotation;
     }
 
-    @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
         movement(deltaTime);
     }
 
