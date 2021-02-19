@@ -109,9 +109,10 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     public void render(float delta) {
         super.render(delta);
         update(delta);
+        long startTime = System.currentTimeMillis();
         fps++;
         if ((System.currentTimeMillis() - lastTime) >= 1000) {
-            //System.out.println(fps);
+            System.out.println(fps);
             fps = 0;
             lastTime = System.currentTimeMillis();
         }
@@ -119,6 +120,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         if (level.isMapLoaded()) {
             layerRenderer.render();
         }
+        System.out.println("TPF: " +(System.currentTimeMillis() - startTime));
     }
 
     public void dispose() {

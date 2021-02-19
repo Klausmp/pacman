@@ -13,7 +13,7 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
  * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
  *
  * @author Klausmp
- * @version 0.9.8
+ * @version 0.10.1
  * @since 0.0.1
  */
 public class Grid {
@@ -168,8 +168,7 @@ public class Grid {
                 return gridTiles.get(i);
             }
         }
-        addEmtyGridTile(new Vector2(posX, posY), this);
-        return getGridTile(posX, posY);
+        return addEmtyGridTile(new Vector2(posX, posY), this);
     }
 
     /**
@@ -238,8 +237,10 @@ public class Grid {
      * @param grid         {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
      * @since 0.1.3
      */
-    public void addEmtyGridTile(GridTileType gridTileType, Vector2 position, Grid grid) {
-        gridTiles.add(new GridTile(gridTileType, position, grid));
+    public GridTile addEmtyGridTile(GridTileType gridTileType, Vector2 position, Grid grid) {
+        GridTile gridTile = new GridTile(gridTileType, position, grid);
+        addTile(gridTile);
+        return gridTile;
     }
 
     /**
@@ -249,8 +250,10 @@ public class Grid {
      * @param grid     {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
      * @since 0.1.3
      */
-    public void addEmtyGridTile(Vector2 position, Grid grid) {
-        addTile(new GridTile(GridTileType.ROAD, position, grid));
+    public GridTile addEmtyGridTile(Vector2 position, Grid grid) {
+        GridTile gridTile = new GridTile(GridTileType.ROAD, position, grid);
+        addTile(gridTile);
+        return gridTile;
     }
 
     /**
