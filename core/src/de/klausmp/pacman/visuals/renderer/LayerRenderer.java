@@ -18,7 +18,7 @@ import de.klausmp.pacman.utils.Layers;
  * zu rendernen elemente hinzugefügt.
  *
  * @author Klausmp
- * @version 0.10.4
+ * @version 0.10.5
  * @since 0.0.1
  */
 public class LayerRenderer implements Disposable {

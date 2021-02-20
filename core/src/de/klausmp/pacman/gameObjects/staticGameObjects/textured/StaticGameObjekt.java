@@ -34,14 +34,4 @@ public abstract class StaticGameObjekt extends GameObject {
     public StaticGameObjekt(TextureRegion region, Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
     }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.8.0
-     */
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

@@ -13,7 +13,7 @@ import de.klausmp.pacman.world.grid.GridTile;
 /**
  * TODO JAVA DOC
  * 
- * @since 0.10.4
+ * @since 0.10.5
  * @version 0.9.8
  */
 public abstract class NonTexturedStaticGameObject extends StaticGameObjekt {
