@@ -148,7 +148,7 @@ public class LayerRenderer implements Disposable {
      * @since 0.0.1
      */
     private void addLayer(Layers layer, int index) {
-        layerOrder.insert(index, layer);
+		layerOrder.insert(index, layer);
         layerArry.add(new Layer(layer));
     }
 

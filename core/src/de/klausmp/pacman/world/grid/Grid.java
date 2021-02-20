@@ -13,7 +13,8 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import java.util.HashMap;
 
 /**
- * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und gespeichert werden.
+ * raster auf dem die {@link GameObject gameObjekte} sich verteilen, bewegen und
+ * gespeichert werden.
  *
  * @author Klausmp
  * @version 0.10.3
@@ -85,7 +86,6 @@ public class Grid {
 
     private Bed bed;
 
-
     /**
      * default konstruktor mit standart einstellungen.
      *
@@ -96,7 +96,8 @@ public class Grid {
     }
 
     /**
-     * konstruktor mit einstellungesmöglichkeiten der {@link #position position} und der {@link #size size}.
+     * konstruktor mit einstellungesmöglichkeiten der {@link #position position} und
+     * der {@link #size size}.
      *
      * @param position {@link #position siehe hier}
      * @param size     {@link #size siehe hier}
@@ -138,15 +139,11 @@ public class Grid {
     private void create(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
-        /*for (int x = 0; x < size.x; x++) {
-            for (int y = 0; y < size.y; y++) {
-                addTile(new GridTile(GridTileType.WALL, new Vector2((x * DEFAULTGRIDSIZE) + position.x, (y * DEFAULTGRIDSIZE) + position.y), this));
-            }
-        }*/
     }
 
     /**
-     * updated alle {@link GridTile gridTiles} in der liste {@link #gridTiles gridTiles}.
+     * updated alle {@link GridTile gridTiles} in der liste {@link #gridTiles
+     * gridTiles}.
      *
      * @version 0.5.0
      * @since 0.0.1
@@ -160,9 +157,11 @@ public class Grid {
     }
 
     /**
-     * rendert alle gridTiles mit der instance des {@link LayerRenderer layerRenderes}.
+     * rendert alle gridTiles mit der instance des {@link LayerRenderer
+     * layerRenderes}.
      *
-     * @param renderer instabce des {@link LayerRenderer layerRenderers} in aktiven {@link com.badlogic.gdx.Screen screens}
+     * @param renderer instabce des {@link LayerRenderer layerRenderers} in aktiven
+     *                 {@link com.badlogic.gdx.Screen screens}
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
@@ -170,8 +169,8 @@ public class Grid {
     }
 
     /**
-     * durchsucht die liste der {@link #gridTiles gridtiles} nach einem mit den passenden koordinaten.
-     * wennn keines gefunden wird wird NULL zurrückgegeben.
+     * durchsucht die liste der {@link #gridTiles gridtiles} nach einem mit den
+     * passenden koordinaten. wennn keines gefunden wird wird NULL zurrückgegeben.
      * nur ganze zahlen
      *
      * @param posX x position des gesuchten {@link GridTile gridTiles}.
@@ -190,8 +189,8 @@ public class Grid {
     }
 
     /**
-     * durchsucht die liste der {@link #gridTiles gridtiles} nach einem mit den passenden koordinaten.
-     * wennn keines gefunden wird wird NULL zurrückgegeben.
+     * durchsucht die liste der {@link #gridTiles gridtiles} nach einem mit den
+     * passenden koordinaten. wennn keines gefunden wird wird NULL zurrückgegeben.
      * nur ganze zahlen
      *
      * @param position position des geuchten {@link GridTile gridTiles}
@@ -203,12 +202,15 @@ public class Grid {
     }
 
     /**
-     * fügt die inctanze des {@link GameObject gameObjekts} zum {@link GridTile gridTile} mit der
-     * angegebenen position. <br>
-     * wenn an der geuchten stelle kein {@link GridTile gridTile} vorhanden ist wird ein neues erstellt.
+     * fügt die inctanze des {@link GameObject gameObjekts} zum {@link GridTile
+     * gridTile} mit der angegebenen position. <br>
+     * wenn an der geuchten stelle kein {@link GridTile gridTile} vorhanden ist wird
+     * ein neues erstellt.
      *
-     * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden soll
-     * @param position   position des {@link GridTile gridTiles} zu dem das {@link GameObject gameObjekt} hinzugefügt werden soll
+     * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden
+     *                   soll
+     * @param position   position des {@link GridTile gridTiles} zu dem das
+     *                   {@link GameObject gameObjekt} hinzugefügt werden soll
      * @since 0.1.3
      */
     public void addToGridTile(GameObject gameObject, Vector2 position) {
@@ -240,7 +242,8 @@ public class Grid {
                     gridTile.setGridTileType(GridTileType.INFWALL);
                     break;
                 default:
-                    System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden: " + gameObject.getGameObjectType());
+                    System.out.println("ERROR IN GRID.ADDTOGRIDTILE. Kein GameObjectType gefunden: "
+                            + gameObject.getGameObjectType());
                     break;
             }
             gridTile.addGameObject(gameObject);
@@ -255,7 +258,8 @@ public class Grid {
      *
      * @param gridTileType type des neuen {@link GridTile gridTiles}
      * @param position     position des neuen {@link GridTile gridTiles}
-     * @param grid         {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
+     * @param grid         {@link Grid grid} indem sich das neue {@link GridTile
+     *                     gridTile} befindet
      * @since 0.1.3
      */
     public GridTile addEmtyGridTile(GridTileType gridTileType, Vector2 position, Grid grid) {
@@ -268,7 +272,8 @@ public class Grid {
      * fügt ein neues {@link GridTile gridTile} zu diesem {@link Grid grid} hinzu.
      *
      * @param position position des neuen {@link GridTile gridTiles}
-     * @param grid     {@link Grid grid} indem sich das neue {@link GridTile gridTile} befindet
+     * @param grid     {@link Grid grid} indem sich das neue {@link GridTile
+     *                 gridTile} befindet
      * @since 0.1.3
      */
     public GridTile addEmtyGridTile(Vector2 position, Grid grid) {
@@ -278,12 +283,15 @@ public class Grid {
     }
 
     /**
-     * fügt die inctanze des {@link GameObject gameObjekts} zum {@link GridTile gridTile} mit
-     * den passenden x und y koordinaten
+     * fügt die inctanze des {@link GameObject gameObjekts} zum {@link GridTile
+     * gridTile} mit den passenden x und y koordinaten
      *
-     * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden soll
-     * @param posX       x position des {@link GridTile gridTiles} zu dem das {@link GameObject gameObjekt} hinzugefügt werden soll
-     * @param posY       y position des {@link GridTile gridTiles} zu dem das {@link GameObject gameObjekt} hinzugefügt werden soll
+     * @param gameObject {@link GameObject gameObjekt} welches hinzugefügt werden
+     *                   soll
+     * @param posX       x position des {@link GridTile gridTiles} zu dem das
+     *                   {@link GameObject gameObjekt} hinzugefügt werden soll
+     * @param posY       y position des {@link GridTile gridTiles} zu dem das
+     *                   {@link GameObject gameObjekt} hinzugefügt werden soll
      * @since 0.0.1
      */
     public void addToGridTile(GameObject gameObject, int posX, int posY) {
@@ -329,7 +337,7 @@ public class Grid {
     }
 
     public void addTile(GridTile gridTile) {
-        //System.out.println(gridTile.getPosition().x +"-" +gridTile.getPosition().y);
+        // System.out.println(gridTile.getPosition().x +"-" +gridTile.getPosition().y);
         gridTiles.put(gridTile.getPosition().x + "-" + gridTile.getPosition().y, gridTile);
     }
 
@@ -366,7 +374,7 @@ public class Grid {
      * @since 0.10.3
      */
     private void removeDeadGameObjects() {
-        for (GridTile gridTile: gridTilesWereSomethingDied) {
+        for (GridTile gridTile : gridTilesWereSomethingDied) {
             gridTile.removeDeadGameObjects();
         }
         Array<UpdatebleGameObject> deadGameObjects = new Array<UpdatebleGameObject>();

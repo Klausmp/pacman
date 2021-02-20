@@ -1,6 +1,5 @@
 package de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.staticGameObjects.textured.StaticGameObjekt;
 import de.klausmp.pacman.utils.GameObjectType;
@@ -16,7 +15,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * @since 0.9.8
  * @version 0.9.8
  */
-public class NonTexturedStaticGameObject extends StaticGameObjekt {
+public abstract class NonTexturedStaticGameObject extends StaticGameObjekt {
     /**
      * konstruktor mit allen nötien einstellungen.
      *
@@ -29,16 +28,16 @@ public class NonTexturedStaticGameObject extends StaticGameObjekt {
      * @since 0.9.8
      */
     public NonTexturedStaticGameObject(Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
+        super(GameScreen.getAtlas().findRegion("black"), position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);    
     }
 
     @Override
     public void render(LayerRenderer renderer) {
-
+        super.render(renderer);
     }
 
     @Override
     protected void animation() {
-
+        super.animation();
     }
 }

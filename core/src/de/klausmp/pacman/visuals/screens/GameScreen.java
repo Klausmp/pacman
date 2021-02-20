@@ -10,9 +10,8 @@ import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.world.level.Level;
 
 /**
- * screen in dem das spiel statfindt.
- * hier werden alle objekte für das gameplay {@link #render(float) gerendert}
- * und {@link #update() geupdated}.
+ * screen in dem das spiel statfindt. hier werden alle objekte für das gameplay
+ * {@link #render(float) gerendert} und {@link #update() geupdated}.
  *
  * @author Klausmp
  * @version 0.9.5
@@ -28,7 +27,8 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     private static LayerRenderer layerRenderer;
 
     /**
-     * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im spiel verwendet werden.
+     * im {@link TextureAtlas textureAtlas} sind alle texturen aufgeführt die im
+     * spiel verwendet werden.
      *
      * @see TextureAtlas
      * @since 0.0.1
@@ -50,8 +50,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     public static int score = 0;
 
     /**
-     * Constructor ohne eigenschaften.
-     * start des spieles.
+     * Constructor ohne eigenschaften. start des spieles.
      */
     public GameScreen() {
         create();
@@ -73,11 +72,11 @@ public class GameScreen extends ScreenAdapter implements Disposable {
      * initalisierung des {@link LayerRenderer LayerRenderes} mit der zu verwendenen
      * layerorder einem array aus {@link Layers layers}. <br>
      * <p>
-     * initalisierung des {@link TextureAtlas TextureAtlases} mit dem pfad
-     * des spriteSheets in "core.assets". <br>
+     * initalisierung des {@link TextureAtlas TextureAtlases} mit dem pfad des
+     * spriteSheets in "core.assets". <br>
      * <p>
-     * initalisierung des {@link Level level}. hierbei kann das jedes von {@link Level level}
-     * erbende objekt verwendet werden
+     * initalisierung des {@link Level level}. hierbei kann das jedes von
+     * {@link Level level} erbende objekt verwendet werden
      *
      * @since 0.0.1
      */
@@ -101,32 +100,43 @@ public class GameScreen extends ScreenAdapter implements Disposable {
     /**
      * rendert und updated alle objecte auf dem screen.
      *
-     * @param delta {@link Graphics#getDeltaTime() deltatime} des spieles dient zur berechnung von geschwindigkeiten und timern
+     * @param delta {@link Graphics#getDeltaTime() deltatime} des spieles dient zur
+     *              berechnung von geschwindigkeiten und timern
      * @Override
      * @see Main#render()
      * @since 0.0.1
      */
+    @Override
     public void render(float delta) {
         super.render(delta);
+        long beforeUpdate = System.currentTimeMillis();
         update(delta);
+        System.out.println("Update zeit: " + (System.currentTimeMillis() - beforeUpdate));
         long startTime = System.currentTimeMillis();
         fps++;
         if ((System.currentTimeMillis() - lastTime) >= 1000) {
-            System.out.println(fps);
+            // System.out.println(fps);
             fps = 0;
             lastTime = System.currentTimeMillis();
         }
+
+        long bevorQuQue = System.currentTimeMillis();
         level.render(layerRenderer);
+        System.out.println("QuQue zeit: " + (System.currentTimeMillis() - bevorQuQue));
         if (level.isMapLoaded()) {
+            long bevorRender = System.currentTimeMillis();
             layerRenderer.render();
+            System.out.println("render zeit: " + (System.currentTimeMillis() - bevorRender));
         }
-        System.out.println("TPF: " +(System.currentTimeMillis() - startTime));
+        System.out.println("TPF: " + (System.currentTimeMillis() - startTime));
+        System.out.println();
+        System.out.println();
     }
 
     public void dispose() {
-        //super.dispose();
-        //layerRenderer.dispose();
-        //atlas.dispose();
-        //level.dispose();
+        // super.dispose();
+        // layerRenderer.dispose();
+        // atlas.dispose();
+        // level.dispose();
     }
 }

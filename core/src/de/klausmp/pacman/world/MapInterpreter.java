@@ -2,6 +2,7 @@ package de.klausmp.pacman.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Clyde;
@@ -17,6 +18,7 @@ import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.GridTileType;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.Grid;
+import de.klausmp.pacman.world.grid.GridTile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -103,11 +105,13 @@ public abstract class MapInterpreter {
                 }
             }
         }
+
         for (int x = 0; x <= result.getSize().x; x++) {
             for (int y = 0; y <= result.getSize().y; y++) {
-                if (result.getGridTile(x, y).getGameObjectByType(GameObjectType.WALL) != null && result.getGridTile(x, y).getGameObjects().get(0) instanceof Wall) {
-                    Wall wall = (Wall) result.getGridTile(x, y).getGameObjects().get(0);
-                    wall.setTexture(GameScreen.getAtlas());
+                GridTile gridTile = result.getGridTile(x, y);
+                GameObject gameObject = gridTile.getGameObjectByType(GameObjectType.WALL);
+                if (gameObject != null & gameObject instanceof Wall) {
+                    ((Wall) gameObject).setTexture(GameScreen.getAtlas());
                 }
             }
         }
