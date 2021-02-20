@@ -2,17 +2,17 @@ package de.klausmp.pacman.world.level;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
-import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.Timer;
 import de.klausmp.pacman.visuals.renderer.LayerRenderer;
-import de.klausmp.pacman.world.MapInterpreter;
 import de.klausmp.pacman.world.grid.Grid;
-import de.klausmp.pacman.world.grid.GridTile;
+import de.klausmp.pacman.world.mapinterpreter.MapInterpreter;
+import de.klausmp.pacman.world.mapinterpreter.PixelMapInterpreter;
 
 /**
  * stellt alle grundmethoden des level zu ferfügung. <br>
- * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} hinzugefügt werden.
+ * es müssen nur noch {@link de.klausmp.pacman.gameObjects.GameObject
+ * gameObjekte} hinzugefügt werden.
  *
  * @author Klausmp
  * @version 0.10.2
@@ -25,7 +25,7 @@ public class Level implements Runnable, Disposable {
      *
      * @since 0.9.6
      */
-    private int gameModeDelays[] = {7000, 20000, 7000, 20000, 5000, 20000, 5000, 1};
+    private int gameModeDelays[] = { 7000, 20000, 7000, 20000, 5000, 20000, 5000, 1 };
 
     /**
      * TODO JAVA DOC
@@ -101,6 +101,13 @@ public class Level implements Runnable, Disposable {
     protected boolean mapLoaded = false;
 
     /**
+     * TODO JAVA DOC
+     * 
+     * @since 0.10.6
+     */
+    private MapInterpreter mapInterpreter;
+
+    /**
      * konstruktor mit default einstellungen
      *
      * @since 0.0.1
@@ -117,7 +124,8 @@ public class Level implements Runnable, Disposable {
      * @since 0.0.1
      */
     public Level(int gridPosX, int gridPosY, String mapPath) {
-        create(new Vector2(Grid.getDEFAULTGRIDSIZE(), Grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY), mapPath);
+        create(new Vector2(Grid.getDEFAULTGRIDSIZE(), Grid.getDEFAULTGRIDSIZE()), new Vector2(gridPosX, gridPosY),
+                mapPath);
     }
 
     /**
@@ -132,6 +140,7 @@ public class Level implements Runnable, Disposable {
         this.gridSize = gridSize;
         this.gridPosition = gridPosition;
         this.mapPath = mapPath;
+        this.mapInterpreter = new PixelMapInterpreter();
         frightedTimer = new Timer(7000);
         gameModeTimer = new Timer(gameModeDelays[gameModeDelayNumber]);
         gameModeTimer.start();
@@ -141,10 +150,11 @@ public class Level implements Runnable, Disposable {
     }
 
     /**
-     * rendert alle {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} im {@link Grid grid}
-     * mit dem {@link LayerRenderer layerRendere}.
+     * rendert alle {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte} im
+     * {@link Grid grid} mit dem {@link LayerRenderer layerRendere}.
      *
-     * @param renderer instance des {@link LayerRenderer layerRenderes} aus dem genutzten {@link com.badlogic.gdx.Screen screen}.
+     * @param renderer instance des {@link LayerRenderer layerRenderes} aus dem
+     *                 genutzten {@link com.badlogic.gdx.Screen screen}.
      * @since 0.0.1
      */
     public void render(LayerRenderer renderer) {
@@ -154,8 +164,8 @@ public class Level implements Runnable, Disposable {
     }
 
     /**
-     * updated das {@link #grid grid} des {@link Level levels} und damit
-     * alle {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte}.
+     * updated das {@link #grid grid} des {@link Level levels} und damit alle
+     * {@link de.klausmp.pacman.gameObjects.GameObject gameObjekte}.
      *
      * @version 0.7.3
      * @since 0.0.1
@@ -176,7 +186,8 @@ public class Level implements Runnable, Disposable {
         if (frightedTimer.isExpired() && gameMode == GameMode.FRIGHTEND) {
             gameMode = lastGameMode;
         }
-        if (gameModeTimer.isExpired() && gameMode != GameMode.FRIGHTEND && gameModeDelayNumber < gameModeDelays.length) {
+        if (gameModeTimer.isExpired() && gameMode != GameMode.FRIGHTEND
+                && gameModeDelayNumber < gameModeDelays.length) {
             gameModeTimer.setDelay(gameModeDelays[gameModeDelayNumber]);
             gameModeTimer.start();
             gameModeDelayNumber++;
@@ -195,22 +206,12 @@ public class Level implements Runnable, Disposable {
      */
     @Override
     public void run() {
-        grid = MapInterpreter.loadMap(mapPath);
+        grid = mapInterpreter.loadMap(mapPath);
         mapLoaded = true;
     }
 
     public boolean isMapLoaded() {
         return mapLoaded;
-    }
-
-    @Override
-    public void dispose() {
-        //pacMan.dispose();
-        for (GridTile gridTile : grid.getGridTilesAsList()) {
-            for (GameObject gameObject : gridTile.getGameObjects()) {
-                //gameObject.dispose();
-            }
-        }
     }
 
     public void print() {
@@ -222,6 +223,8 @@ public class Level implements Runnable, Disposable {
             case FRIGHTEND:
                 frightedTimer.start();
                 break;
+            default:
+                break;
         }
         if (gameMode != GameMode.FRIGHTEND) {
             lastGameMode = gameMode;
@@ -231,5 +234,10 @@ public class Level implements Runnable, Disposable {
 
     public static GameMode getGameMode() {
         return gameMode;
+    }
+
+    @Override
+    public void dispose() {
+        
     }
 }
