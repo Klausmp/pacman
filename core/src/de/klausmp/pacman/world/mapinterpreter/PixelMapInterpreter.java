@@ -39,7 +39,11 @@ import java.io.IOException;
  */
 // TODO Texture interpreter der aus verschiedenen farben auf einem png oder so
 // das level aufbaut.
+<<<<<<< HEAD:core/src/de/klausmp/pacman/world/mapinterpreter/PixelMapInterpreter.java
 public class PixelMapInterpreter implements MapInterpreter {
+=======
+public class PixelMapInterpreter implements MapInterpreter{
+>>>>>>> b3c76201c5e2966b9f25ab251feda44de87006a7:core/src/de/klausmp/pacman/world/MapInterpreter.java
 
     /**
      * TODO JAVA DOC
