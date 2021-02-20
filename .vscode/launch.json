@@ -3,9 +3,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Desktop Run",
+            "name": "Launch DesktopLauncher",
             "request": "launch",
-            "preLaunchTask": "desktopRun"
-        }
+            "mainClass": "de.klausmp.pacman.desktop.DesktopLauncher",
+            "projectName": "desktop"
+        },
     ]
 }

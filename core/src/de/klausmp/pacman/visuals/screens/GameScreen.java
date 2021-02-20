@@ -121,7 +121,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         }
 
         long bevorQuQue = System.currentTimeMillis();
-        level.render(layerRenderer);
+        //level.render(layerRenderer);
         System.out.println("QuQue zeit: " + (System.currentTimeMillis() - bevorQuQue));
         if (level.isMapLoaded()) {
             long bevorRender = System.currentTimeMillis();

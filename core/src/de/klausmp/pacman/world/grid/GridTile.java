@@ -76,20 +76,6 @@ public class GridTile {
     }
 
     /**
-     * updated alle {@link GameObject gameObjekte} in der {@link #gameObjects gameObjekt} liste
-     * und entfernt alle die zu entfernen sind.
-     *
-     * @version 0.5.0
-     * @since 0.0.1
-     */
-    public void update(float deltaTime) {
-        for (int i = 0; i < gameObjects.size; i++) {
-            //gameObjects.get(i).update(deltaTime);
-        }
-        removeDeadGameObjects();
-    }
-
-    /**
      * rendert alle {@link GameObject gameObjekte} mithilfe eines {@link LayerRenderer layerRenderers}.
      *
      * @param renderer instace des layerRenderes der in diesem {@link com.badlogic.gdx.Screen screen} verwendet wird.

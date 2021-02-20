@@ -84,6 +84,12 @@ public class Grid {
      */
     private Blinky blinky;
 
+    /**
+     * TODO JAVA DOC
+     * 
+     * @since 0.9.8
+     * 
+     */
     private Bed bed;
 
     /**

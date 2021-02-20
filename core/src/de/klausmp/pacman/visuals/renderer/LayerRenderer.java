@@ -35,7 +35,7 @@ public class LayerRenderer implements Disposable {
      *
      * @since 0.0.1
      */
-    private static Array<Layer> layerArry;
+    private static Array<Layer> layerArray;
 
     /**
      * reihenfolge in der die layer gerendert werden. <br>
@@ -74,15 +74,15 @@ public class LayerRenderer implements Disposable {
      * @since 0.0.1
      */
     public void create(Layers[] layerOrder) {
-        layerArry = new Array<Layer>();
-        LayerRenderer.layerOrder = new Array<Layers>();
+        layerArray = new Array<Layer>();
+        this.layerOrder = new Array<Layers>();
         setLayerOrder(layerOrder);
         batch = new SpriteBatch();
         addLayersFromOrder();
     }
 
     /**
-     * muss in jedem frame aufgerufen werden um die elemente aus dem {@link #layerArry layerArray}
+     * muss in jedem frame aufgerufen werden um die elemente aus dem {@link #layerArray layerArray}
      * zu zeichnen <br>
      *
      * @since 0.0.1
@@ -108,7 +108,7 @@ public class LayerRenderer implements Disposable {
          * durchgegenagen und zum richtigen zeitpunkt gerendert
          */
         for (Layers layers : layerOrder) {
-            for (Layer layer : layerArry) {
+            for (Layer layer : layerArray) {
                 if (layers.equals(layer.getLayerToRenderOn())) {
                     layer.render(batch);
                     break;
@@ -134,9 +134,9 @@ public class LayerRenderer implements Disposable {
          * damit kein layer doppelt vorkommen kann wird zuerst
          * die alte layerListe gelöscht
          */
-        layerArry.clear();
+        layerArray.clear();
         for (Layers layers : layerOrder) {
-            layerArry.add(new Layer(layers));
+            layerArray.add(new Layer(layers));
         }
     }
 
@@ -149,7 +149,7 @@ public class LayerRenderer implements Disposable {
      */
     private void addLayer(Layers layer, int index) {
 		layerOrder.insert(index, layer);
-        layerArry.add(new Layer(layer));
+        layerArray.add(new Layer(layer));
     }
 
     /**
@@ -174,7 +174,7 @@ public class LayerRenderer implements Disposable {
      * @since 0.0.1
      */
     public void addToQueque(LayerRendererQueQueElement queQueElement) {
-        for (Layer layer : layerArry) {
+        for (Layer layer : layerArray) {
             if (layer.getLayerToRenderOn().equals(queQueElement.getLayerToRenderOn())) {
                 layer.add(queQueElement);
             }

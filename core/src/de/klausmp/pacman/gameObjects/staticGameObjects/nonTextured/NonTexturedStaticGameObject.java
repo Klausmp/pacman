@@ -12,6 +12,7 @@ import de.klausmp.pacman.world.grid.GridTile;
 
 /**
  * TODO JAVA DOC
+ * 
  * @since 0.10.4
  * @version 0.9.8
  */
@@ -19,25 +20,33 @@ public abstract class NonTexturedStaticGameObject extends StaticGameObjekt {
     /**
      * konstruktor mit allen nötien einstellungen.
      *
-     * @param position        position an dem das {@link GameObject gameObjekt} gespawned wird.
+     * @param position        position an dem das {@link GameObject gameObjekt}
+     *                        gespawned wird.
      * @param rotation        start rotation des {@link GameObject gameObjekts}.
      * @param gameObjectType  type des {@link GameObject gameObjekts}.
-     * @param layerToRenderOn {@link Layer layer} auf dem das {@link GameObject gameObjekt} gernder werden soll.
-     * @param renderPriority  bestimmt an welcher stelle im layer das {@link GameObject gameObjekt} gerendert wird. weitere informationen {@link LayerRendererQueQueElement#priority hier}.
-     * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
+     * @param layerToRenderOn {@link Layer layer} auf dem das {@link GameObject
+     *                        gameObjekt} gernder werden soll.
+     * @param renderPriority  bestimmt an welcher stelle im layer das
+     *                        {@link GameObject gameObjekt} gerendert wird. weitere
+     *                        informationen
+     *                        {@link LayerRendererQueQueElement#priority hier}.
+     * @param gridTile        {@link GridTile gridTile} indem sich dieses
+     *                        {@link GameObject gameObjekt} befindet
      * @since 0.10.3
      */
-    public NonTexturedStaticGameObject(Vector2 position, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
-        super(GameScreen.getAtlas().findRegion("black"), position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);    
+    public NonTexturedStaticGameObject(Vector2 position, Rotation rotation, GameObjectType gameObjectType,
+            Layers layerToRenderOn, float renderPriority, GridTile gridTile) {
+        super(GameScreen.getAtlas().findRegion("black"), position, rotation, gameObjectType, layerToRenderOn,
+                renderPriority, gridTile);
     }
 
     @Override
     public void render(LayerRenderer renderer) {
-        super.render(renderer);
+
     }
 
     @Override
     protected void animation() {
-        super.animation();
+
     }
 }
