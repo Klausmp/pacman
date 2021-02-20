@@ -35,7 +35,7 @@ import java.io.IOException;
  * #BigFood RGB 100 255 0
  *
  * @author Klausmp
- * @versiom 0.9.8
+ * @versiom 0.10.4
  * @since 0.7.0
  */
 //TODO Texture interpreter der aus verschiedenen farben auf einem png oder so das level aufbaut.

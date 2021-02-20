@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.level.Level;
  * {@link #render(float) gerendert} und {@link #update() geupdated}.
  *
  * @author Klausmp
- * @version 0.9.5
+ * @version 0.10.4
  * @see com.badlogic.gdx.ScreenAdapter
  * @since 0.0.1
  */
