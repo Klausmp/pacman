@@ -111,7 +111,7 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         super.render(delta);
         long beforeUpdate = System.currentTimeMillis();
         update(delta);
-        System.out.println("Update zeit: " + (System.currentTimeMillis() - beforeUpdate));
+        //System.out.println("Update zeit: " + (System.currentTimeMillis() - beforeUpdate));
         long startTime = System.currentTimeMillis();
         fps++;
         if ((System.currentTimeMillis() - lastTime) >= 1000) {
@@ -121,16 +121,16 @@ public class GameScreen extends ScreenAdapter implements Disposable {
         }
 
         long bevorQuQue = System.currentTimeMillis();
-        //level.render(layerRenderer);
-        System.out.println("QuQue zeit: " + (System.currentTimeMillis() - bevorQuQue));
+        level.render(layerRenderer);
+        //System.out.println("QuQue zeit: " + (System.currentTimeMillis() - bevorQuQue));
         if (level.isMapLoaded()) {
             long bevorRender = System.currentTimeMillis();
             layerRenderer.render();
-            System.out.println("render zeit: " + (System.currentTimeMillis() - bevorRender));
+            //System.out.println("render zeit: " + (System.currentTimeMillis() - bevorRender));
         }
-        System.out.println("TPF: " + (System.currentTimeMillis() - startTime));
-        System.out.println();
-        System.out.println();
+        //System.out.println("TPF: " + (System.currentTimeMillis() - startTime));
+        //System.out.println();
+        //System.out.println();
     }
 
     public void dispose() {
