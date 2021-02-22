@@ -4,13 +4,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.GhostMovementControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.DynamicTileMovementControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.GhostNextRotationChooser;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.target.GhostTargetControler;
 import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.animation.Animation;
+import de.klausmp.pacman.visuals.renderer.LayerRenderer;
 import de.klausmp.pacman.visuals.renderer.LayerRendererQueQueElement;
 import de.klausmp.pacman.visuals.screens.GameScreen;
 import de.klausmp.pacman.world.grid.GridTile;
@@ -153,7 +155,7 @@ public abstract class Ghost extends DynamicGameObject {
      * @since 0.1.4
      */
     public Ghost(TextureRegion region, Vector2 position, GridTile gridTile, GhostTargetControler targetControler) {
-        super(region, position, 80f, Rotation.DEFAULTROTATION, GameObjectType.GHOST, Layers.DEFAULT, 5f, gridTile, new GhostMovementControler());
+        super(region, position, 80f, Rotation.DEFAULTROTATION, GameObjectType.GHOST, Layers.DEFAULT, 5f, gridTile, new GhostNextRotationChooser(), new DynamicTileMovementControler());
         this.targetControler = targetControler;
         this.eatenTextureUp = GameScreen.getAtlas().findRegion("eyeUp");
         this.eatenTextureLeft = GameScreen.getAtlas().findRegion("eyeLeft");
@@ -298,12 +300,6 @@ public abstract class Ghost extends DynamicGameObject {
     @Override
     public void setObjectRotation(Rotation rotation) {
         this.rotation = rotation;
-    }
-
-    @Override
-    protected void movement(float deltaTime) {
-        super.movement(deltaTime);
-        setRotation(0f);
     }
 
     public boolean isEaten() {

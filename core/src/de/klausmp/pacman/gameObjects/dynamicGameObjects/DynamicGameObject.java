@@ -5,11 +5,11 @@ import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
 import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicMovementControler;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicNextRotationChooser;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.visuals.renderer.Layer;
-import de.klausmp.pacman.world.grid.Grid;
 import de.klausmp.pacman.world.grid.GridTile;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
  * dannach wird das erbende objekt geupdated.
  *
  * @author Klausmp
- * @version 0.10.3
+ * @version 0.10.7
  * @see GameObject
  * @since 0.1.0
  */
@@ -49,13 +49,8 @@ public abstract class DynamicGameObject extends GameObject implements UpdatebleG
      *
      * @since 0.9.4
      */
-    protected Rotation rotation;
+    private IDynamicNextRotationChooser nextRotationChooser;
 
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.9.4
-     */
     private IDynamicMovementControler movementControler;
 
     /**
@@ -71,143 +66,17 @@ public abstract class DynamicGameObject extends GameObject implements UpdatebleG
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile, IDynamicMovementControler movementControler) {
+    public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile, IDynamicNextRotationChooser nextRotationChooser, IDynamicMovementControler movementControler) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
         this.movementSpeed = movementSpeed;
+        this.nextRotationChooser = nextRotationChooser;
         this.movementControler = movementControler;
-        changeRotation(rotation);
         nextRotation = rotation;
     }
 
+    @Override
     public void update(float deltaTime) {
-        movement(deltaTime);
-    }
-
-    /**
-     * hier geschieht das movement des {@link GameObject gameObjekts} in jedem tick.
-     *
-     * @version 0.9.4
-     * @since 0.1.0
-     */
-    protected void movement(float deltaTime) {
-        float remainingDistance;
-        movementControler.choseNextRotationToMove(this);
-        if (getObjectRotation() == nextRotation) {
-            setObjectRotation(nextRotation);
-        }
-        if (currendGridTile.getSurroundingGridTiles()[rotation.getInt()].canWalkOn(gameObjectType)) {
-            switch (rotation) {
-                case UP:
-                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y > getY()) {
-                        setY(getY() + getMovementSpeed() * deltaTime);
-                    } else {
-                        remainingDistance = getY() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y;
-                        moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
-                            setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
-                            changeRotation(nextRotation);
-                            moveRemainingDistance(remainingDistance);
-                        }
-                        movement(deltaTime);
-                    }
-                    break;
-                case LEFT:
-                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x < getX()) {
-                        setX(getX() - getMovementSpeed() * deltaTime);
-                    } else {
-                        remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x - getX();
-                        moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
-                            setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
-                            changeRotation(nextRotation);
-                            moveRemainingDistance(remainingDistance);
-                        }
-                        movement(deltaTime);
-                    }
-                    break;
-                case DOWN:
-                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y < getY()) {
-                        setY(getY() - getMovementSpeed() * deltaTime);
-                    } else {
-                        remainingDistance = Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).y - getY();
-                        moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
-                            setY(Grid.convertToPixelPosition(currendGridTile.getPosition()).y);
-                            changeRotation(nextRotation);
-                            moveRemainingDistance(remainingDistance);
-                        }
-                        movement(deltaTime);
-                    }
-                    break;
-                case RIGHT:
-                    if (Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x > getX()) {
-                        setX(getX() + getMovementSpeed() * deltaTime);
-                    } else {
-                        remainingDistance = getX() - Grid.convertToPixelPosition(currendGridTile.getSurroundingGridTiles()[rotation.getInt()].getPosition()).x;
-                        moveToNextGridTile();
-                        if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
-                            setX(Grid.convertToPixelPosition(currendGridTile.getPosition()).x);
-                            changeRotation(nextRotation);
-                            moveRemainingDistance(remainingDistance);
-                        }
-                        movement(deltaTime);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            if (currendGridTile.getSurroundingGridTiles()[nextRotation.getInt()].canWalkOn(getGameObjectType())) {
-                changeRotation(nextRotation);
-            }
-        }
-    }
-
-    /**
-     * TODO JACA DOC
-     *
-     * @param remainingDistance
-     * @since 0.9.4
-     */
-    private void moveRemainingDistance(float remainingDistance) {
-        switch (rotation) {
-            case UP:
-                setY(getY() + remainingDistance);
-                break;
-            case LEFT:
-                setX(getX() - remainingDistance);
-                break;
-            case DOWN:
-                setY(getY() - remainingDistance);
-                break;
-            case RIGHT:
-                setX(getX() + remainingDistance);
-                break;
-            default:
-        }
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.9.4
-     */
-    private void moveToNextGridTile() {
-        currendGridTile.getGrid().transverToOtherGridTile(this, currendGridTile.getSurroundingGridTiles()[rotation.getInt()]);
-        currendGridTile = currendGridTile.getSurroundingGridTiles()[rotation.getInt()];
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @param currentRotation
-     * @param rotation
-     * @version 0.7.4
-     * @since 0.4.2
-     */
-    protected void changeRotation(Rotation rotation) {
-        this.rotation = rotation;
-        setRotation(rotation.getInt() * 90);
+        movementControler.move(this, deltaTime);
     }
 
     /**
@@ -230,24 +99,8 @@ public abstract class DynamicGameObject extends GameObject implements UpdatebleG
         this.nextRotation = nextRotation;
     }
 
-    /**
-     * TODO JAVA DOC
-     *
-     * @return
-     * @since 0.9.4
-     */
-    public Rotation getObjectRotation() {
-        return rotation;
-    }
-
-    /**
-     * TODO JAVA DOC
-     *
-     * @since 0.8.0
-     */
-    @Override
-    public void dispose() {
-        super.dispose();
+    public IDynamicNextRotationChooser getNextRotationChooser() {
+        return nextRotationChooser;
     }
 
     public float getMovementSpeed() {

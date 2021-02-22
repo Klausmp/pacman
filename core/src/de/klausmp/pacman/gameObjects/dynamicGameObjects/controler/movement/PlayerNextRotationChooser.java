@@ -10,7 +10,7 @@ import de.klausmp.pacman.utils.Rotation;
  * @version 0.9.6
  * @since 0.9.4
  */
-public class PlayerMovementControler implements IDynamicMovementControler {
+public class PlayerNextRotationChooser implements IDynamicNextRotationChooser {
 
     @Override
     public void choseNextRotationToMove(DynamicGameObject object) {

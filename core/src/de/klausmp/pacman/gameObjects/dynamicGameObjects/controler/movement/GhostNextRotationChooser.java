@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.level.Level;
  * @version 0.9.8
  * @since 0.9.5
  */
-public class GhostMovementControler implements IDynamicMovementControler {
+public class GhostNextRotationChooser implements IDynamicNextRotationChooser {
 
     /**
      * TODO JAVA DOC

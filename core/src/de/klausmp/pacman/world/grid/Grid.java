@@ -17,7 +17,7 @@ import java.util.HashMap;
  * gespeichert werden.
  *
  * @author Klausmp
- * @version 0.10.5
+ * @version 0.10.7
  * @since 0.0.1
  */
 public class Grid {
@@ -335,6 +335,7 @@ public class Grid {
     public void transverToOtherGridTile(GameObject object, GridTile newGridTile) {
         GridTile oldGridTile = object.getCurrendGridTile();
         newGridTile.addGameObject(object);
+        object.setCurrendGridTile(newGridTile);
         oldGridTile.removeGameObject(object);
     }
 

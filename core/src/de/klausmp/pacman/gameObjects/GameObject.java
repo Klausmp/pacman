@@ -1,9 +1,11 @@
 package de.klausmp.pacman.gameObjects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
 import de.klausmp.pacman.utils.Rotation;
@@ -21,7 +23,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * diese klasse erbt von der klasse {@link Sprite sprite}.
  *
  * @author Klausmp
- * @version 0.10.3
+ * @version 0.10.7
  * @see Sprite
  * @since 0.0.1
  */
@@ -77,7 +79,7 @@ public abstract class GameObject extends Sprite implements Disposable {
      *
      * @since 0.1.0
      */
-    private Rotation rotation;
+    protected Rotation rotation;
 
     /**
      * idle animation;
@@ -170,6 +172,17 @@ public abstract class GameObject extends Sprite implements Disposable {
         return currendGridTile;
     }
 
+    /**
+     * TODO JAVA DOC
+     * ACHTUNG!!! Darf nur in Grid.transverToOtherGridTile() aufherufen werden!!!!
+     *
+     * @since 0.10.7
+     * @param currendGridTile
+     */
+    public void setCurrendGridTile(GridTile currendGridTile) {
+        this.currendGridTile = currendGridTile;
+    }
+
     public Layers getLayerToRenderOn() {
         return layerToRenderOn;
     }
@@ -194,9 +207,6 @@ public abstract class GameObject extends Sprite implements Disposable {
         this.rotation = rotation;
     }
 
-    /**
-     * @since 0.8.0
-     */
     @Override
     public void dispose() {
 

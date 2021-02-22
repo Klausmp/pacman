@@ -6,16 +6,17 @@ import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
  * TODO JAVA DOC
  *
  * @version 0.10.7
- * @since 0.10.7
+ * @since 0.9.4
  */
-public interface IDynamicMovementControler {
+
+public interface IDynamicNextRotationChooser {
 
     /**
      * TODO JAVA DOC
      *
-     * @since 0.10.7
-     * @param dynamicObject
-     * @param deltaTime
+     * @param object
+     * @since 0.9.4
      */
-    public void move(DynamicGameObject dynamicObject, float deltaTime);
+    void choseNextRotationToMove(DynamicGameObject dynObject);
+
 }
