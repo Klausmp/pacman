@@ -1,7 +1,7 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
 import com.badlogic.gdx.utils.Array;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.Dynamic;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.utils.GameMode;
 import de.klausmp.pacman.utils.GridTileType;
@@ -31,7 +31,7 @@ public class GhostNextRotationChooser implements IDynamicNextRotationChooser {
     private boolean useTunnelMode = true;
 
     @Override
-    public void choseNextRotationToMove(DynamicGameObject object) {
+    public void choseNextRotationToMove(Dynamic object) {
         if (object instanceof Ghost) {
             Ghost ghost = (Ghost) object;
             if (lastGridTile == null) {

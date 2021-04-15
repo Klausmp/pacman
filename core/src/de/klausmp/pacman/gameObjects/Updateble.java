@@ -6,7 +6,7 @@ package de.klausmp.pacman.gameObjects;
  * @sincce 0.10.3
  * @version 0.10.3
  */
-public interface UpdatebleGameObject {
+public interface Updateble {
 
     /**
      * TODO JAVA DOC

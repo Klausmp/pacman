@@ -1,6 +1,6 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.Dynamic;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.utils.Rotation;
 import de.klausmp.pacman.world.grid.Grid;
@@ -14,7 +14,7 @@ import de.klausmp.pacman.world.grid.Grid;
 public class DynamicTileMovementControler implements IDynamicMovementControler {
 
     @Override
-    public void move(DynamicGameObject dynObject, float deltaTime) {
+    public void move(Dynamic dynObject, float deltaTime) {
         float remainingDistance;
         dynObject.getNextRotationChooser().choseNextRotationToMove(dynObject);
         if (dynObject.getObjectRotation() == null) {
@@ -99,7 +99,7 @@ public class DynamicTileMovementControler implements IDynamicMovementControler {
 
     }
 
-    private void moveRemainingDistance(DynamicGameObject dynObject,float remainingDistance) {
+    private void moveRemainingDistance(Dynamic dynObject, float remainingDistance) {
         switch (dynObject.getObjectRotation()) {
             case UP:
                 dynObject.setY(dynObject.getY() + remainingDistance);
@@ -117,7 +117,7 @@ public class DynamicTileMovementControler implements IDynamicMovementControler {
         }
     }
 
-    private void setRotation(DynamicGameObject dynObject, Rotation rotation) {
+    private void setRotation(Dynamic dynObject, Rotation rotation) {
         if (dynObject instanceof Ghost) {
             Ghost ghost = (Ghost) dynObject;
             ghost.setObjectRotation(rotation);
@@ -126,7 +126,7 @@ public class DynamicTileMovementControler implements IDynamicMovementControler {
         }
     }
 
-    private void moveToNextGridTile(DynamicGameObject dynObject) {
+    private void moveToNextGridTile(Dynamic dynObject) {
         dynObject.getCurrendGridTile().getGrid().transverToOtherGridTile(dynObject, dynObject.getCurrendGridTile().getSurroundingGridTiles()[dynObject.getObjectRotation().getInt()]);
     }
 }

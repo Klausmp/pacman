@@ -2,7 +2,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.Dynamic;
 import de.klausmp.pacman.utils.Rotation;
 
 /**
@@ -13,7 +13,7 @@ import de.klausmp.pacman.utils.Rotation;
 public class PlayerNextRotationChooser implements IDynamicNextRotationChooser {
 
     @Override
-    public void choseNextRotationToMove(DynamicGameObject object) {
+    public void choseNextRotationToMove(Dynamic object) {
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             object.setNextRotation(Rotation.UP);
         }

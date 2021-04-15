@@ -1,6 +1,6 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.Dynamic;
 
 /**
  * TODO JAVA DOC
@@ -17,6 +17,6 @@ public interface IDynamicNextRotationChooser {
      * @param object
      * @since 0.9.4
      */
-    void choseNextRotationToMove(DynamicGameObject dynObject);
+    void choseNextRotationToMove(Dynamic dynObject);
 
 }

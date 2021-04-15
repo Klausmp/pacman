@@ -3,7 +3,7 @@ package de.klausmp.pacman.gameObjects.dynamicGameObjects;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
+import de.klausmp.pacman.gameObjects.Updateble;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicMovementControler;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement.IDynamicNextRotationChooser;
 import de.klausmp.pacman.utils.GameObjectType;
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * @see GameObject
  * @since 0.1.0
  */
-public abstract class DynamicGameObject extends GameObject implements UpdatebleGameObject {
+public abstract class Dynamic extends GameObject implements Updateble {
 
     /**
      * TODO JAVA DOC
@@ -66,7 +66,7 @@ public abstract class DynamicGameObject extends GameObject implements UpdatebleG
      * @param gridTile        {@link GridTile gridTile} indem sich dieses {@link GameObject gameObjekt} befindet
      * @since 0.1.4
      */
-    public DynamicGameObject(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile, IDynamicNextRotationChooser nextRotationChooser, IDynamicMovementControler movementControler) {
+    public Dynamic(TextureRegion region, Vector2 position, float movementSpeed, Rotation rotation, GameObjectType gameObjectType, Layers layerToRenderOn, float renderPriority, GridTile gridTile, IDynamicNextRotationChooser nextRotationChooser, IDynamicMovementControler movementControler) {
         super(region, position, rotation, gameObjectType, layerToRenderOn, renderPriority, gridTile);
         this.movementSpeed = movementSpeed;
         this.nextRotationChooser = nextRotationChooser;

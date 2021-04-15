@@ -17,10 +17,10 @@ import de.klausmp.pacman.world.grid.GridTile;
  *
  * @author Klausmp
  * @version 0.10.7
- * @see de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject
+ * @see Dynamic
  * @since 0.4.0
  */
-public class PacMan extends DynamicGameObject {
+public class PacMan extends Dynamic {
 
     /**
      * TODO JAVA DOC

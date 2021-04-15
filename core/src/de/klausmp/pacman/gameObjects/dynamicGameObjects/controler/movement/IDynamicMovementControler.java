@@ -1,6 +1,6 @@
 package de.klausmp.pacman.gameObjects.dynamicGameObjects.controler.movement;
 
-import de.klausmp.pacman.gameObjects.dynamicGameObjects.DynamicGameObject;
+import de.klausmp.pacman.gameObjects.dynamicGameObjects.Dynamic;
 
 /**
  * TODO JAVA DOC
@@ -17,5 +17,5 @@ public interface IDynamicMovementControler {
      * @param dynamicObject
      * @param deltaTime
      */
-    public void move(DynamicGameObject dynamicObject, float deltaTime);
+    public void move(Dynamic dynamicObject, float deltaTime);
 }

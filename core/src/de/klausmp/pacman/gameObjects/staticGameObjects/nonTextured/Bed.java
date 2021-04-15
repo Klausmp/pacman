@@ -3,7 +3,7 @@ package de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
+import de.klausmp.pacman.gameObjects.Updateble;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Ghost;
 import de.klausmp.pacman.utils.GameObjectType;
 import de.klausmp.pacman.utils.Layers;
@@ -16,7 +16,7 @@ import de.klausmp.pacman.world.grid.GridTile;
  * @since 0.9.8
  * @version 0.10.3
  */
-public class Bed extends NonTexturedStaticGameObject implements UpdatebleGameObject {
+public class Bed extends NonTexturedStaticGameObject implements Updateble {
     /**
      * konstruktor mit allen nötien einstellungen.
      *

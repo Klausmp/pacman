@@ -3,7 +3,7 @@ package de.klausmp.pacman.world.grid;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import de.klausmp.pacman.gameObjects.GameObject;
-import de.klausmp.pacman.gameObjects.UpdatebleGameObject;
+import de.klausmp.pacman.gameObjects.Updateble;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.PacMan;
 import de.klausmp.pacman.gameObjects.dynamicGameObjects.ghosts.Blinky;
 import de.klausmp.pacman.gameObjects.staticGameObjects.nonTextured.Bed;
@@ -40,7 +40,7 @@ public class Grid {
      *
      * @since 0.10.3
      */
-    private final Array<UpdatebleGameObject> updatebleGameObjects = new Array<UpdatebleGameObject>();
+    private final Array<Updateble> updatebleGameObjects = new Array<Updateble>();
 
     /**
      * hasmap aller {@link GridTile gridTiles} im {@link Grid grid}.
@@ -155,7 +155,7 @@ public class Grid {
      * @since 0.0.1
      */
     public void update(float deltaTime) {
-        updatebleGameObjects.forEach(updatebleGameObject -> updatebleGameObject.update(deltaTime));
+        updatebleGameObjects.forEach(updateble -> updateble.update(deltaTime));
         if (!gridTilesWereSomethingDied.isEmpty()) {
             removeDeadGameObjects();
             gridTilesWereSomethingDied.clear();
@@ -222,8 +222,8 @@ public class Grid {
     public void addToGridTile(GameObject gameObject, Vector2 position) {
         GridTile gridTile = getGridTile((int) position.x, (int) position.y);
         if (gridTile != null) {
-            if (gameObject instanceof UpdatebleGameObject) {
-                updatebleGameObjects.add((UpdatebleGameObject) gameObject);
+            if (gameObject instanceof Updateble) {
+                updatebleGameObjects.add((Updateble) gameObject);
             }
             switch (gameObject.getGameObjectType()) {
                 case DOT:
@@ -384,11 +384,11 @@ public class Grid {
         for (GridTile gridTile : gridTilesWereSomethingDied) {
             gridTile.removeDeadGameObjects();
         }
-        Array<UpdatebleGameObject> deadGameObjects = new Array<UpdatebleGameObject>();
-        for (UpdatebleGameObject updatable : updatebleGameObjects) {
+        Array<Updateble> deadGameObjects = new Array<Updateble>();
+        for (Updateble updatable : updatebleGameObjects) {
             GameObject gameObject = (GameObject) updatable;
             if (!gameObject.isAlive()) {
-                deadGameObjects.add((UpdatebleGameObject) gameObject);
+                deadGameObjects.add((Updateble) gameObject);
             }
         }
         updatebleGameObjects.removeAll(deadGameObjects, true);
